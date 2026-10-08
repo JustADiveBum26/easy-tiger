@@ -7,13 +7,13 @@
 // Firebase (config/house and config/admin) that only Bradley can edit, from the Firebase console.
 window.EASY_TIGER_CONFIG = {
   firebase: {
-    apiKey: '',
-    authDomain: '',
-    projectId: '',
-    appId: ''
+    apiKey: 'AIzaSyBKSrju1ybKcL26tDMra5I3tmNvEXcqf2w',
+    authDomain: 'easy-tiger-como.firebaseapp.com',
+    projectId: 'easy-tiger-como',
+    appId: '1:817764359074:web:1893e95689aa647d9830fb'
   },
   cloudinary: {
-    cloudName: '',
-    uploadPreset: ''   // an UNSIGNED preset, set up in the Cloudinary dashboard
+    cloudName: 'czj4oq2l',
+    uploadPreset: 'easy-tiger-guests'   // an UNSIGNED preset, set up in the Cloudinary dashboard
   }
 };
