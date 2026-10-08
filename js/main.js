@@ -1,5 +1,5 @@
-// Spirits menu. The drinks live in js/menu-data.js, made from the menu PDF.
-// Start view lists the types. Clicking one opens its drinks in a fresh view, with a way back.
+// Spirits menu. The drinks live in js/menu-data.js, made from the menu Word file.
+// Start view lists the types. Clicking one (or searching) opens the drinks in a fresh view, with a way back.
 (function () {
   if (typeof MENU === 'undefined') {
     document.getElementById('menu-fallback').hidden = false;
@@ -13,6 +13,7 @@
   var countEl = document.getElementById('menu-count');
   var listEl = document.getElementById('menu-list');
   var backEl = document.getElementById('menu-back');
+  var searchEl = document.getElementById('menu-search');
   var cats = MENU.categories;
 
   // Whiskey has a mash bill. The rest list what they're made with.
@@ -30,12 +31,14 @@
     return !v || /^confirm on bottle$/i.test(v) ? '' : v;
   }
 
-  function drinkRow(d, cat) {
+  function drinkRow(d, cat, showType) {
     var row = el('details', 'drink');
     var sum = el('summary');
     var main = el('span', 'drink-main');
     main.appendChild(el('span', 'drink-name', d.name));
-    main.appendChild(el('span', 'drink-maker', d.maker));
+    var maker = el('span', 'drink-maker', d.maker);
+    if (showType) maker.appendChild(el('span', 'drink-cat', cat.name));
+    main.appendChild(maker);
     sum.appendChild(main);
     var proof = clean(d.proof);
     if (proof) sum.appendChild(el('span', 'drink-proof', proof));
@@ -47,7 +50,7 @@
     var age = clean(d.age), details = clean(d.details);
     if (age) {
       facts.appendChild(el('b', '', 'Age '));
-      facts.appendChild(document.createTextNode(age + (details ? '  ·  ' : '')));
+      facts.appendChild(document.createTextNode(age + (details ? '  \u00b7  ' : '')));
     }
     if (details) {
       facts.appendChild(el('b', '', MASH_BILL[cat.id] ? 'Mash bill ' : 'Made with '));
@@ -58,13 +61,19 @@
     return row;
   }
 
-  function scrollToMenu() {
-    document.getElementById('menu').scrollIntoView();
+  function scrollToDrinks() {
+    document.getElementById('drinks').scrollIntoView();
+  }
+
+  function showDetail() {
+    homeEl.hidden = true;
+    detailEl.hidden = false;
   }
 
   function openType(cat) {
+    searchEl.value = '';
     titleEl.textContent = cat.name;
-    countEl.textContent = cat.drinks.length + (cat.drinks.length === 1 ? ' pour' : ' pours') + ' · tap one for the details';
+    countEl.textContent = cat.drinks.length + (cat.drinks.length === 1 ? ' pour' : ' pours') + ' \u00b7 tap one for the details';
     listEl.textContent = '';
     // House Drinks carry a base spirit, so show a small heading each time it changes.
     var lastBase = '';
@@ -73,18 +82,66 @@
         listEl.appendChild(el('h4', 'drink-group', d.base));
         lastBase = d.base;
       }
-      listEl.appendChild(drinkRow(d, cat));
+      listEl.appendChild(drinkRow(d, cat, false));
     });
-    homeEl.hidden = true;
-    detailEl.hidden = false;
-    scrollToMenu();
+    showDetail();
+    scrollToDrinks();
   }
 
   function closeType() {
+    searchEl.value = '';
     detailEl.hidden = true;
     homeEl.hidden = false;
-    scrollToMenu();
+    scrollToDrinks();
   }
+
+  // ----- search -----
+  // Lowercase, no accents, no apostrophes, so "makers mark" finds Maker's Mark and "jalapeno" finds jalape\u00f1o.
+  function plain(t) {
+    return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/['\u2019`]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  // Each drink gets two searchable strings: the name side, and the tasting-notes side.
+  var index = [];
+  cats.forEach(function (cat) {
+    cat.drinks.forEach(function (d) {
+      index.push({
+        d: d, cat: cat,
+        front: plain([d.name, d.maker, d.base, cat.name].join(' ')),
+        back: plain([d.notes, d.details, d.age].join(' '))
+      });
+    });
+  });
+
+  function search(q) {
+    var terms = plain(q).split(' ').filter(Boolean);
+    var first = [], second = [];
+    index.forEach(function (it) {
+      var inFront = terms.every(function (t) { return it.front.indexOf(t) !== -1; });
+      if (inFront) { first.push(it); return; }
+      var all = it.front + ' ' + it.back;
+      if (terms.every(function (t) { return all.indexOf(t) !== -1; })) second.push(it);
+    });
+    return first.concat(second);   // name and maker matches first, then tasting-note matches
+  }
+
+  function showResults(q) {
+    var found = search(q);
+    titleEl.textContent = 'Search';
+    countEl.textContent = found.length
+      ? found.length + (found.length === 1 ? ' match' : ' matches') + ' \u00b7 tap one for the details'
+      : '';
+    listEl.textContent = '';
+    if (!found.length) listEl.appendChild(el('p', 'menu-empty', 'Nothing matches that. Try a shorter word, or open the PDF.'));
+    found.forEach(function (it) { listEl.appendChild(drinkRow(it.d, it.cat, true)); });
+    showDetail();
+  }
+
+  searchEl.addEventListener('input', function () {
+    if (plain(searchEl.value)) showResults(searchEl.value);
+    else { detailEl.hidden = true; homeEl.hidden = false; }   // cleared: back to the list of types, no jump
+  });
 
   cats.forEach(function (cat) {
     var li = el('li');
@@ -273,4 +330,59 @@
 
   showGuestbook();
   showWall();
+})();
+
+// ---------- Knock to Enter ----------
+// Fun, not security: the words are checked in the browser. Only a scrambled fingerprint of
+// them is in js/firebase-config.js, so the answer isn't sitting there in plain sight.
+(function () {
+  var cfg = window.EASY_TIGER_CONFIG;
+  var gate = document.getElementById('gate');
+  if (!cfg || !cfg.knock || !cfg.knock.hash || !gate) return;
+
+  var form = document.getElementById('gate-form');
+  var input = document.getElementById('gate-input');
+  var status = document.getElementById('gate-status');
+
+  // "Open Sesame!", "open  sesame" and "OPEN SESAME" all count as the same words.
+  function plain(t) {
+    return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '');
+  }
+
+  function fingerprint(t) {
+    if (!(window.crypto && window.crypto.subtle)) return Promise.resolve(null);
+    return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode('easy-tiger:' + plain(t))).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    });
+  }
+
+  function openDoor() {
+    try { localStorage.setItem('et_knocked', cfg.knock.hash); } catch (e) { /* fine, they'll knock again next time */ }
+    gate.classList.add('open');
+    var wait = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1200;
+    setTimeout(function () {
+      gate.hidden = true;
+      document.documentElement.classList.remove('gate-open');
+    }, wait);
+  }
+
+  function wrong() {
+    var card = document.getElementById('gate-form');
+    status.textContent = 'Nobody answers. Try again.';
+    card.classList.remove('shake');
+    void card.offsetWidth;            // restart the shake
+    card.classList.add('shake');
+    input.select();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!plain(input.value)) { wrong(); return; }
+    fingerprint(input.value).then(function (h) {
+      if (h === null || h === cfg.knock.hash) openDoor();   // an old browser that can't check lets people in
+      else wrong();
+    });
+  });
+
+  if (!gate.hidden) setTimeout(function () { input.focus(); }, 60);
 })();

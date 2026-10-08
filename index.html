@@ -8,14 +8,51 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#070908">
   <link rel="icon" href="assets/logo/easy-tiger-logo-small.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Easy Tiger">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Easy Tiger">
+  <meta property="og:title" content="Easy Tiger · Columbia, Missouri">
+  <meta property="og:description" content="A speakeasy in a basement in Columbia, Missouri. Put the phone down. Stay a while.">
+  <meta property="og:url" content="https://justadivebum26.github.io/easy-tiger/">
+  <meta property="og:image" content="https://justadivebum26.github.io/easy-tiger/assets/social/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Easy Tiger, Columbia, MO. A gold tiger head in an Art Deco circle.">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
+  <script src="js/firebase-config.js?v=10"></script>
 </head>
 <body>
 
-  <!-- Knock to Enter gate goes here later -->
+  <!-- Knock to Enter. Stays hidden unless a phrase is set in js/firebase-config.js -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
+    <div class="gate-curtain gate-curtain-left" aria-hidden="true"></div>
+    <div class="gate-curtain gate-curtain-right" aria-hidden="true"></div>
+    <div class="gate-rod" aria-hidden="true"></div>
+    <form class="frame gate-card" id="gate-form" autocomplete="off">
+      <img class="gate-logo" src="assets/logo/easy-tiger-logo-medium.png" alt="Easy Tiger" width="400" height="400">
+      <p class="label" id="gate-title">Knock to enter</p>
+      <label class="visually-hidden" for="gate-input">The secret words</label>
+      <input id="gate-input" type="text" placeholder="Say the words" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <button class="btn btn-solid" type="submit">Knock</button>
+      <p class="form-status" id="gate-status" role="status"></p>
+    </form>
+  </div>
+  <script>
+    // Runs before the page paints: show the gate unless this browser already knocked with the current words.
+    (function () {
+      var c = window.EASY_TIGER_CONFIG;
+      if (!c || !c.knock || !c.knock.hash) return;
+      try { if (localStorage.getItem('et_knocked') === c.knock.hash) return; } catch (e) { /* no storage: ask every time */ }
+      document.getElementById('gate').hidden = false;
+      document.documentElement.classList.add('gate-open');
+    })();
+  </script>
 
   <header class="nav">
     <a class="nav-brand" href="#top">
@@ -25,7 +62,7 @@
     <nav class="nav-links" aria-label="Main">
       <a href="#story">Story</a>
       <a href="#build">Build</a>
-      <a href="#menu">Menu</a>
+      <a href="#drinks">Drinks</a>
       <a href="#guestbook">Guest Book</a>
       <a href="#photos">Photos</a>
       <a href="#extras">Extras</a>
@@ -44,7 +81,7 @@
         <p class="hero-line">Put the phone down. Stay a while.</p>
         <div class="hero-buttons">
           <a class="btn btn-solid" href="#story">Come on in</a>
-          <a class="btn" href="#menu">See the menu</a>
+          <a class="btn" href="#drinks">See the drinks</a>
         </div>
       </div>
     </section>
@@ -141,20 +178,25 @@
       </div>
     </section>
 
-    <!-- MENU -->
-    <section class="section burgundy" id="menu">
+    <!-- DRINKS -->
+    <section class="section burgundy" id="drinks">
       <div class="wrap">
         <header class="section-head">
           <p class="label">What's pouring</p>
-          <h2>The Menu</h2>
+          <h2>Spirits Menu</h2>
           <div class="rule"><span></span></div>
         </header>
 
         <div class="frame menu-card" id="spirits-menu">
 
+          <div class="menu-searchbar">
+            <label class="visually-hidden" for="menu-search">Search the drinks</label>
+            <input id="menu-search" class="menu-search" type="search" placeholder="Search drinks, makers, flavors" autocomplete="off" enterkeyhint="search">
+          </div>
+
           <!-- Start view: the types -->
           <div id="menu-home">
-            <h3>The menu</h3>
+            <h3>Pick a pour</h3>
             <ul class="menu-sections" id="menu-types"></ul>
             <p class="note" id="menu-fallback" hidden>The list did not load. Try refreshing the page, or open the PDF below.</p>
             <a class="btn btn-solid" href="assets/menu/easy-tiger-menu.pdf">View the full PDF</a>
@@ -288,13 +330,12 @@
     <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Keep it between us</p>
   </footer>
 
-  <script src="js/menu-data.js?v=9" charset="utf-8"></script>
-  <script src="js/firebase-config.js?v=9"></script>
-  <script src="js/store.js?v=9"></script>
+  <script src="js/menu-data.js?v=10" charset="utf-8"></script>
+  <script src="js/store.js?v=10"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=9"></script>
-  <script src="js/main.js?v=9"></script>
+  <script src="js/store-firebase.js?v=10"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

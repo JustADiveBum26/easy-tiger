@@ -12,6 +12,12 @@ window.EASY_TIGER_CONFIG = {
     projectId: 'easy-tiger-como',
     appId: '1:817764359074:web:1893e95689aa647d9830fb'
   },
+  // Knock to Enter. Empty hash = no gate. To turn it on, run:
+  //   python tools/make-knock-hash.py "the secret words"
+  // and paste the long code it prints between the quotes. It is a fun gate, not real security.
+  knock: {
+    hash: '1111e6e907b39632ca3fa649d0c6ba41fc1d610c65204d8cd8a2a78a7c3980a9'
+  },
   cloudinary: {
     cloudName: 'czj4oq2l',
     uploadPreset: 'easy-tiger-guests'   // an UNSIGNED preset, set up in the Cloudinary dashboard

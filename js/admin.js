@@ -69,9 +69,25 @@
     return row;
   }
 
+  var BASE_TITLE = 'Easy Tiger \u00b7 Admin';
+
+  // Shows how many things are waiting, on the page and in the browser tab's title,
+  // so a pinned tab tells you at a glance.
+  function setWaiting(photos, notes) {
+    var total = photos + notes;
+    document.title = (total ? '(' + total + ') ' : '') + BASE_TITLE;
+    var parts = [];
+    if (photos) parts.push(photos + (photos === 1 ? ' photo' : ' photos'));
+    if (notes) parts.push(notes + (notes === 1 ? ' guest book note' : ' guest book notes'));
+    var line = document.getElementById('admin-summary');
+    line.textContent = total ? parts.join(' and ') + ' waiting for you.' : 'Nothing waiting. You are all caught up.';
+    line.className = 'admin-summary' + (total ? ' has-waiting' : '');
+  }
+
   function showSignedOut(message) {
     signinEl.hidden = false;
     panelEl.hidden = true;
+    document.title = BASE_TITLE;
     document.getElementById('signin-msg').textContent = message || '';
   }
 
@@ -87,6 +103,7 @@
         store.listGuestbook({ approved: false }),
         store.listGuestbook({ approved: true })
       ]).then(function (r) {
+        setWaiting(r[0].length, r[2].length);
         document.getElementById('pending-count').textContent = '(' + r[0].length + ')';
         document.getElementById('approved-count').textContent = '(' + r[1].length + ')';
         document.getElementById('gb-pending-count').textContent = '(' + r[2].length + ')';
@@ -110,4 +127,7 @@
   document.getElementById('signout-btn').addEventListener('click', function () { store.adminSignOut().then(render); });
 
   render();
+
+  // Quiet refresh so an open (or pinned) tab keeps its count current.
+  setInterval(function () { if (!panelEl.hidden) render(); }, 120000);
 })();
