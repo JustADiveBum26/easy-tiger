@@ -932,13 +932,13 @@ html.gate-open, html.gate-open body { overflow: hidden; }
    0.0   the door fades in over the password box
    0.35  knock   0.70  knock (the door jolts)
    1.0   the peephole's wooden slider opens
-   1.4   a tiger looks out: eyes glowing, turning left, then right, a blink
+   1.4   two glowing tiger eyes appear in the dark, look left, then right, and blink
    2.0   "Let's have a look at you."   3.1  "That's the one."   4.1  "Mind the stairs."
    5.15  the slider snaps shut
    5.4   the door swings open into warm light
    6.0   the tiger emblem rises out of the light, then a gold shine   6.5  "Welcome to Easy Tiger"
    7.2   everything fades to the page   8.0  done
-   Pictures: assets/door/ (real photo textures, see assets/door/CREDITS.md)            */
+   Pictures: assets/door/ (real photo textures, see assets/door/README.md). Earlier versions are saved as git tags named opening-v1 to opening-v4.   */
 .gate-stage {
   --hatch-w: min(84vw, 700px);                   /* the peephole's size */
   --hatch-h: calc(var(--hatch-w) / 3.2);
@@ -1027,27 +1027,42 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   background: #000;
   box-shadow: 0 0 0 4px #100904, 0 0 0 6px rgba(255, 205, 140, .10), 0 12px 26px rgba(0, 0, 0, .75), inset 0 0 22px 6px #000;
 }
-.hatch-tiger { position: absolute; inset: 0; overflow: hidden; }
-.tiger-pic {
-  position: absolute;
-  left: -6%; top: -6%; width: 112%; height: 112%;
-  object-fit: cover;
-  opacity: 0;
-}
-.hatch-glow {                                    /* warm light from the passage beyond */
+.hatch-tiger {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 115%, rgba(255, 150, 40, .45), transparent 62%),
-              radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, .75) 100%);
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, #5a2d0a 0%, #2a1306 45%, #080402 100%);
+}
+.hatch-glow {                                     /* soft depth: dark edges, a little warmth from below */
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(255, 150, 40, .30), transparent 62%),
+              radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0, 0, 0, .7) 100%);
   mix-blend-mode: screen;
+  pointer-events: none;
 }
-.tiger-lid {                                     /* a blink: the eye goes dark for a moment */
+
+/* the two tiger eyes (these are the original eyes from the first door; the photo of a real tiger is saved in git, see assets/door/README.md) */
+.door-eyes { position: absolute; inset: 0; opacity: 0; }
+.door-eye {
   position: absolute;
-  top: 36%; width: 14%; height: 30%;
-  background: radial-gradient(ellipse, #160a03 52%, transparent 72%);
-  opacity: 0;
+  top: 50%;
+  width: calc(var(--hatch-w) * .17); height: calc(var(--hatch-w) * .085);
+  margin-top: calc(var(--hatch-w) * -.0425);
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 50%, #fff0b8 0%, #ffc43d 42%, #d8791f 100%);
+  box-shadow: 0 0 calc(var(--hatch-w) * .06) calc(var(--hatch-w) * .014) rgba(255, 170, 50, .75);
+  overflow: hidden;
 }
-.tiger-lid-l { left: calc(32.6% - 7%); }
-.tiger-lid-r { left: calc(67.4% - 7%); }
+.door-eye::after {                                /* the slit pupil */
+  content: "";
+  position: absolute;
+  left: 50%; top: -6%;
+  width: 15%; height: 112%;
+  transform: translateX(-50%);
+  background: #100803;
+  border-radius: 50%;
+}
+.door-eye-l { left: calc(50% - var(--hatch-w) * .225); }
+.door-eye-r { left: calc(50% + var(--hatch-w) * .055); }
 .hatch-shutter {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -1089,8 +1104,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 .gate.playing .gate-door       { animation: door-run 6.7s linear forwards; }
 .gate.playing .door-flicker    { animation: flicker 2.4s ease-in-out infinite; }
 .gate.playing .hatch-shutter   { animation: shutter 5.3s linear forwards; }
-.gate.playing .tiger-pic       { animation: tiger-look 3.9s ease 1.4s forwards; }
-.gate.playing .tiger-lid       { animation: tiger-blink 3.9s linear 1.4s forwards; }
+.gate.playing .door-eyes       { animation: eyes-look 3.9s ease 1.4s forwards; }
+.gate.playing .door-eye        { animation: eye-blink 3.9s linear 1.4s forwards; }
 .gate.playing .gate-line-1     { animation: line .95s ease 2.0s forwards; }
 .gate.playing .gate-line-2     { animation: line .9s ease 3.1s forwards; }
 .gate.playing .gate-line-3     { animation: line .9s ease 4.1s forwards; }
@@ -1133,21 +1148,21 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   98.9%  { transform: translateY(0); }
   100%   { transform: translateY(0); }
 }
-@keyframes tiger-look {       /* fades up out of the dark, then the head turns left, right, and back */
-  0%    { opacity: 0; transform: translateX(0) scale(1.04); }
-  15%   { opacity: 1; transform: translateX(0) scale(1.04); }
-  22%   { transform: translateX(0) scale(1.04); }
-  30%   { transform: translateX(-3.5%) scale(1.07); }
-  38%   { transform: translateX(-3.5%) scale(1.07); }
-  47%   { transform: translateX(3.5%) scale(1.07); }
-  58%   { transform: translateX(3.5%) scale(1.07); }
-  66%   { opacity: 1; transform: translateX(0) scale(1.1); }
-  100%  { opacity: 1; transform: translateX(0) scale(1.12); }
+@keyframes eyes-look {          /* the eyes fade up, look left, look right, and settle in the middle */
+  0%    { opacity: 0; transform: translateX(0); }
+  15%   { opacity: 1; transform: translateX(0); }
+  20%   { transform: translateX(0); }
+  26%   { transform: translateX(-4%); }
+  33%   { transform: translateX(-4%); }
+  41%   { transform: translateX(4%); }
+  54%   { transform: translateX(4%); }
+  62%   { opacity: 1; transform: translateX(0); }
+  100%  { opacity: 1; transform: translateX(0); }
 }
-@keyframes tiger-blink {
-  0%, 69%   { opacity: 0; }
-  71.5%     { opacity: 1; }
-  75%, 100% { opacity: 0; }
+@keyframes eye-blink {
+  0%, 68%   { transform: scaleY(1); }
+  71%       { transform: scaleY(.08); }
+  75%, 100% { transform: scaleY(1); }
 }
 @keyframes line {
   0%   { opacity: 0; transform: translateY(8px); }
@@ -1163,6 +1178,6 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .gate.playing, .gate.playing .gate-stage, .gate.playing .gate-door, .gate.playing .door-flicker, .gate.playing .hatch-shutter,
-  .gate.playing .tiger-pic, .gate.playing .tiger-lid, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
+  .gate.playing .door-eyes, .gate.playing .door-eye, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
   .gate.playing .gate-shine, .gate.playing .gate-welcome, .gate.playing .gate-skip { animation: none; }
 }

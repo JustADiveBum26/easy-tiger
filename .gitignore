@@ -4,3 +4,7 @@
 firebase-debug.log
 .DS_Store
 Thumbs.db
+
+# door picture recipes: downloaded sources and test output stay on this computer
+tools/door-pictures/source/
+tools/door-pictures/output/
