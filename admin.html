@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Easy Tiger · Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#070908">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body class="admin">
+
+  <main class="section">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="label">Easy Tiger</p>
+        <h2>Admin</h2>
+        <div class="rule"><span></span></div>
+      </header>
+
+      <p class="demo-note" id="demo-note" hidden>Demo mode. This only sees what was added in this same browser. The real version signs in with your Google account.</p>
+
+      <!-- Signed out -->
+      <div class="admin-signin" id="signin">
+        <p class="note">Only Bradley can approve photos.</p>
+        <button class="btn btn-solid" type="button" id="signin-btn">Sign in</button>
+        <p class="form-status" id="signin-msg" role="status"></p>
+      </div>
+
+      <!-- Signed in -->
+      <div id="panel" hidden>
+        <div class="admin-bar">
+          <a href="index.html">&larr; Back to the site</a>
+          <button class="btn" type="button" id="signout-btn">Sign out</button>
+        </div>
+
+        <h3 class="admin-h">Waiting for approval <span id="pending-count"></span></h3>
+        <div class="admin-list" id="pending"></div>
+
+        <h3 class="admin-h">On the wall <span id="approved-count"></span></h3>
+        <div class="admin-list" id="approved"></div>
+
+        <h3 class="admin-h">Guest book, waiting <span id="gb-pending-count"></span></h3>
+        <div class="admin-gb" id="gb-pending"></div>
+
+        <h3 class="admin-h">Guest book, posted <span id="gb-count"></span></h3>
+        <div class="admin-gb" id="gb"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/firebase-config.js?v=7"></script>
+  <script src="js/store.js?v=7"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/store-firebase.js?v=7"></script>
+  <script src="js/admin.js?v=7"></script>
+</body>
+</html>

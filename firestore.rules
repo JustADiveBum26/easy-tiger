@@ -1,0 +1,65 @@
+rules_version = '2';
+
+// Easy Tiger security rules. These, not the web page, are what protect the data.
+//
+// Two documents only Bradley can create (from the Firebase console, never from this repo):
+//   config/house  ->  { password: "the house password" }
+//   config/admin  ->  { email: "the Google account that approves things" }
+//
+// Guests can only ADD to the two "Pending" collections, and only with the right house password.
+// Nobody but the admin can read those, so the password stored with each entry stays private.
+// The public collections (guestbook, photos) can be read by anyone with the link and changed
+// only by the admin, which is what approving does.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function house() {
+      return get(/databases/$(database)/documents/config/house).data;
+    }
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == get(/databases/$(database)/documents/config/admin).data.email;
+    }
+    function rightPassword() {
+      return request.resource.data.key == house().password;
+    }
+
+    // The password and the admin email. No one can read or write these from a web page.
+    match /config/{doc} {
+      allow read, write: if false;
+    }
+
+    // What everyone sees
+    match /guestbook/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /photos/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // What guests send in. Add-only, right password, small and plain.
+    match /guestbookPending/{id} {
+      allow create: if rightPassword()
+        && request.resource.data.keys().hasOnly(['name', 'note', 'key', 'ts'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 60
+        && request.resource.data.note is string
+        && request.resource.data.note.size() > 0 && request.resource.data.note.size() <= 400
+        && request.resource.data.ts == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+    match /photosPending/{id} {
+      allow create: if rightPassword()
+        && request.resource.data.keys().hasOnly(['src', 'caption', 'key', 'ts'])
+        && request.resource.data.src is string
+        && request.resource.data.src.matches('https://res\\.cloudinary\\.com/.*')
+        && request.resource.data.caption is string
+        && request.resource.data.caption.size() <= 80
+        && request.resource.data.ts == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
