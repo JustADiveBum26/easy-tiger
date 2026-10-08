@@ -8,3 +8,6 @@ Thumbs.db
 # door picture recipes: downloaded sources and test output stay on this computer
 tools/door-pictures/source/
 tools/door-pictures/output/
+
+# QR codes and the printable sign stay on this computer (not on the website)
+assets/qr/
