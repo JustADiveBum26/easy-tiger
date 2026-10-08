@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=23">
-  <script src="js/firebase-config.js?v=23"></script>
+  <link rel="stylesheet" href="css/style.css?v=25">
+  <script src="js/firebase-config.js?v=25"></script>
 </head>
 <body>
 
@@ -47,30 +47,36 @@
 
     <!-- The opening: plays once the right password is in -->
     <div class="gate-stage" aria-hidden="true">
-      <div class="gate-light">
-        <div class="gate-light-bg"></div>
-        <div class="gate-emblem">
-          <img src="assets/logo/easy-tiger-logo-medium.png" alt="" width="400" height="400">
-          <span class="gate-shine"></span>
-        </div>
-        <p class="gate-welcome">Welcome to Easy Tiger</p>
-      </div>
+      <div class="door-scene">
+        <div class="door-jamb"></div>
 
-      <div class="gate-door">
-        <div class="door-strap door-strap-1"></div>
-        <div class="door-strap door-strap-2"></div>
-        <div class="door-hatch">
-          <div class="hatch-inner">
-            <div class="door-eyes"><span class="door-eye door-eye-l"></span><span class="door-eye door-eye-r"></span></div>
+        <!-- what is behind the door: warm light, the tiger, the welcome -->
+        <div class="gate-light">
+          <div class="gate-light-bg"></div>
+          <div class="gate-emblem">
+            <img src="assets/logo/easy-tiger-logo-medium.png" alt="" width="400" height="400">
+            <span class="gate-shine"></span>
           </div>
-          <div class="hatch-shutter"></div>
+          <p class="gate-welcome">Welcome to Easy Tiger</p>
         </div>
-        <div class="door-knocker"></div>
-      </div>
 
-      <p class="gate-line gate-line-1">Let&rsquo;s have a look at you.</p>
-      <p class="gate-line gate-line-2">That&rsquo;s the one.</p>
-      <p class="gate-line gate-line-3">Mind the stairs.</p>
+        <!-- the door -->
+        <div class="gate-door">
+          <div class="door-hatch">
+            <div class="hatch-tiger">
+              <img class="tiger-pic" src="assets/door/tiger-eyes.jpg" alt="" width="1280" height="400">
+              <span class="tiger-lid tiger-lid-l"></span><span class="tiger-lid tiger-lid-r"></span>
+              <span class="hatch-glow"></span>
+            </div>
+            <img class="hatch-shutter" src="assets/door/shutter.jpg" alt="" width="717" height="228">
+          </div>
+          <span class="door-flicker"></span>
+        </div>
+
+        <p class="gate-line gate-line-1">Let&rsquo;s have a look at you.</p>
+        <p class="gate-line gate-line-2">That&rsquo;s the one.</p>
+        <p class="gate-line gate-line-3">Mind the stairs.</p>
+      </div>
       <p class="gate-skip">Tap anywhere to skip</p>
     </div>
   </div>
@@ -367,12 +373,12 @@
     <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Tagline goes here</p>
   </footer>
 
-  <script src="js/menu-data.js?v=23" charset="utf-8"></script>
-  <script src="js/store.js?v=23"></script>
+  <script src="js/menu-data.js?v=25" charset="utf-8"></script>
+  <script src="js/store.js?v=25"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=23"></script>
-  <script src="js/main.js?v=23"></script>
+  <script src="js/store-firebase.js?v=25"></script>
+  <script src="js/main.js?v=25"></script>
 </body>
 </html>

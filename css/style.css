@@ -928,30 +928,49 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 }
 
 /* ---------- The opening (about 8 seconds) ----------
-   A heavy speakeasy door. Times are seconds after the right password.
+   A real-looking speakeasy door. Times are seconds after the right password.
    0.0   the door fades in over the password box
    0.35  knock   0.70  knock (the door jolts)
    1.0   the brass hatch slides open
-   1.4   two tiger eyes light up behind it, look left, look right, blink
+   1.4   a tiger looks out: eyes glowing, turning left, then right, a blink
    2.0   "Let's have a look at you."   3.1  "That's the one."   4.1  "Mind the stairs."
    5.15  the hatch snaps shut
    5.4   the door swings open into warm light
    6.0   the tiger emblem rises out of the light, then a gold shine   6.5  "Welcome to Easy Tiger"
-   7.2   everything fades to the page   8.0  done                                           */
+   7.2   everything fades to the page   8.0  done
+   Pictures: assets/door/ (real photo textures, see assets/door/CREDITS.md)            */
 .gate-stage {
-  --em: min(52vw, 230px);                 /* width of the tiger emblem */
   position: absolute;
   inset: 0;
   z-index: 3;
   overflow: hidden;
-  background: #050403;
-  perspective: 1400px;
+  background: radial-gradient(ellipse at 50% 42%, #1c130c 0%, #0a0705 55%, #030201 100%);
   opacity: 0;
   pointer-events: none;
 }
 
-/* what is behind the door: warm light, the tiger, the welcome */
-.gate-light { position: absolute; inset: 0; }
+/* the doorway: a dark frame around the door, sized like a real door on any screen */
+.door-scene {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: min(100vw, calc(100dvh * 0.496));
+  aspect-ratio: 0.496;
+  transform: translate(-50%, -50%);
+  perspective: 1500px;
+}
+.door-jamb {
+  position: absolute; inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), url(../assets/door/jamb.jpg) 0 0 / 340px;
+  box-shadow: inset 0 0 36px 6px rgba(0, 0, 0, .85), 0 0 80px 24px rgba(0, 0, 0, .85);
+}
+
+/* what is behind the door */
+.gate-light {
+  position: absolute;
+  left: 5.5%; top: 4%; width: 89%; height: 96%;
+  overflow: hidden;
+  background: #060402;
+}
 .gate-light-bg {
   position: absolute; inset: 0;
   background: radial-gradient(circle at 50% 46%, #ffe7b0 0%, #f3b95c 17%, #9a5c18 42%, #2a1707 72%, #0c0703 100%);
@@ -959,8 +978,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 }
 .gate-emblem {
   position: absolute;
-  left: 50%; top: 44%;
-  width: var(--em); height: var(--em);
+  left: 50%; top: 42%;
+  width: 66%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
@@ -978,134 +997,89 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 .gate-welcome {
   position: absolute;
   left: 0; right: 0;
-  top: calc(44% + var(--em) / 2 + 34px);
+  top: 76%;
   margin: 0;
   text-align: center;
   font-family: var(--font-head);
-  font-size: clamp(1rem, 4.6vw, 1.35rem);
-  letter-spacing: .3em;
-  text-indent: .3em;
+  font-size: clamp(.85rem, 3.9vw, 1.2rem);
+  letter-spacing: .26em;
+  text-indent: .26em;
   text-transform: uppercase;
   color: #fff4d6;
   text-shadow: 0 0 18px rgba(255, 170, 60, .9), 0 1px 2px rgba(0, 0, 0, .6);
   opacity: 0;
 }
 
-/* the door itself: planks, grain, iron straps, gold studs */
+/* the door leaf: a photographed plank door with real hardware, hinged on the left */
 .gate-door {
   position: absolute;
-  inset: -24px;                           /* a little bigger than the screen so jolts never show an edge */
-  transform-origin: 0 50%;                /* hinged on the left, swings away from you */
+  left: 5.5%; top: 4%; width: 89%; height: 96%;
+  transform-origin: 0 50%;
   backface-visibility: hidden;
   opacity: 0;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, .65) 0, transparent 9%, transparent 91%, rgba(0, 0, 0, .65) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, .55) 0, transparent 14%, transparent 86%, rgba(0, 0, 0, .6) 100%),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, .7) 0 3px, rgba(255, 255, 255, .03) 3px 5px, transparent 5px 98px),
-    url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='500'%3E%3Cfilter%20id='g'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85%200.012'%20numOctaves='3'%20seed='7'/%3E%3CfeColorMatrix%20values='0%200%200%200%200.05%20%200%200%200%200%200.03%20%200%200%200%200%200.02%20%201.9%200%200%200%20-0.55'/%3E%3C/filter%3E%3Crect%20width='100%25'%20height='100%25'%20filter='url%28%23g%29'/%3E%3C/svg%3E") 0 0 / 300px 500px,
-    linear-gradient(180deg, #34200f, #22140a 55%, #170d06);
-  box-shadow: inset 0 0 90px rgba(0, 0, 0, .75);
+  background: #1a0f08 url(../assets/door/door-leaf.jpg) center / 100% 100% no-repeat;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .9);
 }
-.door-strap {
-  position: absolute;
-  left: 0; width: 66%; height: 34px;
-  background:
-    radial-gradient(circle, #f1d58a 0 2.5px, #a67c1d 3.5px, transparent 5px) 14px 50% / 54px 100% repeat-x,
-    linear-gradient(180deg, #1d1713, #0a0705 70%, #15100c);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, .75), inset 0 1px 0 rgba(255, 255, 255, .05);
+/* lantern light that flickers a little */
+.door-flicker {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 22%, rgba(255, 170, 70, .20), transparent 62%);
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
-.door-strap-1 { top: 15%; }
-.door-strap-2 { top: 80%; }
 
-/* the peep hatch: a brass frame, a shutter, and the dark behind it */
+/* the hatch and what is behind it */
 .door-hatch {
   position: absolute;
-  left: 50%; top: 31%;
-  width: min(66vw, 300px); height: 74px;
-  transform: translate(-50%, -50%);
-  border: 5px solid #b98a2e;
-  border-top-color: #e6c26a;
-  border-bottom-color: #8a6420;
-  border-radius: 3px;
-  background: #0a0502;
-  box-shadow: 0 0 0 3px #1b1007, 0 6px 16px rgba(0, 0, 0, .8), inset 0 0 14px #000;
+  left: 14.45%; top: 27.6%; width: 71.1%; height: 10.21%;
   overflow: hidden;
+  background: #000;
 }
-.hatch-inner {
+.hatch-tiger { position: absolute; inset: 0; overflow: hidden; }
+.tiger-pic {
+  position: absolute;
+  left: -6%; top: -6%; width: 112%; height: 112%;
+  object-fit: cover;
+  opacity: 0;
+}
+.hatch-glow {                                   /* warm light from the passage beyond */
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, #5a2d0a 0%, #2a1306 45%, #080402 100%);
+  background: radial-gradient(ellipse at 50% 115%, rgba(255, 150, 40, .45), transparent 62%),
+              radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, .75) 100%);
+  mix-blend-mode: screen;
 }
+.tiger-lid {                                    /* a blink: the eye goes dark for a moment */
+  position: absolute;
+  top: 36%; width: 14%; height: 30%;
+  background: radial-gradient(ellipse, #160a03 52%, transparent 72%);
+  opacity: 0;
+}
+.tiger-lid-l { left: calc(34.6% - 7%); }
+.tiger-lid-r { left: calc(65.4% - 7%); }
 .hatch-shutter {
   position: absolute; inset: 0;
-  background:
-    linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, .55) 50%, transparent 54%),
-    linear-gradient(180deg, #4a3a22, #2b2112 60%, #1d160c);
-  box-shadow: inset 0 -3px 0 #b98a2e, inset 0 0 12px rgba(0, 0, 0, .7);
-}
-
-/* two tiger eyes */
-.door-eyes { position: absolute; inset: 0; opacity: 0; }
-.door-eye {
-  position: absolute;
-  top: 50%;
-  width: 46px; height: 22px;
-  margin-top: -11px;
-  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-  background: radial-gradient(ellipse at 50% 50%, #fff0b8 0%, #ffc43d 42%, #d8791f 100%);
-  box-shadow: 0 0 16px 4px rgba(255, 170, 50, .75);
-  overflow: hidden;
-}
-.door-eye::after {                         /* the slit pupil */
-  content: "";
-  position: absolute;
-  left: 50%; top: -3px;
-  width: 7px; height: calc(100% + 6px);
-  transform: translateX(-50%);
-  background: #100803;
-  border-radius: 50%;
-}
-.door-eye-l { left: calc(50% - 60px); }
-.door-eye-r { left: calc(50% + 14px); }
-
-.door-knocker {
-  position: absolute;
-  left: 50%; top: 68%;
-  width: 62px; height: 62px;
-  transform: translate(-50%, -50%);
-  border: 7px solid #c99a3a;
-  border-top-color: #f0d078;
-  border-bottom-color: #8a6420;
-  border-radius: 50%;
-  box-shadow: inset 0 0 7px #000, 0 5px 10px rgba(0, 0, 0, .8);
-}
-.door-knocker::before {                    /* the plate it hangs from */
-  content: "";
-  position: absolute;
-  left: 50%; top: -22px;
-  width: 26px; height: 20px;
-  transform: translateX(-50%);
-  border-radius: 6px 6px 3px 3px;
-  background: linear-gradient(180deg, #f0d078, #a67c1d);
-  box-shadow: 0 3px 5px rgba(0, 0, 0, .7);
+  width: 100%; height: 100%;
+  object-fit: cover;
+  box-shadow: inset 0 -4px 0 rgba(185, 138, 46, .9), 0 4px 10px rgba(0, 0, 0, .8);
 }
 
 /* what the doorman says */
 .gate-line {
   position: absolute;
   left: 0; right: 0;
-  top: 46%;
+  top: 56.5%;
   margin: 0;
-  padding: 0 20px;
+  padding: 0 8%;
   text-align: center;
   font-style: italic;
-  font-size: clamp(1.6rem, 7vw, 2.2rem);
+  font-size: clamp(1.45rem, 6vw, 1.95rem);
   color: #fff4d6;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, .9);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .95), 0 0 3px rgba(0, 0, 0, .9);
   opacity: 0;
 }
 .gate-skip {
   position: absolute;
-  left: 0; right: 0; bottom: 26px;
+  left: 0; right: 0; bottom: 18px;
   margin: 0;
   text-align: center;
   font-family: var(--font-label);
@@ -1121,9 +1095,10 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 .gate.playing { cursor: pointer; animation: gate-out .8s ease 7.2s forwards; }
 .gate.playing .gate-stage      { animation: stage-in .35s ease forwards; }
 .gate.playing .gate-door       { animation: door-run 6.7s linear forwards; }
+.gate.playing .door-flicker    { animation: flicker 2.4s ease-in-out infinite; }
 .gate.playing .hatch-shutter   { animation: shutter 5.3s linear forwards; }
-.gate.playing .door-eyes       { animation: eyes-look 3.9s ease 1.4s forwards; }
-.gate.playing .door-eye        { animation: eye-blink 3.9s linear 1.4s forwards; }
+.gate.playing .tiger-pic       { animation: tiger-look 3.9s ease 1.4s forwards; }
+.gate.playing .tiger-lid       { animation: tiger-blink 3.9s linear 1.4s forwards; }
 .gate.playing .gate-line-1     { animation: line .95s ease 2.0s forwards; }
 .gate.playing .gate-line-2     { animation: line .9s ease 3.1s forwards; }
 .gate.playing .gate-line-3     { animation: line .9s ease 4.1s forwards; }
@@ -1139,20 +1114,21 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 @keyframes stage-in { to { opacity: 1; } }
 @keyframes gate-out { to { opacity: 0; } }
 @keyframes gate-skip-out { to { opacity: 0; } }
+@keyframes flicker { 0%, 100% { opacity: .85; } 20% { opacity: 1; } 38% { opacity: .7; } 55% { opacity: .95; } 78% { opacity: .78; } }
 
 @keyframes door-run {
   0%    { opacity: 0; transform: none; }
   5%    { opacity: 1; }
   5.2%  { transform: none; }
-  6.0%  { transform: translate(-7px, 2px); }
-  7.5%  { transform: translate(4px, 0); }
+  6.0%  { transform: translate(-5px, 1px); }
+  7.5%  { transform: translate(3px, 0); }
   9%    { transform: none; }
   10.4% { transform: none; }
-  11.2% { transform: translate(-7px, 2px); }
-  12.7% { transform: translate(4px, 0); }
+  11.2% { transform: translate(-5px, 1px); }
+  12.7% { transform: translate(3px, 0); }
   14.2% { transform: none; }
   76.8% { opacity: 1; transform: none; }
-  77.6% { transform: translate(-6px, 1px); }
+  77.6% { transform: translate(-4px, 1px); }
   79%   { transform: none; }
   80.6% { opacity: 1; transform: rotateY(0deg); animation-timing-function: cubic-bezier(.55, 0, .75, .6); }
   100%  { opacity: 1; transform: rotateY(102deg); }
@@ -1165,21 +1141,21 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   98.9%  { transform: translateY(0); }
   100%   { transform: translateY(0); }
 }
-@keyframes eyes-look {
-  0%    { opacity: 0; transform: translateX(0); }
-  15%   { opacity: 1; transform: translateX(0); }
-  20%   { transform: translateX(0); }
-  26%   { transform: translateX(-12px); }
-  33%   { transform: translateX(-12px); }
-  41%   { transform: translateX(12px); }
-  54%   { transform: translateX(12px); }
-  62%   { opacity: 1; transform: translateX(0); }
-  100%  { opacity: 1; transform: translateX(0); }
+@keyframes tiger-look {       /* fades up out of the dark, then the head turns left, right, and back */
+  0%    { opacity: 0; transform: translateX(0) scale(1.04); }
+  15%   { opacity: 1; transform: translateX(0) scale(1.04); }
+  22%   { transform: translateX(0) scale(1.04); }
+  30%   { transform: translateX(-3.5%) scale(1.07); }
+  38%   { transform: translateX(-3.5%) scale(1.07); }
+  47%   { transform: translateX(3.5%) scale(1.07); }
+  58%   { transform: translateX(3.5%) scale(1.07); }
+  66%   { opacity: 1; transform: translateX(0) scale(1.1); }
+  100%  { opacity: 1; transform: translateX(0) scale(1.12); }
 }
-@keyframes eye-blink {
-  0%, 68%  { transform: scaleY(1); }
-  71%      { transform: scaleY(.08); }
-  75%, 100% { transform: scaleY(1); }
+@keyframes tiger-blink {
+  0%, 69%   { opacity: 0; }
+  71.5%     { opacity: 1; }
+  75%, 100% { opacity: 0; }
 }
 @keyframes line {
   0%   { opacity: 0; transform: translateY(8px); }
@@ -1194,7 +1170,7 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 @keyframes skip-hint { 0% { opacity: 0; } 20% { opacity: .8; } 100% { opacity: .8; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .gate.playing, .gate.playing .gate-stage, .gate.playing .gate-door, .gate.playing .hatch-shutter, .gate.playing .door-eyes,
-  .gate.playing .door-eye, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
+  .gate.playing, .gate.playing .gate-stage, .gate.playing .gate-door, .gate.playing .door-flicker, .gate.playing .hatch-shutter,
+  .gate.playing .tiger-pic, .gate.playing .tiger-lid, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
   .gate.playing .gate-shine, .gate.playing .gate-welcome, .gate.playing .gate-skip { animation: none; }
 }
