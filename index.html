@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
-  <script src="js/firebase-config.js?v=10"></script>
+  <link rel="stylesheet" href="css/style.css?v=11">
+  <script src="js/firebase-config.js?v=11"></script>
 </head>
 <body>
 
@@ -35,20 +35,23 @@
     <div class="gate-curtain gate-curtain-right" aria-hidden="true"></div>
     <div class="gate-rod" aria-hidden="true"></div>
     <form class="frame gate-card" id="gate-form" autocomplete="off">
-      <img class="gate-logo" src="assets/logo/easy-tiger-logo-medium.png" alt="Easy Tiger" width="400" height="400">
-      <p class="label" id="gate-title">Knock to enter</p>
-      <label class="visually-hidden" for="gate-input">The secret words</label>
-      <input id="gate-input" type="text" placeholder="Say the words" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+      <img class="gate-logo" src="assets/logo/easy-tiger-logo-medium.png" alt="" width="400" height="400">
+      <p class="label">Knock, knock</p>
+      <h1 class="gate-headline" id="gate-title">Every good speakeasy has a password</h1>
+      <p class="gate-sub">Whisper it to the door.</p>
+      <label class="visually-hidden" for="gate-input">The password</label>
+      <input id="gate-input" type="text" placeholder="The password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
       <button class="btn btn-solid" type="submit">Knock</button>
       <p class="form-status" id="gate-status" role="status"></p>
     </form>
   </div>
   <script>
-    // Runs before the page paints: show the gate unless this browser already knocked with the current words.
+    // Runs before the page paints. The gate shows on EVERY page load: nothing is remembered,
+    // so a refresh, a new tab or a new window all ask again.
     (function () {
       var c = window.EASY_TIGER_CONFIG;
+      try { localStorage.removeItem('et_knocked'); } catch (e) { /* older versions remembered people; forget that */ }
       if (!c || !c.knock || !c.knock.hash) return;
-      try { if (localStorage.getItem('et_knocked') === c.knock.hash) return; } catch (e) { /* no storage: ask every time */ }
       document.getElementById('gate').hidden = false;
       document.documentElement.classList.add('gate-open');
     })();
@@ -102,23 +105,20 @@
 
         <div class="story-grid">
           <div class="story-text">
-            <p>Easy Tiger is a speakeasy room in a basement in Columbia, Missouri. The name is a nod to the Mizzou Tigers, with a little Prohibition wink on top.</p>
-            <p>It's a place to unplug after a long day. No phones, no screens. The bottles on the shelf are meant to be opened and shared, not saved for some better night.</p>
-            <p class="placeholder">[Bradley: a few lines here about how the idea started and who helped build it.]</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
           </div>
 
           <aside class="frame in-the-room">
             <h3>In the room</h3>
             <ul>
-              <li>Deep teal green walls and a flat black ceiling, pipes and joists included</li>
-              <li>One wall of burned cedar, charcoal black with silver-grey grain</li>
-              <li>Red leather sofa, two brown Chesterfield chairs, and a hammered copper and bronze coffee table</li>
-              <li>A rug with two tigers on it</li>
-              <li>Gold fixtures and warm amber Edison light. Nothing cool or white.</li>
-              <li>Exposed concrete floor, cleaned and sealed</li>
-              <li>A burgundy velvet curtain where a door would be</li>
-              <li>Prohibition-era art prints and gold animal busts on one wall</li>
-              <li>A record player on a dark walnut console</li>
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Sed do eiusmod tempor incididunt</li>
+              <li>Ut labore et dolore magna aliqua</li>
+              <li>Ut enim ad minim veniam</li>
+              <li>Quis nostrud exercitation ullamco</li>
             </ul>
           </aside>
         </div>
@@ -312,13 +312,6 @@
             <p>Empty bottles that stay on the list because they were gifts or marked a milestone.</p>
             <p class="placeholder">[None yet.]</p>
           </article>
-
-          <article class="frame extra">
-            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="20" width="24" height="22" rx="2"/><path d="M17 20v-6a7 7 0 0 1 14 0v6"/><circle cx="24" cy="31" r="2"/></svg>
-            <h3>Knock to Enter</h3>
-            <p>There's a secret phrase. Ask Bradley.</p>
-            <p class="placeholder">[Phrase not picked yet.]</p>
-          </article>
         </div>
       </div>
     </section>
@@ -327,15 +320,15 @@
 
   <footer class="footer">
     <div class="rule"><span></span></div>
-    <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Keep it between us</p>
+    <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Tagline goes here</p>
   </footer>
 
-  <script src="js/menu-data.js?v=10" charset="utf-8"></script>
-  <script src="js/store.js?v=10"></script>
+  <script src="js/menu-data.js?v=11" charset="utf-8"></script>
+  <script src="js/store.js?v=11"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=10"></script>
-  <script src="js/main.js?v=10"></script>
+  <script src="js/store-firebase.js?v=11"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>

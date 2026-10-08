@@ -333,8 +333,9 @@
 })();
 
 // ---------- Knock to Enter ----------
-// Fun, not security: the words are checked in the browser. Only a scrambled fingerprint of
-// them is in js/firebase-config.js, so the answer isn't sitting there in plain sight.
+// Fun, not security: the password is checked in the browser. Only a scrambled fingerprint of
+// it is in js/firebase-config.js, so the answer isn't sitting there in plain sight.
+// Nothing is remembered. Every page load, refresh, new tab or new window asks again.
 (function () {
   var cfg = window.EASY_TIGER_CONFIG;
   var gate = document.getElementById('gate');
@@ -344,7 +345,15 @@
   var input = document.getElementById('gate-input');
   var status = document.getElementById('gate-status');
 
-  // "Open Sesame!", "open  sesame" and "OPEN SESAME" all count as the same words.
+  var WRONG = [
+    'The peephole slides shut. Try again.',
+    'Nobody answers. Try again.',
+    'Wrong word. The door stays shut.',
+    'The bouncer is not impressed. Try again.'
+  ];
+  var tries = 0;
+
+  // "Open Sesame!", "open  sesame" and "OPEN SESAME" all count as the same password.
   function plain(t) {
     return (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '');
   }
@@ -357,7 +366,7 @@
   }
 
   function openDoor() {
-    try { localStorage.setItem('et_knocked', cfg.knock.hash); } catch (e) { /* fine, they'll knock again next time */ }
+    status.textContent = 'Come on in.';
     gate.classList.add('open');
     var wait = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1200;
     setTimeout(function () {
@@ -367,11 +376,11 @@
   }
 
   function wrong() {
-    var card = document.getElementById('gate-form');
-    status.textContent = 'Nobody answers. Try again.';
-    card.classList.remove('shake');
-    void card.offsetWidth;            // restart the shake
-    card.classList.add('shake');
+    status.textContent = WRONG[tries % WRONG.length];
+    tries++;
+    form.classList.remove('shake');
+    void form.offsetWidth;            // restart the shake
+    form.classList.add('shake');
     input.select();
   }
 
@@ -383,6 +392,10 @@
       else wrong();
     });
   });
+
+  // Coming back to the page with the back button can show it frozen in its "opened" state.
+  // Reload so the door is shut again.
+  window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
 
   if (!gate.hidden) setTimeout(function () { input.focus(); }, 60);
 })();
