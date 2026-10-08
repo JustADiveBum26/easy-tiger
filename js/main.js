@@ -365,15 +365,45 @@
     });
   }
 
+  // The opening plays for about 4.7 seconds (the timeline is in css/style.css).
+  var OPENING_MS = 4700;
+  var timer = null;
+  var startedAt = 0;
+  var finished = false;
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+    clearTimeout(timer);
+    gate.hidden = true;
+    document.documentElement.classList.remove('gate-open');
+    toTop();
+  }
+
+  // Tap, click or press a key during the opening to jump straight in.
+  function skip() {
+    if (finished || Date.now() - startedAt < 500) return;    // ignore the tap or Enter that just sent the password
+    clearTimeout(timer);
+    gate.classList.remove('playing');
+    gate.classList.add('open', 'skip');
+    timer = setTimeout(finish, 480);
+  }
+
   function openDoor() {
+    startedAt = Date.now();
     status.textContent = 'Come on in.';
-    gate.classList.add('open');
-    var wait = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1200;
-    setTimeout(function () {
-      gate.hidden = true;
-      document.documentElement.classList.remove('gate-open');
-      toTop();
-    }, wait);
+    // a quick double knock on phones that can buzz (some Android phones; iPhones ignore it)
+    try { if (navigator.vibrate) navigator.vibrate([70, 90, 70]); } catch (e) { /* not supported */ }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {   // calm version: no show
+      gate.classList.add('open');
+      timer = setTimeout(finish, 350);
+      return;
+    }
+    gate.classList.add('playing');
+    gate.addEventListener('pointerdown', skip);
+    document.addEventListener('keydown', skip);
+    timer = setTimeout(finish, OPENING_MS);
   }
 
   function wrong() {
@@ -387,6 +417,7 @@
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (gate.classList.contains('playing') || gate.classList.contains('open')) return;
     if (!plain(input.value)) { wrong(); return; }
     fingerprint(input.value).then(function (h) {
       if (h === null || h === cfg.knock.hash) openDoor();   // an old browser that can't check lets people in
@@ -428,5 +459,5 @@ window.addEventListener('load', toTop);
     if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); btn.focus(); }
   });
   // turning a tablet sideways (or resizing a window) into the wide layout: close it
-  window.matchMedia('(min-width: 861px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+  window.matchMedia('(min-width: 1001px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
 })();

@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20">
-  <script src="js/firebase-config.js?v=20"></script>
+  <link rel="stylesheet" href="css/style.css?v=22">
+  <script src="js/firebase-config.js?v=22"></script>
 </head>
 <body>
 
@@ -44,6 +44,20 @@
       <button class="btn btn-solid" type="submit">Try the door</button>
       <p class="form-status" id="gate-status" role="status"></p>
     </form>
+
+    <!-- The opening: plays once the right password is in -->
+    <div class="gate-stage" aria-hidden="true">
+      <div class="gate-glow"></div>
+      <div class="gate-slot"></div>
+      <div class="gate-emblem">
+        <img src="assets/logo/easy-tiger-logo-medium.png" alt="" width="400" height="400">
+        <span class="gate-shine"></span>
+      </div>
+      <p class="gate-line gate-line-1">That&rsquo;s the one.</p>
+      <p class="gate-line gate-line-2">Mind the stairs.</p>
+      <p class="gate-line gate-line-3">Welcome to Easy Tiger</p>
+      <p class="gate-skip">Tap anywhere to skip</p>
+    </div>
   </div>
   <script>
     // Runs before the page paints. The gate shows on EVERY page load: nothing is remembered,
@@ -70,6 +84,7 @@
       <span class="nav-toggle-bars" aria-hidden="true"></span>
     </button>
     <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#rules">House Rules</a>
       <a href="#drinks">Drinks</a>
       <a href="#story">The Story</a>
       <a href="#build">The Build</a>
@@ -96,6 +111,27 @@
     <div class="band">
       <p>Speak softly <span aria-hidden="true">&middot;</span> Pour generously <span aria-hidden="true">&middot;</span> Stay late</p>
     </div>
+
+    <!-- HOUSE RULES -->
+    <section class="section rules-section" id="rules">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="label">The fine print</p>
+          <h2>House Rules</h2>
+          <div class="rule"><span></span></div>
+        </header>
+
+        <div class="frame poster">
+          <ol class="poster-rules">
+            <li><span class="poster-head">Phones Off. Conversation On.</span><span class="poster-sub">Be in the Moment.</span></li>
+            <li><span class="poster-head">Drink It, Don&rsquo;t Save It.</span><span class="poster-sub">It&rsquo;s Here to Drink, Not Look At.</span></li>
+            <li><span class="poster-head">Pour a Little for Your Neighbor.</span><span class="poster-sub">An Empty Glass Is Everyone&rsquo;s Problem.</span></li>
+            <li><span class="poster-head">Leave Your Bad Day at the Door.</span><span class="poster-sub">Pick It Back Up on the Way Out.</span></li>
+            <li><span class="poster-head">Stay Late(ish).</span><span class="poster-sub">The More We Like You, the Later We&rsquo;re Open.</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
 
     <!-- DRINKS -->
     <section class="section burgundy" id="drinks">
@@ -300,18 +336,6 @@
 
         <div class="extras-grid">
           <article class="frame extra">
-            <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="6" width="20" height="36" rx="3"/><path d="M8 40 L40 8"/></svg>
-            <h3>House Rules</h3>
-            <ul class="rules">
-              <li><span class="rule-head">Phones Off. Conversation On.</span><span class="rule-sub">Be in the Moment.</span></li>
-              <li><span class="rule-head">Drink It, Don&rsquo;t Save It.</span><span class="rule-sub">It&rsquo;s Here to Drink, Not Look At.</span></li>
-              <li><span class="rule-head">Pour a Little for Your Neighbor.</span><span class="rule-sub">An Empty Glass Is Everyone&rsquo;s Problem.</span></li>
-              <li><span class="rule-head">Leave Your Bad Day at the Door.</span><span class="rule-sub">Pick It Back Up on the Way Out.</span></li>
-              <li><span class="rule-head">Stay Late(ish).</span><span class="rule-sub">The More We Like You, the Later We&rsquo;re Open.</span></li>
-            </ul>
-          </article>
-
-          <article class="frame extra">
             <svg class="icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M20 4h8v8l5 8v22a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V20l5-8z"/><path d="M15 28h18"/></svg>
             <h3>Pours We Remember</h3>
             <p>Empty bottles that stay on the list because they were gifts or marked a milestone.</p>
@@ -328,12 +352,12 @@
     <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Tagline goes here</p>
   </footer>
 
-  <script src="js/menu-data.js?v=20" charset="utf-8"></script>
-  <script src="js/store.js?v=20"></script>
+  <script src="js/menu-data.js?v=22" charset="utf-8"></script>
+  <script src="js/store.js?v=22"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=20"></script>
-  <script src="js/main.js?v=20"></script>
+  <script src="js/store-firebase.js?v=22"></script>
+  <script src="js/main.js?v=22"></script>
 </body>
 </html>
