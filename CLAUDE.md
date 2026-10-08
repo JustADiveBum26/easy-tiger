@@ -255,6 +255,7 @@ Add a line here each time a decision changes or a piece gets finished, so the ne
 - [ ] Guest book working
 - [ ] Photo upload working
 - [ ] Admin approval page working
+- [x] Hero buttons: both gone now (See the drinks removed too), Oct 8, 2026. Nav now reads THE STORY, THE BUILD, Drinks, Guest Book, Photos, Extras. The page always opens at the very top: scroll position is not restored on refresh, a #section on the address is stripped, and it jumps to the top again when the password door opens (toTop in js/main.js, plus a small script at the top of index.html). Don't undo that without asking.
 - [x] Removed the gold Come on in button from the hero (Oct 8, 2026, Bradley's call). The hero now has one button: See the drinks. The password screen still flashes Come on in. as the curtains open (he chose to keep that one).
 - [x] Round 3 of changes (Oct 8, 2026):
   - Story section and the In the room box now hold plain Latin filler text only (Bradley doesn't want anything real showing yet). Layout is unchanged. The real room details are still listed in the About the room section above, and the earlier real wording is in git history (commit a6c7e1b and before). Put real text back only when he asks.

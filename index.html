@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=14">
-  <script src="js/firebase-config.js?v=14"></script>
+  <link rel="stylesheet" href="css/style.css?v=15">
+  <script src="js/firebase-config.js?v=15"></script>
 </head>
 <body>
 
@@ -49,6 +49,10 @@
     // Runs before the page paints. The gate shows on EVERY page load: nothing is remembered,
     // so a refresh, a new tab or a new window all ask again.
     (function () {
+      // Always open at the very top: don't let the browser jump back to where you were scrolled
+      // (refresh) or to a #section on the end of the address.
+      try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) { /* fine */ }
+      try { if (location.hash) history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* fine */ }
       var c = window.EASY_TIGER_CONFIG;
       try { localStorage.removeItem('et_knocked'); } catch (e) { /* older versions remembered people; forget that */ }
       if (!c || !c.knock || !c.knock.hash) return;
@@ -63,8 +67,8 @@
       <span>Easy Tiger</span>
     </a>
     <nav class="nav-links" aria-label="Main">
-      <a href="#story">Story</a>
-      <a href="#build">Build</a>
+      <a href="#story">The Story</a>
+      <a href="#build">The Build</a>
       <a href="#drinks">Drinks</a>
       <a href="#guestbook">Guest Book</a>
       <a href="#photos">Photos</a>
@@ -82,9 +86,6 @@
       <div class="hero-inner">
         <img class="hero-logo" src="assets/logo/easy-tiger-logo.png" alt="Easy Tiger, Columbia, MO. A gold tiger head in an Art Deco circle." width="900" height="900">
         <p class="hero-line">Put the phone down. Stay a while.</p>
-        <div class="hero-buttons">
-          <a class="btn" href="#drinks">See the drinks</a>
-        </div>
       </div>
     </section>
 
@@ -322,12 +323,12 @@
     <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Tagline goes here</p>
   </footer>
 
-  <script src="js/menu-data.js?v=14" charset="utf-8"></script>
-  <script src="js/store.js?v=14"></script>
+  <script src="js/menu-data.js?v=15" charset="utf-8"></script>
+  <script src="js/store.js?v=15"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=14"></script>
-  <script src="js/main.js?v=14"></script>
+  <script src="js/store-firebase.js?v=15"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>

@@ -372,6 +372,7 @@
     setTimeout(function () {
       gate.hidden = true;
       document.documentElement.classList.remove('gate-open');
+      toTop();
     }, wait);
   }
 
@@ -399,3 +400,9 @@
 
   if (!gate.hidden) setTimeout(function () { input.focus(); }, 60);
 })();
+
+// ---------- Always start at the top ----------
+// scroll-behavior is smooth on this site, so ask for an instant jump instead of a long glide.
+function toTop() { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+toTop();
+window.addEventListener('load', toTop);
