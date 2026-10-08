@@ -255,6 +255,7 @@ Add a line here each time a decision changes or a piece gets finished, so the ne
 - [ ] Guest book working
 - [ ] Photo upload working
 - [ ] Admin approval page working
+- [x] Removed the gold Come on in button from the hero (Oct 8, 2026, Bradley's call). The hero now has one button: See the drinks. The password screen still flashes Come on in. as the curtains open (he chose to keep that one).
 - [x] Round 3 of changes (Oct 8, 2026):
   - Story section and the In the room box now hold plain Latin filler text only (Bradley doesn't want anything real showing yet). Layout is unchanged. The real room details are still listed in the About the room section above, and the earlier real wording is in git history (commit a6c7e1b and before). Put real text back only when he asks.
   - The Knock to Enter card was removed from the Extras section (Extras now has two cards: House Rules, Pours We Remember).
