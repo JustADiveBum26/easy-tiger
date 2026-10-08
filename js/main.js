@@ -365,8 +365,8 @@
     });
   }
 
-  // The opening plays for about 4.7 seconds (the timeline is in css/style.css).
-  var OPENING_MS = 4700;
+  // The opening plays for about 8 seconds (the timeline is in css/style.css).
+  var OPENING_MS = 8000;
   var timer = null;
   var startedAt = 0;
   var finished = false;
@@ -384,16 +384,15 @@
   function skip() {
     if (finished || Date.now() - startedAt < 500) return;    // ignore the tap or Enter that just sent the password
     clearTimeout(timer);
-    gate.classList.remove('playing');
-    gate.classList.add('open', 'skip');
-    timer = setTimeout(finish, 480);
+    gate.classList.add('skip');
+    timer = setTimeout(finish, 430);
   }
 
   function openDoor() {
     startedAt = Date.now();
     status.textContent = 'Come on in.';
-    // a quick double knock on phones that can buzz (some Android phones; iPhones ignore it)
-    try { if (navigator.vibrate) navigator.vibrate([70, 90, 70]); } catch (e) { /* not supported */ }
+    // a quick double knock, timed with the door's first knock, on phones that can buzz (some Android phones; iPhones ignore it)
+    setTimeout(function () { try { if (navigator.vibrate) navigator.vibrate([70, 90, 70]); } catch (e) { /* not supported */ } }, 330);
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {   // calm version: no show
       gate.classList.add('open');
