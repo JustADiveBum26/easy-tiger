@@ -287,16 +287,26 @@ p { margin: 0 0 1rem; }
 
 /* ---------- Photos (build + wall) ---------- */
 
-.build-grid, .wall {
+.wall {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
+.build-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+.build-grid .photo { width: calc((100% - 56px) / 3); }
 @media (max-width: 800px) {
-  .build-grid, .wall { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .wall { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .build-grid { gap: 18px; }
+  .build-grid .photo { width: calc((100% - 18px) / 2); }
 }
 @media (max-width: 480px) {
-  .build-grid, .wall { grid-template-columns: 1fr; }
+  .wall { grid-template-columns: 1fr; }
+  .build-grid .photo { width: 100%; }
 }
 
 .photo { margin: 0; }
