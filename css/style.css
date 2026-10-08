@@ -882,3 +882,24 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   .gate-card { padding: 22px 24px 18px; }
   .gate-sub { margin-bottom: 14px; }
 }
+
+/* House Rules: a short headline, then a quiet line under it */
+.extra .rules { list-style: none; margin: 0; padding: 0; }
+.extra .rules li {
+  position: relative;
+  padding: 14px 0 14px 24px;
+  border-top: 1px solid rgba(212, 168, 70, 0.2);
+  color: inherit;
+}
+.extra .rules li:first-child { border-top: 0; padding-top: 4px; }
+.extra .rules li::before {
+  content: "";
+  position: absolute;
+  left: 4px; top: 1.2em;
+  width: 7px; height: 7px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+.extra .rules li:first-child::before { top: 0.8em; }
+.rule-head { display: block; font-weight: 600; font-size: 1.3rem; line-height: 1.25; color: var(--text); }
+.rule-sub { display: block; margin-top: 2px; font-style: italic; font-size: 1.1rem; color: var(--soft); }
