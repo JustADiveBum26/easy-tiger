@@ -187,9 +187,76 @@ p { margin: 0 0 1rem; }
 }
 .nav-links a:hover { color: var(--gold); }
 
-@media (max-width: 720px) {
-  .nav-brand span { display: none; }
-  .nav-links { margin-left: 0; gap: 18px; }
+/* The three-line button. Only shows on phones and small tablets. */
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(212, 168, 70, 0.55);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle:hover, .nav-toggle:focus-visible { border-color: var(--gold); }
+.nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--gold);
+  transition: transform 0.25s ease, background 0.2s ease;
+}
+.nav-toggle-bars { position: relative; }
+.nav-toggle-bars::before, .nav-toggle-bars::after { content: ""; position: absolute; left: 0; }
+.nav-toggle-bars::before { top: -7px; }
+.nav-toggle-bars::after { top: 7px; }
+/* open: the three lines turn into an X */
+.nav.open .nav-toggle-bars { background: transparent; }
+.nav.open .nav-toggle-bars::before { transform: translateY(7px) rotate(45deg); }
+.nav.open .nav-toggle-bars::after { transform: translateY(-7px) rotate(-45deg); }
+
+/* Phones and small tablets: the links drop down from the bar instead of scrolling sideways. */
+@media (max-width: 860px) {
+  .nav { gap: 12px; padding: 8px 16px; }
+  .nav-brand { font-size: 0.9rem; letter-spacing: 0.2em; }
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(212, 168, 70, 0.45);
+    max-height: 0;
+    visibility: hidden;                       /* closed links can't be tabbed to */
+    transition: max-height 0.35s ease, visibility 0s linear 0.35s;
+  }
+  .nav.open .nav-links {
+    max-height: 480px;
+    visibility: visible;
+    transition: max-height 0.35s ease, visibility 0s;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 17px 24px;
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    border-top: 1px solid rgba(212, 168, 70, 0.18);
+  }
+  .nav-links a:first-child { border-top: 0; }
+  .nav-links a:active { color: var(--gold); background: rgba(212, 168, 70, 0.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links, .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after { transition: none; }
 }
 
 /* ---------- Hero ---------- */

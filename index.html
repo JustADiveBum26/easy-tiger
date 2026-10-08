@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Josefin+Sans:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=15">
-  <script src="js/firebase-config.js?v=15"></script>
+  <link rel="stylesheet" href="css/style.css?v=16">
+  <script src="js/firebase-config.js?v=16"></script>
 </head>
 <body>
 
@@ -61,12 +61,15 @@
     })();
   </script>
 
-  <header class="nav">
+  <header class="nav" id="nav">
     <a class="nav-brand" href="#top">
       <img src="assets/logo/easy-tiger-logo-small.png" alt="" width="36" height="36">
       <span>Easy Tiger</span>
     </a>
-    <nav class="nav-links" aria-label="Main">
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
       <a href="#story">The Story</a>
       <a href="#build">The Build</a>
       <a href="#drinks">Drinks</a>
@@ -323,12 +326,12 @@
     <p>Easy Tiger <span aria-hidden="true">&middot;</span> Columbia, Missouri <span aria-hidden="true">&middot;</span> Tagline goes here</p>
   </footer>
 
-  <script src="js/menu-data.js?v=15" charset="utf-8"></script>
-  <script src="js/store.js?v=15"></script>
+  <script src="js/menu-data.js?v=16" charset="utf-8"></script>
+  <script src="js/store.js?v=16"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/store-firebase.js?v=15"></script>
-  <script src="js/main.js?v=15"></script>
+  <script src="js/store-firebase.js?v=16"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>

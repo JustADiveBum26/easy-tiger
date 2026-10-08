@@ -406,3 +406,27 @@
 function toTop() { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
 toTop();
 window.addEventListener('load', toTop);
+
+// ---------- Phone navigation dropdown ----------
+(function () {
+  var nav = document.getElementById('nav');
+  var btn = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (!nav || !btn || !links) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  }
+
+  btn.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+  links.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+  nav.querySelector('.nav-brand').addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); btn.focus(); }
+  });
+  // turning a tablet sideways (or resizing a window) into the wide layout: close it
+  window.matchMedia('(min-width: 861px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+})();
