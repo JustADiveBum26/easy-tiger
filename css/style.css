@@ -932,7 +932,7 @@ html.gate-open, html.gate-open body { overflow: hidden; }
    0.0   the door fades in over the password box
    0.35  knock   0.70  knock (the door jolts)
    1.0   the peephole's wooden slider opens
-   1.4   two glowing tiger eyes appear in the dark, look left, then right, and blink
+   1.4   the engraved gold tiger looks out: eyes shimmering, the head turns left, then right, one soft blink
    2.0   "Let's have a look at you."   3.1  "That's the one."   4.1  "Mind the stairs."
    5.15  the slider snaps shut
    5.4   the door swings open into warm light
@@ -1040,29 +1040,32 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   pointer-events: none;
 }
 
-/* the two tiger eyes (these are the original eyes from the first door; the photo of a real tiger is saved in git, see assets/door/README.md) */
-.door-eyes { position: absolute; inset: 0; opacity: 0; }
-.door-eye {
+/* the tiger behind the peephole: the engraved gold tiger from the logo, lit like a gold-leaf print by a lantern (assets/door/tiger-engraved.jpg).
+   Its eyes sit at 33.2% and 66.8% across, halfway down. The whole thing moves as one piece (.tiger-move). */
+.tiger-move {
   position: absolute;
-  top: 50%;
-  width: calc(var(--hatch-w) * .17); height: calc(var(--hatch-w) * .085);
-  margin-top: calc(var(--hatch-w) * -.0425);
-  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
-  background: radial-gradient(ellipse at 50% 50%, #fff0b8 0%, #ffc43d 42%, #d8791f 100%);
-  box-shadow: 0 0 calc(var(--hatch-w) * .06) calc(var(--hatch-w) * .014) rgba(255, 170, 50, .75);
-  overflow: hidden;
+  left: -6%; top: -6%; width: 112%; height: 112%;
+  opacity: 0;
 }
-.door-eye::after {                                /* the slit pupil */
-  content: "";
+.tiger-pic { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tiger-glow {                                     /* a slow lantern shimmer in each eye */
   position: absolute;
-  left: 50%; top: -6%;
-  width: 15%; height: 112%;
-  transform: translateX(-50%);
-  background: #100803;
-  border-radius: 50%;
+  top: calc(50% - 24%); width: 15%; height: 48%;
+  background: radial-gradient(ellipse, rgba(255, 190, 80, .55) 0%, rgba(255, 150, 40, .22) 42%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: .55;
+  animation: eye-shimmer 2.7s ease-in-out infinite alternate;
 }
-.door-eye-l { left: calc(50% - var(--hatch-w) * .225); }
-.door-eye-r { left: calc(50% + var(--hatch-w) * .055); }
+.tiger-glow-l { left: calc(33.2% - 7.5%); }
+.tiger-glow-r { left: calc(66.8% - 7.5%); animation-delay: -1.3s; }
+.tiger-lid {                                      /* a soft blink: each eye dims for a moment */
+  position: absolute;
+  top: calc(50% - 17%); width: 11%; height: 34%;
+  background: radial-gradient(ellipse, rgba(20, 10, 3, .96) 50%, transparent 74%);
+  opacity: 0;
+}
+.tiger-lid-l { left: calc(33.2% - 5.5%); }
+.tiger-lid-r { left: calc(66.8% - 5.5%); }
 .hatch-shutter {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -1104,8 +1107,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 .gate.playing .gate-door       { animation: door-run 6.7s linear forwards; }
 .gate.playing .door-flicker    { animation: flicker 2.4s ease-in-out infinite; }
 .gate.playing .hatch-shutter   { animation: shutter 5.3s linear forwards; }
-.gate.playing .door-eyes       { animation: eyes-look 3.9s ease 1.4s forwards; }
-.gate.playing .door-eye        { animation: eye-blink 3.9s linear 1.4s forwards; }
+.gate.playing .tiger-move      { animation: tiger-look 3.9s ease 1.4s forwards; }
+.gate.playing .tiger-lid       { animation: tiger-blink 3.9s linear 1.4s forwards; }
 .gate.playing .gate-line-1     { animation: line .95s ease 2.0s forwards; }
 .gate.playing .gate-line-2     { animation: line .9s ease 3.1s forwards; }
 .gate.playing .gate-line-3     { animation: line .9s ease 4.1s forwards; }
@@ -1148,22 +1151,23 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   98.9%  { transform: translateY(0); }
   100%   { transform: translateY(0); }
 }
-@keyframes eyes-look {          /* the eyes fade up, look left, look right, and settle in the middle */
-  0%    { opacity: 0; transform: translateX(0); }
-  15%   { opacity: 1; transform: translateX(0); }
-  20%   { transform: translateX(0); }
-  26%   { transform: translateX(-4%); }
-  33%   { transform: translateX(-4%); }
-  41%   { transform: translateX(4%); }
-  54%   { transform: translateX(4%); }
-  62%   { opacity: 1; transform: translateX(0); }
-  100%  { opacity: 1; transform: translateX(0); }
+@keyframes tiger-look {         /* fades up out of the dark, then the head turns left, right, and back, edging closer */
+  0%    { opacity: 0; transform: translateX(0) scale(1.03); }
+  15%   { opacity: 1; transform: translateX(0) scale(1.03); }
+  22%   { transform: translateX(0) scale(1.03); }
+  30%   { transform: translateX(-2.5%) scale(1.055); }
+  38%   { transform: translateX(-2.5%) scale(1.055); }
+  47%   { transform: translateX(2.5%) scale(1.055); }
+  58%   { transform: translateX(2.5%) scale(1.055); }
+  66%   { opacity: 1; transform: translateX(0) scale(1.075); }
+  100%  { opacity: 1; transform: translateX(0) scale(1.09); }
 }
-@keyframes eye-blink {
-  0%, 68%   { transform: scaleY(1); }
-  71%       { transform: scaleY(.08); }
-  75%, 100% { transform: scaleY(1); }
+@keyframes tiger-blink {
+  0%, 69%   { opacity: 0; }
+  72%       { opacity: 1; }
+  77%, 100% { opacity: 0; }
 }
+@keyframes eye-shimmer { 0% { opacity: .35; } 100% { opacity: 1; } }
 @keyframes line {
   0%   { opacity: 0; transform: translateY(8px); }
   22%  { opacity: 1; transform: none; }
@@ -1178,6 +1182,6 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .gate.playing, .gate.playing .gate-stage, .gate.playing .gate-door, .gate.playing .door-flicker, .gate.playing .hatch-shutter,
-  .gate.playing .door-eyes, .gate.playing .door-eye, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
+  .gate.playing .tiger-move, .gate.playing .tiger-lid, .tiger-glow, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
   .gate.playing .gate-shine, .gate.playing .gate-welcome, .gate.playing .gate-skip { animation: none; }
 }
