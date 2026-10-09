@@ -1,307 +1,236 @@
 # Easy Tiger Website: Handshake
 
-Read this first. It's the main primer for everything in this folder. If something in here is out of date, tell Bradley and offer to fix it.
+Read this first. It is the main primer for everything in this project, and it was rewritten on Oct 9, 2026 to match what actually exists. If something here is out of date, tell Bradley and fix it. Keep it current: when a decision changes or a piece gets finished, update the right section (don't just add a line at the bottom).
+
+---
+
+## HARD RULES (never break these)
+
+1. **Never access, read, open, list the contents of, copy, or use ANY file inside a folder that is marked "(DO NOT USE)" or named like "DO NOT USE".** Bradley uses these folders to park things he has rejected. This applies to every folder on his computer, now and in the future. Don't peek to "check what's in there", don't use it for comparing duplicates, don't copy from it. If a task seems to need something from such a folder, stop and ask him. Example today: `Easy Tiger Construction/DO NOT USE/`.
+2. **Never use the "Archived" folders either** (for example `Easy Tiger Menus/Archived Menus/`, `Easy Tiger Logo/Archived Version/`). Bradley said they hold historical versions and must not be used unless he says so. Use only the newest files outside the archives.
+3. **Never write the Knock to Enter password words anywhere** (not in files, not in notes, not in commit messages, not in comments, not on printed signs). Only the scrambled fingerprint goes in `js/firebase-config.js`. Don't write anything about what the words are, look like, or relate to. Same for the house password and the admin's email: they live only in Firebase.
+4. **Never `git add` a whole folder** (like `assets`). Add specific files by name, then check `git status` before committing. A QR folder was published by mistake once this way.
+5. **The repo is public.** No passwords, keys, home address, phone numbers, personal emails, guests' info, or anything private in any file. Commits must use the GitHub noreply email (already set in this repo's git config), never Bradley's real email.
+6. **Ask before** creating or changing any account or cloud setting, spending or committing money, deleting anything, rewriting git history, or force-pushing.
+7. **Don't touch his source folders** (Construction, Menus, Logo, Misc). Read the newest files in them, never edit, move, or delete them.
 
 ---
 
 ## What we're building
 
-A small, private-feeling website for **Easy Tiger**, the speakeasy room Bradley is building in his basement in Columbia, Missouri. It's a fun, moody, 1920s Prohibition-style site that guests reach by link only. There's no domain name, no search listing, no public marketing. Just a link he hands to friends and family.
+A small, private-feeling website for **Easy Tiger**, the speakeasy room Bradley is building in his basement in Columbia, Missouri. A fun, moody, 1920s Prohibition-style site that guests reach by link only (no domain, no search listing). The name is a Mizzou Tigers nod. The room is a place to unplug after a long day: no phones, no screens, bottles meant to be opened and shared, not saved.
 
-The name is a Mizzou Tigers nod. The room is a place to unplug after a long day: no phones, no screens, bottles meant to be opened and shared, not saved.
+## Where things live (live now)
 
-A visual mockup already exists (see "Mockup" below). This file holds the decisions so far so we don't redo them.
+| What | Where |
+|---|---|
+| The website | https://justadivebum26.github.io/easy-tiger/ (GitHub Pages, serves the `main` branch root; every push updates it in about a minute) |
+| Short link | https://tinyurl.com/EasyTigerCoMo (Bradley made it; upper and lower case both work; points at the address above) |
+| Hidden admin page | https://justadivebum26.github.io/easy-tiger/admin.html (not linked anywhere; Google sign-in) |
+| The repo | https://github.com/JustADiveBum26/easy-tiger (public) |
+| Firebase project | `easy-tiger-como` (Firestore in `nam5`). Separate from his `family-hub` project, which must never be touched. |
+| Photo storage | Cloudinary cloud `czj4oq2l`, unsigned upload preset `easy-tiger-guests` (folder `easy-tiger`) |
+| Printed sign and QR codes | `assets/qr/` on his computer only (git-ignored, not on the site) |
+
+Tools installed on his PC during this work: GitHub CLI (`gh`, logged in as JustADiveBum26), `firebase-tools` (logged in), and Python packages for testing and pictures (playwright, pillow, opencv, pymupdf, python-docx, segno, zxing-cpp). Local Chrome is at `C:\Program Files\Google\Chrome\Application\chrome.exe`.
 
 ---
 
 ## Who you're working with
 
-Bradley Jenkins. A few things about how he likes to work:
+Bradley Jenkins. How he likes to work:
 
 - **Casual tone, plain words.** No big words, no long winding sentences. Talk like a normal person.
 - **Ask questions before big decisions.** Short, clear ones. Don't guess on anything that costs money, touches accounts, or is hard to undo.
-- **Explain as you go.** He likes to learn why, not just get the result. One or two plain sentences is plenty.
-- **He's comfortable with GitHub and Firebase.** He already has web apps on GitHub (his username is `justadivebum26`) and used Firebase for another project (a family shopping-list app). He is not a front-end developer, so keep the setup simple.
-- **Anything written for the site should sound like a person wrote it.** Plain, warm, a little dry. Skip filler and buzzwords. Go easy on em dashes. Don't write like a brochure.
+- **Explain as you go.** One or two plain sentences on why.
+- **He is comfortable with GitHub and Firebase** but is not a front-end developer. Keep setup simple.
+- **Anything written for the site should sound like a person wrote it.** Plain, warm, a little dry. No filler, no buzzwords, go easy on em dashes.
+- **He gives fast, specific feedback and changes his mind.** Show options side by side when taste is involved. Keep everything he rejects saved (git tags, kept files) so it can come back.
+- **He wants it to look high end and classy**, never cheesy. Fake-looking details (cartoon hardware, cat-like eyes, AI-looking pictures) got rejected.
+- **Most guests use phones.** Check every change at phone width first (360x640 and 390x844), then a computer.
+
+### Working arrangement (as of Oct 9, 2026)
+
+He authorized Claude to set up the GitHub repo, Pages, and the Firebase project. Since then Claude has made changes, tested them, and **published each batch**, then reported what went live, and he went along with that (he said he'd send "lots of minor updates"). Keep doing that for ordinary site changes, but still ask first for anything in HARD RULE 6. Always run the tests below before publishing, and verify the live site after.
 
 ---
 
-## Ground rules
+## Folders
 
-1. **Ask before you:** push to GitHub, create or change any account or cloud setting, spend or commit money, or delete anything.
-2. **Don't commit or push without his OK.** Keep commit messages short and plain.
-3. **The repo is public.** GitHub Pages on a free account needs a public repo. So never put passwords, private keys, home address, phone numbers, or guests' personal info in any file in this folder.
-4. **Small steps.** Build one piece, show it, get a thumbs up, move on.
-5. **Keep it simple.** Plain HTML, CSS and JavaScript. No framework and no build step unless there's a real reason. If you think we need one, ask first.
-6. **If something looks risky or wrong, say so,** even if he already asked for it.
+Outside the repo, in `Downloads\Easy Tiger Project\` (Bradley's, read-only for Claude, newest files only, see the hard rules):
+
+- `Easy Tiger Logo\` (use `Version 8`, the newest; `Archived Version` is off limits). The page uses `02_Easy_Tiger_HERO_Black_Background_5000px.png`.
+- `Easy Tiger Menus\` (newest Word menu: `Easy Tiger Spirits Menu10082026v2.docx`; `Archived Menus` is off limits).
+- `Easy Tiger Construction\` (his build photos; `DO NOT USE` inside it is off limits).
+- `Easy Tiger Misc\` (holds `peephole-options.png`, the side-by-side of the opening options).
+- `Easy Tiger Webpage\` is the repo (this folder).
+
+Inside the repo:
+
+```
+index.html              the whole front page (one long page with anchor links)
+admin.html              hidden admin page (approve/delete photos and guest notes)
+robots.txt, manifest.webmanifest
+css/style.css           all styling (plain CSS, no build step)
+js/main.js              menu + search, guest book, photo wall, nav dropdown, Knock to Enter gate, opening, scroll-to-top
+js/admin.js             admin page
+js/store.js             the DEMO store (browser-only). Dormant when Firebase is configured.
+js/store-firebase.js    the REAL store (Firestore + Cloudinary), replaces EasyStore when configured
+js/firebase-config.js   public connection values + the Knock to Enter fingerprint (no secrets)
+js/menu-data.js         the 110 drinks, generated from the Word menu (see "Updating the menu")
+firestore.rules, firebase.json   database security rules
+assets/logo, build, menu, icons, social, door    pictures and the menu PDF
+assets/qr/              printable QR codes and sign (git-ignored)
+tools/                  make-menu-data.py, make-knock-hash.py, door-pictures/ (picture recipes)
+CLAUDE.md               this file (see "Open decisions": it is publicly served)
+```
+
+Always bump the `?v=NN` cache number on the CSS/JS links in `index.html` and `admin.html` when changing those files, so phones don't keep old copies (currently `?v=32`).
 
 ---
 
-## Decisions already made
+## The page, top to bottom
 
-- **Hosting:** GitHub Pages (free). Address will look like `justadivebum26.github.io/easy-tiger`. No domain to buy.
-- **Privacy:** Link only. It's not locked down. Anyone with the link can open it. Add a `noindex` meta tag and a `robots.txt` that asks search engines to skip it. Be honest with him that this isn't real security.
-- **Guest book and photo uploads:** Needs a small outside service, because GitHub Pages can only show pages, it can't save what guests type. Plan is **Firebase** (he's used it before). Guest book goes in Firestore.
-- **Photos need approval first.** Nothing a guest uploads shows on the wall until Bradley approves it.
-- **House password** on the guest book and photo upload, so a stranger who finds the link can't fill it with junk. This is a speed bump, not real security. See "Guest book and photos" for how to do it right.
-- **Menu:** A PDF stored in the repo, linked from the site. Bradley will have Claude make the PDF version of the menu separately.
-- **Look:** Dark, moody, classy, 1920s Prohibition. Details below.
-- **Logo:** He has a finished logo (gold tiger head in an Art Deco circle, "EASY TIGER / COLUMBIA, MO"). Use it. Don't redraw or restyle it.
-- **Site has one long page** with anchor links, not many separate pages. (Plus a hidden admin page for approving photos.)
+Order matters: the top menu follows the same order.
 
-## Still open (ask him, don't assume)
+1. **Knock to Enter gate** (full-screen, before the page). See "The gate and the opening".
+2. **Nav bar.** Small tiger + EASY TIGER. Links, in order: House Rules, Drinks, The Story, The Build, Guest Book, Photos, Extras. On screens 1000px wide and under it becomes a gold three-line button (icon only, no word "Menu", on purpose) that drops a solid list; it closes on link tap, outside tap, Escape, logo tap, or widening.
+3. **Hero.** Logo between burgundy velvet curtains with a gold rod. Line: "Put the phone down. Stay a while." **No buttons** (he removed them).
+4. **Gold band.** "Speak softly · Pour generously · Stay late". This is still the original placeholder; he hasn't commented. Now overlaps with rule 5 (Stay Late(ish)), so ask before leaving it.
+5. **House Rules** (`#rules`). Framed poster, Roman numerals I to V, bold headline plus an italic line. Final wording:
+   1. Phones Off. Conversation On. / Be in the Moment.
+   2. Drink It, Don't Save It. / It's Here to Drink, Not Look At.
+   3. Pour a Little for Your Neighbor. / An Empty Glass Is Everyone's Problem.
+   4. Leave Your Bad Day at the Door. / Pick It Back Up on the Way Out.
+   5. Stay Late(ish). / The More We Like You, the Later We're Open.
+6. **Drinks** (`#drinks`, heading "Spirits Menu"). A search box, then a card "Pick a pour" listing the seven types with counts. See "Updating the menu".
+7. **The Story** (`#story`). **Currently Latin filler text only** (he doesn't want anything real showing yet), in the same layout, plus the "In the room" box also with filler. Real wording is in git history (commit `a6c7e1b` and earlier). Put real text back only when he asks.
+8. **The Build** (`#build`). 13 photos in a centered gallery, **no captions** (he asked), alt text only. Files in `assets/build/` (01 to 06 are 1600px; 00, 02b, 03b, 04b, 05b, 05c, 05d are 640px). Two show the storage area behind the wall, uncropped on purpose (he said no). Two show a person.
+9. **Guest Book** (`#guestbook`). Name, note, house password, "Sign it". Entries need his approval before they show.
+10. **Photo Wall** (`#photos`). Add a photo, an approval note, a grid of approved photos in gold frames.
+11. **Extras** (`#extras`). One card: Pours We Remember (empty, placeholder).
+12. **Footer.** "Easy Tiger · Columbia, Missouri · Tagline goes here" (placeholder; he dislikes the old "Keep it between us").
 
-- **Where photos get stored:** Firebase Storage or Cloudinary. Firebase Storage may need a pay-as-you-go plan (with a spending cap, a small room's worth of photos would cost pennies). Cloudinary has a free tier. Lay out the trade-off in plain words and let him pick.
-- **Do guest book entries need approval too,** or do they post right away? He only said photos need approval.
-- **The tagline band.** The mockup shows "Speak softly · Pour generously · Stay late." Claude made that up as a placeholder. Confirm or replace it.
-- **The "Knock to Enter" secret phrase.** Not chosen yet.
-- **Story text.** The mockup has a short story based on what he's told us. He needs to add a few lines about how the idea started and who helped build it.
-- **House password.** He picks it. Don't write it into a file in the repo.
+The page always opens at the very top (no remembered scroll position, `#section` stripped from the address, jump to top after the opening). Don't undo this without asking.
 
----
+### About the room (the real details, for when the Story comes back)
 
-## Sections on the page
+Use only what's listed. Don't invent details. Never put the street address on the site.
 
-In order, top to bottom:
-
-1. **Nav bar.** Small logo, "Easy Tiger" in letterspaced caps, links to: Story, Build, Menu, Guest Book, Photos, Extras.
-2. **Hero.** The logo big and centered, between burgundy velvet curtains with a gold rod across the top. Line under the logo: "Put the phone down. Stay a while." Two buttons: Come on in, See the menu.
-3. **Gold band.** The tagline strip (placeholder, see above).
-4. **The Story.** A few paragraphs plus an "In the room" box listing what's in the space.
-5. **The Build.** Six construction photos with short captions, in build order (see "Assets").
-6. **The Menu.** Button to open the PDF, plus the section names (House Drinks, Bourbon & Spirits, Wine, Pours We Remember). Next to it, a **Drink of the Night** card.
-7. **Guest Book.** Name, note, house password, a Sign it button. Past entries listed next to the form.
-8. **Photo Wall.** Add a photo button, a note that photos show up after approval, and a grid of approved photos in gold frames.
-9. **The Extras.** Three cards: House Rules, Pours We Remember, Knock to Enter.
-10. **Footer.** "Easy Tiger · Columbia, Missouri · Keep it between us."
-
-### About the room (for the Story and "In the room" box)
-
-Use only what's listed here. Don't invent details.
-
-- Deep teal green walls (Sherwin-Williams Cascades) and a flat black ceiling with the pipes, ducts and joists painted black too
-- One wall of **burned cedar** (shou sugi ban): torched, wire-brushed and oiled, so it's black charcoal with silver-grey grain, not honey colored
-- Red leather sofa against the cedar wall, two brown Chesterfield chairs facing it, a hammered copper and bronze round coffee table, and a vintage-looking rug with two tigers on it
-- Gold fixtures and warm amber Edison light only, no cool white light anywhere
+- Deep teal green walls (Sherwin-Williams Cascades), flat black ceiling with pipes, ducts and joists painted black
+- One wall of burned cedar (shou sugi ban): black charcoal with silver-grey grain, not honey colored
+- Red leather sofa against the cedar wall, two brown Chesterfield chairs facing it, a hammered copper and bronze round coffee table, a vintage-looking rug with two tigers
+- Gold fixtures and warm amber Edison light only, no cool white light
 - Exposed concrete floor, cleaned and sealed
 - A burgundy velvet curtain where a door would be
 - Prohibition-era art prints and gold animal busts on one wall, a record player on a dark walnut console
-
-Don't put the street address anywhere on the site.
 
 ---
 
 ## Design
 
-**Mood:** Dark, moody, classy 1920s speakeasy. Art Deco. Think gold foil on black, velvet, pinstripes, double-line frames.
-
-**Colors** (these match the logo and the room):
+Dark, moody, classy 1920s speakeasy. Art Deco. Gold foil on black, velvet, pinstripes, double-line frames.
 
 | Use | Color |
 |---|---|
-| Gold (main accent, from the logo) | `#d4a846` |
-| Page background, near black | `#070908` |
+| Gold (from the logo) | `#d4a846` (CSS variable `--gold`) |
+| Page background | `#070908` |
 | Teal sections | `#0d1917` |
-| Burgundy menu section | `#2a0d15` |
-| Velvet curtain reds | `#3d0f1a`, `#5a1626`, `#2e0a13` |
-| Main text, warm ivory | `#efe6d0` |
-| Soft text | `#c9c0a8` and `#a8a08c` |
+| Burgundy section | `#2a0d15` |
+| Velvet curtains | `#3d0f1a`, `#5a1626`, `#2e0a13` |
+| Main text, ivory | `#efe6d0` |
+| Soft text | `#c9c0a8`, `#a8a08c` |
 
-Keep the gold as one CSS variable so it's easy to swap.
+Fonts (Google Fonts): **Playfair Display** 600 caps with wide spacing for headings, **Cormorant Garamond** for body and italics, **Josefin Sans** small caps for labels and buttons.
 
-**Fonts** (Google Fonts):
-- **Playfair Display**, 600 weight, all caps with wide letter spacing, for headings
-- **Cormorant Garamond** for body text and italic notes
-- **Josefin Sans**, small caps with wide letter spacing, for labels and buttons
-
-**Signature touches:**
-- Gold **double-line frames** (a 1px border plus a 1px inner outline pulled in about 9px) on the menu card, guest book, extras and story box
-- Photos sit in a thin gold frame with a dark mat
-- Section headers: small gold label, big caps heading, then a thin gold line with a diamond in the middle
-- Faint vertical **pinstripes** on the teal and burgundy sections
-- **Burgundy velvet curtains** down both sides of the hero
-- The logo has a pure black background, so on the page use `mix-blend-mode: screen` so it blends in with no box around it
-- No emoji. Icons are simple thin gold line drawings.
-- Must work on a phone. Most guests will open the link on their phone. Test small screens.
+Signature touches: gold double-line frames; photos in a thin gold frame with a dark mat; section headers (small gold label, big caps heading, thin gold line with a diamond); pinstripes on teal and burgundy sections; velvet curtains in the hero; logo with `mix-blend-mode: screen` (its background is pure black); no emoji, thin gold line icons. The logo is finished: never redraw or restyle it.
 
 ---
 
-## Guest book and photos: how it should work
+## How the features work
 
-**Guest book:** Guest types name and note, enters the house password, taps Sign it. Entry saves to a Firestore collection (`guestbook`). The page reads and shows entries newest first.
+### The menu and search
+- Source of truth is the **Word menu** in `Easy Tiger Menus`. The 110 drinks are in `js/menu-data.js`: Bourbon 51, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27. (A `.js` file on purpose: browsers block `fetch()` of `.json` when a page is opened from a folder.)
+- The card first shows **only the list of types**. Tapping one opens that type's drinks in a fresh view with an "All types" back button; each drink opens to show notes, age, and mash bill (or "made with"). House Drinks are grouped under base-spirit headings (Bourbon, Rye, Other American Whiskey, Tequila, Gin, Vodka).
+- **Search** (box above the card) searches all drinks by name, maker and base first, then tasting notes; ignores caps, accents and apostrophes. Typing opens a Search results view; clearing it goes back to the types.
+- **Bradley rejected** tabs plus an always-open list. Don't bring them back.
+- "Confirm on bottle" values are hidden on the site. Two tasting notes in the Word file still contain to-do wording (Redwood Empire Lost Monarch, Russell's Reserve 6 Year); he must fix them in Word.
+- The PDF `assets/menu/easy-tiger-menu.pdf` is the Word menu saved as PDF (cover still says "Spirits Menu"; Wine isn't on the menu yet).
 
-**Photos:**
-1. Guest picks a photo, enters the house password, taps upload.
-2. The file goes into storage (Firebase Storage or Cloudinary, whichever he picks) and a record is saved in Firestore (`photos`) with `approved: false`.
-3. The Photo Wall only shows records where `approved` is `true`.
-4. Bradley has a hidden page, `admin.html`, not linked from the site. He signs in with his Google account (Firebase Auth). It shows waiting photos with **Approve** and **Delete** buttons.
-5. Security rules only let his Google account change `approved` or delete anything.
+### The gate and the opening
+- **Knock to Enter.** A full-screen gate asks for a password on **every** page load (refresh, new tab, new window, back button). Nothing is remembered. Screen: tiger, "Knock, knock", "Every good speakeasy has a password", "Get it right and the door opens. Get it wrong and, well.", a box, and a button "Try the door". Wrong answers rotate through four short teases and shake the card. Caps, spaces and punctuation don't matter. The check is in the browser against a SHA-256 fingerprint (`knock.hash` in `js/firebase-config.js`), so it is a fun gate, **not security**. An empty hash turns the gate off. `admin.html` is not gated. To change the words: `python tools/make-knock-hash.py "new words"`, paste the result into the config. Choose words that aren't easy to guess, since the fingerprint is public.
+- **The opening** (about **11 seconds**) after the right password: a full-screen plank-door scene (real photo wood, no hardware) fades in; two knocks (a double-knock phone buzz on supporting phones); a small peephole's wooden slider opens and the **engraved gold tiger from the logo** looks out (fades up, head turns left then right, a lantern shimmer in the eyes, one soft blink); the doorman says "Let's have a look at you." / "That's the one." / "Mind the stairs."; the slider snaps shut; the door swings open in 3D into warm light; the tiger emblem rises with a gold shine and "Welcome to Easy Tiger", which holds about 3 seconds (the emblem breathes, a second shine); then it fades to the page at the top. **Tap, click or any key skips** (ignored for the first half second so the Enter that sent the password doesn't skip it). People with "reduce motion" get a calm 0.4 s fade.
+- The second-by-second timeline is the comment above `.gate-stage` in `css/style.css`. `OPENING_MS = 11000` in `js/main.js` must change together with it.
+- Pictures are in `assets/door/` (see its `README.md`): `door-wood.jpg` (seamless plank tile repeated across the whole screen), `shutter.jpg`, `tiger-engraved.jpg` (the one in use; eyes at 33.2% and 66.8% across, halfway down, which is where the glow and blink are placed). Kept but unused: `tiger-eyes.jpg` (real tiger photo), `tiger-ai-1/2/3.jpg` and `ai-originals/` (AI tigers from Copilot), all saved as choices.
+- **History of the opening (all rejected or replaced, all saved as git tags):** `opening-v1-glowing-slot` (4.7 s slot), `v2-css-door` (cartoon door with drawn hardware), `v3-hardware-door` (photo door with drawn brass hardware, "cheesy"), `v4-photo-tiger-fullscreen` (real tiger photo), `v5-original-css-eyes` (glowing slit-pupil eyes, read as cat/snake), `v6-ai-tiger`, and current `v7-engraved-tiger`. Other options he saw but didn't pick: brighter engraved tiger, refined CSS glow eyes, Art Deco line-art eyes, a minimal gleam (side by side in `Easy Tiger Misc\peephole-options.png`). To bring a version back, copy only the opening's pieces from the tag (gate box in `index.html`, the opening block at the end of `css/style.css`, the opening part of `js/main.js`), never whole files (that would undo later changes). Don't delete the tags or `assets/door`.
+- Picture recipes (tested, they reproduce the site's pictures) are in `tools/door-pictures/`; the engraved tiger needs the logo file path as an argument.
 
-**Be honest about the house password.** Anything checked only in the web page's JavaScript can be read by anyone who views the source. So:
-- Do the check in the **Firebase security rules** too, not just on the page.
-- Keep the real password **out of the repo**. It lives in the rules in the Firebase console, and Bradley tells guests the password in person.
-- Also set simple limits in the rules: images only, a file size cap (around 8 MB), and a cap on the length of guest book notes.
-- Explain this to him in plain words. Don't oversell it.
+### Guest book, photos, admin
+- Everything goes through `window.EasyStore`. `js/store.js` is the demo (browser-only) version; `js/store-firebase.js` replaces it when `js/firebase-config.js` has the project values (it does, so the site runs in real mode).
+- **Both guest book entries and photos need Bradley's approval.** Guests write to `guestbookPending` / `photosPending` (add-only, must send the right house password, limits: name 60, note 400, caption 80, images only, 8 MB, photo address must start with `https://res.cloudinary.com/`). Only the admin can read pending items (so the typed password is never public). Approving copies the entry, without the password, into public `guestbook` / `photos`. The house password is the Firestore document `config/house` and the admin is `config/admin`; both were created by Bradley in the Firebase console and nobody can read or write them from a web page. Guests' photos are shrunk to 1400px in the browser (also drops camera data) and uploaded to Cloudinary.
+- **Admin page:** Google sign-in, shows waiting photos and notes with Approve and Delete, posted ones with Delete, a summary line, and the waiting count in the tab title like "(3) Easy Tiger · Admin" (refreshes every 2 minutes).
+- Redeploy rules: `firebase deploy --only firestore --project easy-tiger-como`.
+- Security was tested from outside on Oct 8, 2026: pending items, `config/house` and `config/admin` cannot be read; outsiders cannot write with a wrong password or delete anything.
+- **Known limits:** a wrong-password guest's photo file still reaches Cloudinary before Firestore refuses the entry (junk can be removed in the Cloudinary Media Library); Delete on the admin page removes the entry from the site but not the file from Cloudinary.
+- **Still needs Bradley's hand test** with the real password and his Google login: post an entry, upload a photo, sign in at admin, approve both, delete both. Not confirmed yet.
 
-Put the Firebase config values in one small file (`js/firebase-config.js`). Those values aren't secret by themselves, since the security rules are what protect the data.
+### Link preview and home-screen icon
+Open Graph tags plus `assets/social/preview.jpg` (1200x630), `assets/icons/*`, and `manifest.webmanifest`. Messaging apps cache previews, so changes can take a while to show.
 
----
-
-## The menu
-
-- A PDF at `assets/menu/easy-tiger-menu.pdf`. To update the menu, replace that one file.
-- The menu itself has sections for House Drinks, Bourbon & Spirits, Wine, and "Pours We Remember" (empty bottles, kept on the list because some were gifts or marked milestones).
-- The PDF is made separately. Don't make up drinks or bottles for it.
-- The look of the PDF should match the site: black, gold, Art Deco. The logo can go at the top.
-
----
-
-## The fun extras
-
-- **Drink of the Night.** Reads from `data/tonight.json` (drink name and one line). He edits that file by hand to change it. Later, a tiny form on the admin page could do it.
-- **House Rules.** Phones stay out of the room. Open the bottle. Pour a little for the person next to you.
-- **Pours We Remember.** A page or section for empty bottles, with who gave them and when. It starts empty. Needs a simple way to add entries.
-- **Knock to Enter.** A fun gate at the front. Visitor types a secret phrase and the door "opens." Saves to the browser (`localStorage`) so they only do it once. This is for fun, not security. Say so.
-
-Ideas he'd probably like, if we get time (ask first): a random Prohibition-era quote each visit, a "who's coming tonight" list, a record-of-the-week for the record player.
+### QR codes and the printed sign (local only, `assets/qr/`)
+Plain and tiger-emblem QR codes and a 6x8 inch print-ready sign (`easy-tiger-sign-6x8-logo-qr.pdf` is the one to print). They encode the direct site address (not the TinyURL, so they survive a TinyURL change). The sign says "Scan to come in", shows `tinyurl.com/EasyTigerCoMo`, and "Then ask for the secret password" (never print the password). All were decoded with a scanner at many sizes, but **not tested on a real phone**. The emblem covers about 10% of the code (30% is the limit); the `*-logo20-*` files (20%) failed every scanner, so ignore them. For prints under about 1.5 inches use the plain code. The sign's bottom line "Keep it between us" is a line Bradley dislikes on the site; ask before reprinting.
 
 ---
 
-## Assets to put in this folder
+## How to do common jobs
 
-Bradley saves these into `assets/`. Ask him for any that are missing.
+- **Update the menu:** Bradley edits the Word file. Run `python tools/make-menu-data.py "<path to the newest docx>"` (needs python-docx; it reads formatting: Heading 1 = type, bold 12pt = drink, italic 9.5 = maker/proof or "Built on", italic 9 = age/mash bill, regular 10 = notes). It stops with a message if it can't tell a House Drink's base spirit (add a word to `BASE_WORDS`). Then save the docx as PDF (Word, or Word COM from PowerShell) over `assets/menu/easy-tiger-menu.pdf`, bump the `?v=`, test, publish.
+- **Add or change Build photos:** work from copies in his Construction folder (skip anything in a DO NOT USE folder), resize to about 1600px (or keep small ones as they are), re-save as JPEG to drop camera data, put them in `assets/build/`, edit the gallery in `index.html`.
+- **Change the gate words:** see above.
+- **Swap the tiger behind the peephole:** change the `src` in the `.hatch-tiger` block and the glow/blink percentages (`.tiger-glow-*`, `.tiger-lid-*`) in `css/style.css`; the numbers for each picture are in `assets/door/README.md`.
+- **Restore Story text, add Pours We Remember entries, change the tagline or footer:** only when he asks.
 
-- `assets/logo/easy-tiger-logo.png`: the gold tiger logo (black background)
-- `assets/build/` : six construction photos, in the order they should show:
-  1. Furring strips going up on the bare concrete wall
-  2. Wiring and outlet boxes along the studs
-  3. Framing the new wall
-  4. Looking through the studs
-  5. Drywall up and the burned cedar going on
-  6. The finished burned cedar wall
-- `assets/menu/easy-tiger-menu.pdf`: when it's ready
-
-Shrink photos before putting them on the site (around 1600 px on the long side is plenty) so the page loads fast on a phone. Two of the build photos show the storage area behind the wall. Ask him if he wants those cropped.
+### Testing before publishing (always)
+Start a local server (`python -m http.server <port>` in the repo folder, stop it afterward) and drive it with Playwright using the local Chrome. Check at **360x640, 390x844 (touch), 1366x768, 1920x1080, 2560x1080**: no sideways scroll, the gate and opening play to the end (about 11 s) and land at the top, tap to skip (about 0.45 s), Enter doesn't skip, reduced motion (about 0.4 s), a wrong password teases and doesn't start the door, a refresh asks again, no console errors, no failed requests, div tags balanced. After pushing, wait for the Pages build to match the commit (`gh api repos/JustADiveBum26/easy-tiger/pages/builds/latest`) and re-test the **live** address.
 
 ---
 
-## Suggested folder layout
+## Decisions Bradley made (so we don't redo them)
 
-```
-/
-├── CLAUDE.md            (this file)
-├── index.html           (the whole front page)
-├── admin.html           (hidden, for approving photos)
-├── robots.txt
-├── css/
-│   └── style.css
-├── js/
-│   ├── main.js          (guest book, photo wall, knock gate)
-│   ├── admin.js
-│   └── firebase-config.js
-├── data/
-│   └── tonight.json
-└── assets/
-    ├── logo/
-    ├── build/
-    └── menu/
-```
-
-If you want to change this layout, tell him why first.
+- Hosting is GitHub Pages, link only, `noindex` + `robots.txt`. Be honest with him that this is not real security.
+- Menu is a PDF plus a clickable list generated from the Word file. Menu naming: nothing called just "Menu" (it clashes with navigation): "Drinks", "Spirits Menu", "Pick a pour".
+- No Drink of the Night for now (removed). Held for later: shrinking the 1.2 MB logo, tap-to-enlarge photos, a house-password hint on the forms.
+- No captions on Build photos. Photos 3 and 4 stay uncropped.
+- Phone navigation is a dropdown opened by an icon. Sections and menu are in the same order.
+- The page opens at the top; the gate asks every time; the opening is about 11 s and skippable.
+- Rejected looks: cartoon or drawn door hardware, a narrow door on desktop, slit-pupil glowing eyes, real tiger photo, AI tiger pictures. He wants high end and classy; the engraved gold tiger from the logo is the current choice ("keep it for now").
 
 ---
 
-## Mockup
+## Open items
 
-A visual mockup was made in Claude chat and is saved in Bradley's Claude artifacts as **"Easy Tiger Website Mockup."** It's the look he approved so far. If you can't open it, ask him for a screenshot and match the section list and design notes above. Everything marked [in brackets] in the mockup is a placeholder, not final text.
+Waiting on Bradley (don't start unless he brings them up; remind him at natural stopping points):
 
----
+1. **Hand test** of the real guest book, photos and admin (above).
+2. **Story text:** how the idea started and who helped build it. Then restore the real room details.
+3. **Footer tagline** (placeholder now) and what to do with the gold band line.
+4. **Pours We Remember:** empty; needs entries and a simple way to add them.
+5. **Menu cleanup:** fix the two to-do notes in the Word file, then regenerate the list and the PDF. PDF cover still says "Spirits Menu".
+6. **Real house password:** he sets it in `config/house` in Firebase. Change it if he used a throwaway for testing.
+7. Optional ideas (ask first): a random Prohibition-era quote, "who's coming tonight", a record of the week, a different tiger each visit.
 
-## Putting it on GitHub Pages (plain steps)
+Decisions waiting on him from the Oct 8 audit:
 
-1. Make a new **public** repo called `easy-tiger` on his GitHub account.
-2. Push these files to the `main` branch (after he says OK).
-3. In the repo, go to Settings, then Pages, and set the source to the `main` branch, root folder.
-4. After a minute or two the site is live at `justadivebum26.github.io/easy-tiger`.
-5. Every push to `main` after that updates the site.
+- **`CLAUDE.md` is public** (served at the site address). Recommend keeping it local only (git-ignore it) since it is Claude's working notes. He hasn't answered.
+- **Scrubbing old mistakes out of git history** (an old wrong hint in older versions of this file; the QR files that were briefly published): needs a history rewrite and force-push, and moves the `opening-v*` tags. Not urgent, nothing sensitive beyond the hint. Ask first.
+- **`assets/door/ai-originals`** (7 MB of unused full-size AI pictures) is published; could be kept local only.
+- `js/store.js` still ships the dormant demo store with a demo password (harmless; could be removed).
+- One tiny test image (the 96px logo icon) sits in his Cloudinary Media Library; he can delete it.
 
-Tell him each step as you go, and check that it worked before the next one.
-
----
-
-## First things to do in Claude Code
-
-1. Read this file, then ask Bradley the open questions above. Keep it to a few at a time.
-2. Check which assets are already in the folder and list what's missing.
-3. Build the static page first: `index.html` and `css/style.css`, matching the design above, with placeholder text and photos. Show him on a phone-size view.
-4. Add the `noindex` tag and `robots.txt`.
-5. Get it live on GitHub Pages so he can open the link on his phone.
-6. Then add the Firebase pieces: guest book first, then photo upload and approval, then the admin page.
-7. Last, the fun extras.
+### Audit result (Oct 8, 2026)
+All 53 published files and all saved versions were searched: no emails, phone numbers, street addresses, local folder names, passwords or secrets; every commit uses the noreply address; no picture or the PDF carries camera, location, or personal-name data. The database rules were tested from outside and hold. Redo this kind of check before any big publish.
 
 ---
 
-## Notes to keep up to date
-
-Add a line here each time a decision changes or a piece gets finished, so the next session picks up where this one left off.
-
-- [x] Static page built (index.html, css/style.css, robots.txt, data/tonight.json, js/main.js stub). Uses Version 8 logo, black background, resized to 900px plus a 96px nav version. Tagline placeholder kept. Build photos and menu PDF still missing, so placeholder boxes show. Guest book and photo buttons are stubs until Firebase.
-- [x] Live on GitHub Pages (Oct 8, 2026): repo https://github.com/JustADiveBum26/easy-tiger (public), site https://justadivebum26.github.io/easy-tiger/ . Pages serves the main branch root; every push to main updates it in about a minute. Repo commits use GitHub's private noreply email (set in the repo's local git config), not Bradley's Gmail. Tools installed on his PC: GitHub CLI (gh, logged in as JustADiveBum26) and firebase-tools. Checked live: all assets load, menu works, noindex tag present.
-- [ ] Short link: Bradley picked EasyTigerCoMo (less guessable than EasyTiger). is.gd and v.gd both refused every create call on Oct 8, 2026 ("database insert failed", even with no custom name), so it is NOT made yet. Try again later, or Bradley can make it on the is.gd website himself. Plan: is.gd/EasyTigerCoMo -> the Pages address.
-- Decisions (Oct 8, 2026): guest book entries need approval, same as photos. Photo files go to Cloudinary (free). Admin Google account is the one Bradley named (it is NOT written in any file; it goes in the Firestore doc config/admin from the Firebase console). Photos 3 and 4 in the Build section stay uncropped (he said no). Firebase code is written but dormant: js/store-firebase.js, firestore.rules, firebase.json, js/firebase-config.js (empty values = demo mode). Rules design: guests can only ADD to guestbookPending/photosPending with the right house password (kept in Firestore doc config/house); only the admin can read those, so the password never shows; approving copies the entry to the public collections without the password. Needs a Firestore database, Google sign-in turned on, and justadivebum26.github.io added as an authorized domain in Firebase Auth.
-- [x] Firebase project set up (Oct 8, 2026): project id easy-tiger-como (separate from his family-hub project, never touch that one), Firestore (default) database in nam5, rules deployed from firestore.rules (redeploy: firebase deploy --only firestore --project easy-tiger-como), Google sign-in on, github.io domain authorized, config/house and config/admin docs created by Bradley in the console. Cloudinary: cloud czj4oq2l, unsigned preset easy-tiger-guests (folder easy-tiger). Connection values are in js/firebase-config.js. Pushed live in commit 5b7f6d9.
-- Known limits: a guest with a wrong house password still uploads the photo file to Cloudinary before Firestore refuses the entry (the rules can't check first). Junk files can be removed in the Cloudinary Media Library. "Delete" on the admin page removes the entry/photo from the site but not the file in Cloudinary. One tiny test image (the 96px logo icon) is in Cloudinary from testing.
-- [ ] Still to verify by hand (needs the real password / Bradley's Google login): post a guest book entry with the right password, upload a photo, sign in at admin.html, approve both, delete both.
-- [ ] Guest book working
-- [ ] Photo upload working
-- [ ] Admin approval page working
-- [x] Page sections reordered to match the menu (Oct 8, 2026): top to bottom the page is now hero, gold band, Drinks, The Story, The Build, Guest Book, Photos, Extras, footer. This replaces the section order in the Sections on the page list near the top of this file and the earlier note that the page order differed. Section colors still alternate (burgundy, plain, teal, plain, teal, plain).
-- [x] House Rules are now a poster section (Oct 8, 2026), live: id rules, right under the gold band and ABOVE Drinks, framed, Roman numerals I to V, big Playfair caps headline plus italic line (the wording is the five rules in the note below). It has its own first link in the top menu (House Rules). The old card is gone from Extras, so Extras now has just Pours We Remember, centered. Page and menu order: House Rules, Drinks, The Story, The Build, Guest Book, Photos, Extras. Seven links no longer fit the bar, so the phone dropdown now starts at 1000px.
-- [x] AUDIT of what is public (Oct 8, 2026, Bradley asked to make sure nothing unintended is published). Checked: all 53 published files and all saved versions have no emails, phone numbers, street addresses, local folder names, passwords or secrets; every commit uses the GitHub noreply address; no picture or the menu PDF carries camera, GPS or personal-name data; the database rules hold (waiting entries, config/house and config/admin cannot be read, and outsiders cannot write or delete). Found and fixed: an earlier version of this file carried a wrong hint about the gate words (now removed from the current file, still in older saved versions; never write anything about what the words are or look like); the QR files were published by mistake for a few minutes and then removed (still in 2 older saved versions, they contain only the site address). LESSON: never `git add` a whole folder (like assets); add specific files. STILL OPEN, waiting for Bradley's decision: (1) this CLAUDE.md is public and served at the site address; recommend stopping publishing it (keep it local only) since it is Claude's working notes; (2) scrubbing the two old issues out of the saved history needs a history rewrite and force-push, which also moves the opening-v* tags; (3) assets/door/ai-originals (7 MB of unused full-size AI pictures) is published, could be kept local only; (4) js/store.js still ships the old demo store with a demo password (dormant, harmless); (5) one tiny test image sits in Cloudinary; (6) the gate fingerprint is public, so the words should not be easy to guess.
-- [x] Welcome screen holds 3 seconds longer (Oct 9, 2026, Bradley's request, he also said to keep the engraved tiger for now). The whole opening is now about 11 seconds (it was 8): the Welcome to Easy Tiger screen is fully shown from about 7.2 s to 10.3 s, the emblem breathes gently while it holds and a second gold shine passes at 9 s, and the page fades in at 10.2 s. Changed in css/style.css (gate-out delay 10.2s, second shine, emblem-breathe) and OPENING_MS = 11000 in js/main.js; keep those two in step. Tap to skip still works at any point, reduced motion is unchanged (0.4 s). Anything about opening lengths written earlier in this file saying about 8 seconds is now 11.
-- [x] Password-right opening, CURRENT = version 7: the ENGRAVED GOLD TIGER from the logo behind the peephole (Oct 9, 2026), live, about 8 seconds. Bradley found the glowing slit-pupil CSS eyes, the real tiger photo and the AI tiger pictures all cheesy and asked for something high end and classy, so Claude mocked up options side by side (saved for him as peephole-options.png in the Easy Tiger Misc folder, outside the repo) and he said to implement option 2b: the engraved gold tiger cut from Version 8 of the logo (5000 px), darkened and warmed so it looks like a gold-leaf print lit by a lantern: assets/door/tiger-engraved.jpg (1400x437). Motion: it fades up out of the dark, the head turns slightly left then right and edges closer (.tiger-move), a slow lantern shimmer pulses in each eye (.tiger-glow), one soft blink (.tiger-lid). Eyes sit at 33.2% and 66.8% across, halfway down (the glow and blink are placed from that). Recipe: tools/door-pictures/make_engraved_tiger.py (tested, reproduces the site picture exactly; needs the logo file path as an argument). Everything else about the opening is unchanged: full-screen plank door, no hardware, plain wooden slider, doorman lines, door swings open into warm light, emblem and welcome, tap to skip, ~8 s. If he dislikes it, other options were the lighter 2 (same picture, brighter), refined CSS glow eyes, Art Deco line-art eyes (SVG), a minimal two-point gleam; the earlier looks are git tags opening-v1 to opening-v6 and v7 is tagged opening-v7-engraved-tiger.
-- [x] House Rules are final at FIVE (Oct 8, 2026), live. Each is a bold headline plus an italic line, no numbers on the page: (1) Phones Off. Conversation On. / Be in the Moment. (2) Drink It, Don't Save It. / It's Here to Drink, Not Look At. (3) Pour a Little for Your Neighbor. / An Empty Glass Is Everyone's Problem. (4) Leave Your Bad Day at the Door. / Pick It Back Up on the Way Out. (5) Stay Late(ish). / The More We Like You, the Later We're Open. Bradley chose rule 4 from options I offered. I added a comma in rule 5's second line and a period after Stay Late(ish) for consistency. Old rules are in git history.
-- [x] Nav order changed (Oct 8, 2026, Bradley's call): Drinks, The Story, The Build, Guest Book, Photos, Extras. Only the LIST order changed. The sections on the page are still in the old order (Story, Build, Drinks, ...), so the first link jumps down the page. Offered to reorder the page itself to match; he hasn't answered yet.
-- [x] Phone navigation (Oct 8, 2026): at 1000px wide and under (it was 860 until House Rules made seven links), the top bar shows the tiger, EASY TIGER and a gold three-line button (icon only, on purpose: Bradley didn't like the word Menu being confusable) that drops a solid black list of the six links (big tap targets, 55px+). It closes on link tap, tapping outside, Escape, tapping the logo, or widening to desktop; closed links can't be tabbed to. Above 1000px it is the normal horizontal bar. Sections land just under the bar. Most guests use phones, so check anything new at phone width first.
-- [x] Hero buttons: both gone now (See the drinks removed too), Oct 8, 2026. Nav now reads THE STORY, THE BUILD, Drinks, Guest Book, Photos, Extras. The page always opens at the very top: scroll position is not restored on refresh, a #section on the address is stripped, and it jumps to the top again when the password door opens (toTop in js/main.js, plus a small script at the top of index.html). Don't undo that without asking.
-- [x] Removed the gold Come on in button from the hero (Oct 8, 2026, Bradley's call). The hero now has one button: See the drinks. The password screen still flashes Come on in. as the curtains open (he chose to keep that one).
-- [x] Round 3 of changes (Oct 8, 2026):
-  - Story section and the In the room box now hold plain Latin filler text only (Bradley doesn't want anything real showing yet). Layout is unchanged. The real room details are still listed in the About the room section above, and the earlier real wording is in git history (commit a6c7e1b and before). Put real text back only when he asks.
-  - The Knock to Enter card was removed from the Extras section (Extras now has two cards: House Rules, Pours We Remember).
-  - Footer tagline is a placeholder: Tagline goes here. He dislikes Keep it between us (also still printed on the QR signs, ask before changing those). The gold band under the hero (Speak softly, Pour generously, Stay late) is still the original placeholder and he hasn't commented on it.
-  - Knock to Enter now remembers NOTHING: every page load, refresh, new tab, new window and back-button return asks again (he asked for this). It also deletes the old et_knocked flag older versions saved. Tapping links inside the page doesn't re-ask. This replaces the earlier note that it remembers each browser.
-  - Gate wording is now fun: Knock, knock / Every good speakeasy has a password / Get it right and the door opens. Get it wrong and, well. (Bradley didn't like Whisper it to the door, and chose this line himself.) The button says Try the door (it used to say Knock, then Let me in). Wrong answers rotate through four short lines; the right one says Come on in.
-- [x] Round of improvements (Oct 8, 2026), all live:
-  - Renames so nothing is confused with the site's nav menu: nav link Drinks, hero button See the drinks, section title Spirits Menu (PDF cover also says Spirits Menu), card heading Pick a pour. The section id is now #drinks.
-  - Search is back, but not as tabs: a search box sits at the top of the drinks card, the start view still shows only the types, and typing opens a fresh Search results view across all drinks (name, maker, base spirit first, then tasting notes; ignores caps, accents and apostrophes). Clearing it or tapping All types goes back. Do not bring back tabs or an always-open list.
-  - Knock to Enter is built and ON. The password words are NOT written in any file on purpose: only a SHA-256 fingerprint is in js/firebase-config.js under knock.hash. Bradley knows the words. Caps, spaces and punctuation don't matter. To change them: python tools/make-knock-hash.py "new words" and paste the result in. Empty hash turns the gate off. admin.html is not gated. It is a fun gate, not security: anyone can read the page source, and a short guessable phrase can in theory be worked out from the fingerprint, so pick words that are not easy to guess.
-  - Link preview card and home-screen icon: Open Graph tags + assets/social/preview.jpg (1200x630), assets/icons/*, manifest.webmanifest. Messaging apps cache previews, so a changed image can take a while to update.
-  - Admin waiting count: admin.html shows how many photos and guest book notes are waiting, puts the total in the tab title like (3) Easy Tiger, and quietly refreshes every 2 minutes while open.
-  - Admin page address: https://justadivebum26.github.io/easy-tiger/admin.html (not linked from the site; sign in with the Google account set in Firestore config/admin). Told Bradley to bookmark it.
-  - Bradley decided to HOLD: the story text, shrinking the 1.2 MB logo, tap-to-enlarge photos, a house-password hint on the forms. Drink of the Night stays out.
-- [x] Build photos updated again (Oct 8, 2026): now 13 photos (6 big ones plus 7 smaller 640px ones from Bradley's second batch), all in assets/build/. He asked for NO captions on the Build photos, so there are none (alt text only, for screen readers). Skipped as duplicates: IMG_4729.JPG, IMG_4733.JPG (small copies of big ones), IMG_4634, IMG_4736, and anything in his DO NOT USE folder inside Easy Tiger Construction. The section list above that says six photos with short captions is out of date. Order is still his original order; EXIF dates suggest framing came before furring, ask if he wants it reordered by date. Two photos (cedar going up) show a person.
-- [x] Build photos added (Oct 8, 2026). Bradley gave 8 in "Easy Tiger Construction". Used 6, resized to 1600px wide JPGs in assets/build/ (originals stay in the Construction folder, never copy them into this folder, they're huge). Order: IMG_4633, 4729, 0263, 4733, 4839, 4832. Spares not used: IMG_4634 (another furring strips shot), IMG_4736 (close-up of an outlet box and ductwork). Photos 3 and 4 show the storage area behind the wall, not cropped yet, waiting on Bradley.
-- [x] Guest book, photo upload, photo wall and admin page built as a DEMO (Oct 8, 2026). Everything saves through js/store.js (EasyStore), which is a demo version: it keeps data in the browser's localStorage only, so nothing is shared between people. Demo house password is "tiger" (shown on the page in demo mode; it is not the real one, which never goes in the repo). Demo admin "sign in" is just a button. main.js and admin.js only talk to EasyStore, so going real means writing a Firebase version of store.js with the same functions (listGuestbook, addGuestbook, deleteGuestbook, listPhotos({approved}), addPhoto, approvePhoto, deletePhoto, isAdmin, adminSignIn, adminSignOut) and nothing else should need to change. Photos are shrunk to 1400px JPEG in the browser before saving (also strips camera data). Limits match the plan: images only, 8 MB, name 60, note 400, caption 80. Guest book entries currently post right away (still an open question: should they need approval too?). admin.html is not linked from the site and has noindex. Tested end to end with a script: wrong password refused, entry shows newest first, typed HTML shows as plain text, photo stays off the wall until approved on admin.html. Still open: photo storage choice (Firebase Storage vs Cloudinary), the real house password, creating the Firebase project (needs Bradley's OK, touches his account). The "Firebase project set up" and the three items after it below are NOT done.
-- [x] Drink of the Night removed for now (Oct 8, 2026, Bradley's call). The card, its code and data/tonight.json are gone. If it comes back, it's a small card plus a JSON file he edits by hand (see "The fun extras" above). The CSS/JS/HTML links carry ?v=3 so phones don't keep an old cached copy. Bump the number when changing those files.
-- [x] Clickable menu (Oct 8, 2026). Source of truth is the menu Word file in "Easy Tiger Menus" (newest: Easy Tiger Spirits Menu10082026v2.docx; never use "Archived Menus"). Run `python tools/make-menu-data.py "<path to docx>"` (needs python-docx) to rebuild js/menu-data.js. It reads the docx by formatting (Heading 1 = type, bold 12 = drink name, italic 9.5 = maker/proof or "Built on", italic 9 = age/mash bill, regular 10 = notes). Then convert the docx to PDF (Word: File > Save As > PDF works, or Word COM from PowerShell) and replace assets/menu/easy-tiger-menu.pdf. Bump the ?v= number on the CSS/JS links in index.html so phones skip their cached copy. It is a .js file on purpose: browsers block fetch() of .json when a page is opened from a folder. Seven types now: Bourbon 51, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27 (110 drinks). House Drinks have a "Built on ..." line (some have none) and a description, no proof/age. They are grouped by base spirit on the site (Bourbon, Rye, Other American Whiskey, Tequila, Gin, Vodka, same order as the menu types), worked out by tools/make-menu-data.py from the "Built on" bottle, or the first spirit in the description when there's no bottle or it's a liqueur. The script stops with a message if it can't tell a drink's base, so a new House Drink with an odd description may need a word added to BASE_WORDS. Within a group the drinks keep the Word file's order. UI: the menu card first shows only the list of types; clicking one opens its drinks in a fresh view with an "All types" back button; each drink opens to show notes. Bradley did NOT like the earlier tabs-plus-search version that showed the bourbon list right away, so do not bring it back. "Confirm on bottle" values are hidden on the site. Two tasting notes in the menu file still contain to-do wording (Redwood Empire Lost Monarch, Russell's Reserve 6 Year); Bradley fixes those in the Word file.
-- [x] Menu PDF added (Oct 8, 2026) and replaced the same day with the v2 menu (now includes House Drinks), converted from the docx with Word. Lives at assets/menu/easy-tiger-menu.pdf. Wine and Pours We Remember are not in it yet. The cover still says "Spirits Menu".
-- [ ] Extras added
-
----
-
-## Parked list (Bradley said: hold these, we'll come back to them)
-
-Last updated Oct 8, 2026. Don't start these unless he brings them up, but do remind him when a natural stopping point comes.
-
-1. ~~Short link~~ DONE (Oct 8, 2026): https://tinyurl.com/EasyTigerCoMo (Bradley made it on TinyURL after is.gd and v.gd refused our calls). Redirects to the Pages address in upper and lower case. If the site ever moves (new domain, new repo name), the QR codes and this link both need updating.
-1b. **QR codes** DONE (Oct 8, 2026), in assets/qr/: easy-tiger-qr-black-on-white.png and -black-on-ivory.png (2385px, plain, most reliable), easy-tiger-qr.svg (vector), easy-tiger-sign-6x8.png and .pdf (print-ready 6x8 in sign with logo, the code, and the tinyurl text). They encode the direct address https://justadivebum26.github.io/easy-tiger/ (not the TinyURL) so they keep working if TinyURL ever changes. All were decoded with a QR reader to confirm they scan, including the sign shrunk to 350px wide. Also made (Oct 8, 2026) with the tiger emblem in the middle: easy-tiger-qr-logo-black-on-white.png, -black-on-ivory.png (1575px), easy-tiger-qr-logo.svg, easy-tiger-sign-6x8-logo-qr.png/.pdf. The emblem covers about 10% of the code (error level H allows ~30%). Tested with ZXing (the kind of reader phone scanner apps use): reads at every size from full down to 140px wide, and under blur, heavy JPEG, noise and a 12 degree tilt. OpenCV's built-in reader was fussier and failed the emblem PNGs at their exact native size only (fine at every scaled size), so that is a limit of that test tool, not the code. Not tested on a real phone yet: ask Bradley to scan the printed sign. For very small prints (under ~1.5 inches) use the plain version. Emblem size test (Oct 8, 2026): patch sizes up to 17 squares (16.6% of the code) scan cleanly in ZXing, but every size over ~10% leaves almost no room for smudges or scuffs (plain survives ~3% scrambled squares, 10% emblem ~1%, 13%+ ~0%). The 20% version (files *-logo20-*, 19-square patch, 20.7%) FAILED every reader at every size in our tests (ZXing, OpenCV classic and aruco), even though Bradley said one scan worked on his phone, so it is not safe to print: recommend the 10% version (*-logo-*), keep the plain one for small prints. Signs (the two 6x8 ones, plain code and 10% emblem code) now say "Then ask for the secret password" under the typed address, because the Knock to Enter words will change and must never be printed on anything. Rebuilt and re-scanned Oct 8, 2026. The *-logo20-* files were not rebuilt and have no password line (they failed scanning anyway, ignore them). They are NOT pushed to GitHub yet.
-2. **Full hand test of the real guest book and photos** (right password, upload, admin sign-in, approve, delete). Only he can do it (his password and Google login). Waiting on his result.
-3. ~~Knock to Enter~~ DONE (Oct 8, 2026), see the improvements note above.
-4. **Story text.** A few lines on how the idea started and who helped build it (marked in brackets on the page).
-5. **Pours We Remember.** Empty section, needs entries and a simple way to add them.
-6. **Drink of the Night.** Removed for now at his request. Comes back later if he wants it.
-7. **Menu cleanup.** Two tasting notes in the Word file still have to-do wording (Redwood Empire Lost Monarch, Russell's Reserve 6 Year). After he fixes them: re-run tools/make-menu-data.py, redo the PDF, push.
-8. **Menu PDF cover** still says "Spirits Menu" even though House Drinks is included. Wine isn't on the menu yet.
-9. **Optional ideas** from the original notes (ask first): random Prohibition-era quote, "who's coming tonight", record-of-the-week.
-10. **Housekeeping:** delete the tiny test image in Cloudinary (the 96px logo icon); change the house password if he used a throwaway one for testing.
-11. **Held by Bradley on Oct 8, 2026** (do not start unless he asks): shrink the 1.2 MB logo; tap-to-enlarge photos; a hint line about the house password on the guest book and photo forms.
+## Style notes for new text on the site
+Plain and dry, short headlines, no filler, few em dashes, no emoji. Use only facts he has given. When he says "placeholder", use plain Latin filler or a bracketed note, never something that looks real.
