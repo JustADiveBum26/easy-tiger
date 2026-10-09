@@ -927,8 +927,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   text-wrap: balance;
 }
 
-/* ---------- The opening (about 8 seconds) ----------
-   A plank door that fills the whole screen, with a small peephole. Times are seconds after the right password.
+/* ---------- The opening (about 11 seconds) ----------
+   A plank door that fills the whole screen, with a small peephole. Times are seconds after the right password. (About 11 seconds in all.)
    0.0   the door fades in over the password box
    0.35  knock   0.70  knock (the door jolts)
    1.0   the peephole's wooden slider opens
@@ -937,7 +937,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
    5.15  the slider snaps shut
    5.4   the door swings open into warm light
    6.0   the tiger emblem rises out of the light, then a gold shine   6.5  "Welcome to Easy Tiger"
-   7.2   everything fades to the page   8.0  done
+   6.9   the welcome screen holds (the emblem glows gently, a second gold shine passes at 9.0)
+   10.2  everything fades to the page   11.0  done
    Pictures: assets/door/ (real photo textures, see assets/door/README.md). Earlier versions are saved as git tags named opening-v1 to opening-v4.   */
 .gate-stage {
   --hatch-w: min(84vw, 700px);                   /* the peephole's size */
@@ -1102,7 +1103,7 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 }
 
 /* ---- the timeline ---- */
-.gate.playing { cursor: pointer; animation: gate-out .8s ease 7.2s forwards; }
+.gate.playing { cursor: pointer; animation: gate-out .8s ease 10.2s forwards; }
 .gate.playing .gate-stage      { animation: stage-in .35s ease forwards; }
 .gate.playing .gate-door       { animation: door-run 6.7s linear forwards; }
 .gate.playing .door-flicker    { animation: flicker 2.4s ease-in-out infinite; }
@@ -1114,7 +1115,8 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 .gate.playing .gate-line-3     { animation: line .9s ease 4.1s forwards; }
 .gate.playing .gate-light-bg   { animation: light-up 1.4s ease 5.4s forwards; }
 .gate.playing .gate-emblem     { animation: emblem-up .9s ease 6s forwards; }
-.gate.playing .gate-shine      { animation: shine 1.2s ease 6.7s forwards; }
+.gate.playing .gate-shine      { animation: shine 1.2s ease 6.7s forwards, shine 1.2s ease 9s forwards; }
+.gate.playing .gate-emblem img { animation: emblem-breathe 2.4s ease-in-out 7s infinite alternate; }
 .gate.playing .gate-welcome    { animation: welcome-in .8s ease 6.5s forwards; }
 .gate.playing .gate-skip       { animation: skip-hint 4s ease .8s forwards; }
 
@@ -1175,6 +1177,7 @@ html.gate-open, html.gate-open body { overflow: hidden; }
   100% { opacity: 0; transform: translateY(-5px); }
 }
 @keyframes light-up { 0% { opacity: .15; } 100% { opacity: 1; } }
+@keyframes emblem-breathe { 0% { filter: brightness(1); } 100% { filter: brightness(1.14); } }
 @keyframes emblem-up { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.82); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 @keyframes shine { 0% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
 @keyframes welcome-in { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: none; } }
@@ -1183,5 +1186,5 @@ html.gate-open, html.gate-open body { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .gate.playing, .gate.playing .gate-stage, .gate.playing .gate-door, .gate.playing .door-flicker, .gate.playing .hatch-shutter,
   .gate.playing .tiger-move, .gate.playing .tiger-lid, .tiger-glow, .gate.playing .gate-line, .gate.playing .gate-light-bg, .gate.playing .gate-emblem,
-  .gate.playing .gate-shine, .gate.playing .gate-welcome, .gate.playing .gate-skip { animation: none; }
+  .gate.playing .gate-shine, .gate.playing .gate-emblem img, .gate.playing .gate-welcome, .gate.playing .gate-skip { animation: none; }
 }

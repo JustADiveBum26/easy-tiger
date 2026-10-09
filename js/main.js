@@ -365,8 +365,8 @@
     });
   }
 
-  // The opening plays for about 8 seconds (the timeline is in css/style.css).
-  var OPENING_MS = 8000;
+  // The opening plays for about 11 seconds (the timeline is in css/style.css).
+  var OPENING_MS = 11000;
   var timer = null;
   var startedAt = 0;
   var finished = false;
