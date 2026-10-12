@@ -62,7 +62,8 @@ Outside the repo, in `Downloads\Easy Tiger Project\` (Bradley's, read-only for C
 - `Easy Tiger Logo\` (use `Version 8`, the newest; `Archived Version` is off limits). The page uses `02_Easy_Tiger_HERO_Black_Background_5000px.png`.
 - `Easy Tiger Menus\` (newest Word menu: `Easy Tiger Spirits Menu10082026v2.docx`; `Archived Menus` is off limits).
 - `Easy Tiger Construction\` (his build photos; `DO NOT USE` inside it is off limits).
-- `Easy Tiger Misc\` (holds `peephole-options.png`, the side-by-side of the opening options).
+- `Easy Tiger Misc\` holds `peephole-options.png` (the side-by-side of the opening options), **`Christmas Preview\`** (the holiday edition in progress, see below) and its zip backup.
+- `Easy Tiger Logo\Easy Tiger Christmas\Easy_Tiger_Christmas_Logo\` is the Christmas logo set (use `Detailed_Color`). The `Bad Version` folder next to it is rejected: treat it like a DO NOT USE folder.
 - `Easy Tiger Webpage\` is the repo (this folder).
 
 Inside the repo:
@@ -179,6 +180,18 @@ Open Graph tags plus `assets/social/preview.jpg` (1200x630), `assets/icons/*`, a
 
 ### QR codes and the printed sign (local only, `assets/qr/`)
 Plain and tiger-emblem QR codes and a 6x8 inch print-ready sign (`easy-tiger-sign-6x8-logo-qr.pdf` is the one to print). They encode the direct site address (not the TinyURL, so they survive a TinyURL change). The sign says "Scan to come in", shows `tinyurl.com/EasyTigerCoMo`, and "Then ask for the secret password" (never print the password). All were decoded with a scanner at many sizes, but **not tested on a real phone**. The emblem covers about 10% of the code (30% is the limit); the `*-logo20-*` files (20%) failed every scanner, so ignore them. For prints under about 1.5 inches use the plain code. The sign's bottom line "Keep it between us" is a line Bradley dislikes on the site; ask before reprinting.
+
+---
+
+## Holiday popup: Christmas edition (in progress, NOT live)
+
+Bradley wants a Christmas refresh of the **visuals only** (never the words, the order of the sections or how things work). The plan is to go live about **Nov 25, 2026** (45 days from Oct 12), so there is time to refine.
+
+- **Where it lives:** `Easy Tiger Misc\Christmas Preview\` is a separate copy of the site plus `css/christmas.css`, `js/christmas.js`, `assets/xmas/` and the Christmas logo files. It has its own local-only version history (git, no remote, tag `xmas-v1`), a zip backup (`Christmas Preview backup 2026-10-12.zip`), a README with the plan and a to-do list, and `tools/make_xmas_art.py` (recipes for the logo cutout, the red bow lifted from the logo, the garland and the baubles; tested, they reproduce the pictures exactly).
+- **View it:** double-click `START PREVIEW.bat` there, or run `python -m http.server 8160 --bind 127.0.0.1` in that folder and open http://localhost:8160/ (add `?skipgate` to skip the password screen). It is disconnected from the real database on purpose.
+- **What it does:** wreath logo everywhere (cut out of its black square for the end of the door opening), evergreen and cranberry sections, richer red velvet, a pine garland with hanging baubles and the satin bow over the rod, the rules poster, the footer and the door, twinkling lights under the nav, gold twinkles, soft bokeh lights, gentle snow (off for reduced motion).
+- **Status:** Bradley said "much better" after two rounds. Not published, nothing in the real repo or on the live site. Keep working there, commit each round, and only move it into the real site when he says so.
+- **Going live (plan):** switch it on by date (about Nov 25 to Jan 2) with a `?theme=` override for testing, add only specific files (never a whole folder), test at phone width first, verify the live site, then update this section.
 
 ---
 
