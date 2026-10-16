@@ -106,7 +106,7 @@ Order matters: the top menu follows the same order.
    5. Stay Late(ish). / The More We Like You, the Later We're Open.
 6. **Drinks** (`#drinks`, heading "Spirits Menu"). A search box, then a card "Pick a pour" listing the seven types with counts. See "Updating the menu".
 7. **The Story** (`#story`). **Currently Latin filler text only** (he doesn't want anything real showing yet), in the same layout, plus the "In the room" box also with filler. Real wording is in git history (commit `a6c7e1b` and earlier). Put real text back only when he asks.
-8. **The Build** (`#build`). 13 photos in a centered gallery, **no captions** (he asked), alt text only. Files in `assets/build/` (01 to 06 are 1600px; 00, 02b, 03b, 04b, 05b, 05c, 05d are 640px). Two show the storage area behind the wall, uncropped on purpose (he said no). Two show a person.
+8. **The Build** (`#build`). 22 photos in a centered gallery, **no captions** (he asked), alt text only. Files in `assets/build/` (01 to 06 and 07 to 09c are 1600px; 00, 02b, 03b, 04b, 05b, 05c, 05d are 640px). 07 to 09c came from `morepics.zip` in his Construction folder on Oct 16, 2026 (painting the walls teal, then the finished teal room with the cedar wall); three show a person painting. Two show the storage area behind the wall, uncropped on purpose (he said no). Two show a person.
 9. **Guest Book** (`#guestbook`). Name, note, house password, "Sign it". Entries need his approval before they show.
 10. **Photo Wall** (`#photos`). Add a photo, an approval note, a grid of approved photos in gold frames.
 11. **Extras** (`#extras`). One card: Pours We Remember (empty, placeholder).
