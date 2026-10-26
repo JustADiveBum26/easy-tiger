@@ -100,10 +100,10 @@ Order matters: the top menu follows the same order.
 4. **Gold band.** "Speak softly · Pour generously · Stay late". This is still the original placeholder; he hasn't commented. Now overlaps with rule 5 (Stay Late(ish)), so ask before leaving it.
 5. **House Rules** (`#rules`). Framed poster, Roman numerals I to V, bold headline plus an italic line. Final wording:
    1. Phones Off. Conversation On. / Be in the Moment.
-   2. Drink It, Don't Save It. / It's Here to Drink, Not Look At.
-   3. Pour a Little for Your Neighbor. / An Empty Glass Is Everyone's Problem.
-   4. Leave Your Bad Day at the Door. / Pick It Back Up on the Way Out.
-   5. Stay Late(ish). / The More We Like You, the Later We're Open.
+   2. Leave Your Bad Day at the Door. / Pick It Back Up on the Way Out.
+   3. Drink It, Don't Save It. / It's Here to Drink, Not Look At.
+   4. Pour a Little for Your Neighbor. / An Empty Glass Is Everyone's Problem.
+   5. Stay Late(ish). / The More We Like You, The Later We're Open.
 6. **Drinks** (`#drinks`, heading "Spirits Menu"). A search box, then a card "Pick a pour" listing the seven types with counts. See "Updating the menu".
 7. **The Story** (`#story`). **Currently Latin filler text only** (he doesn't want anything real showing yet), in the same layout, plus the "In the room" box also with filler. Real wording is in git history (commit `a6c7e1b` and earlier). Put real text back only when he asks.
 8. **The Build** (`#build`). 29 photos in a centered gallery, **no captions** (he asked), alt text only. Files in `assets/build/` (01 to 06, 07 to 09c and 10 to 12c are 1600px; 00, 02b, 03b, 04b, 05b, 05c, 05d are 640px). 07 to 09c came from `morepics.zip` in his Construction folder on Oct 16, 2026 (painting the walls teal, then the finished teal room with the cedar wall); three show a person painting. 10 to 12c are seven `IMG_52xx.jpeg` files he added on Oct 26, 2026 (finished cedar wall with the chandelier, baseboards going in, the dark doors, the tiger rug, the red sofa with the copper table, a cabinet by the door); they are in story order, not camera-number order. Two show the storage area behind the wall, uncropped on purpose (he said no). Two show a person.
