@@ -99,10 +99,10 @@ Order matters: the top menu follows the same order.
 3. **Hero.** Logo between burgundy velvet curtains with a gold rod. Line: "Put the phone down. Stay a while." **No buttons** (he removed them).
 4. **Gold band.** "Speak softly · Pour generously · Stay late". This is still the original placeholder; he hasn't commented. Now overlaps with rule 5 (Stay Late(ish)), so ask before leaving it.
 5. **House Rules** (`#rules`). Framed poster, Roman numerals I to V, bold headline plus an italic line. Final wording:
-   1. Phones Off. Conversation On. / Be in the Moment.
-   2. Leave Your Bad Day at the Door. / Pick It Back Up on the Way Out.
-   3. Drink It, Don't Save It. / It's Here to Drink, Not Look At.
-   4. Pour a Little for Your Neighbor. / An Empty Glass Is Everyone's Problem.
+   1. Phones Off. Conversation On. / Be In The Moment.
+   2. Leave Your Bad Day At The Door. / Pick It Back Up On The Way Out.
+   3. Drink It, Don't Save It. / It's Here To Drink, Not Look At.
+   4. Pour A Little For Your Neighbor. / An Empty Glass Is Everyone's Problem.
    5. Stay Late(ish). / The More We Like You, The Later We're Open.
 6. **Drinks** (`#drinks`, heading "Spirits Menu"). A search box, then a card "Pick a pour" listing the seven types with counts. See "Updating the menu".
 7. **The Story** (`#story`). **Currently Latin filler text only** (he doesn't want anything real showing yet), in the same layout, plus the "In the room" box also with filler. Real wording is in git history (commit `a6c7e1b` and earlier). Put real text back only when he asks.
