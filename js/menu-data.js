@@ -722,7 +722,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Our go-to. Bourbon, sugar and bitters, with the glass smoked before we pour. You get a little campfire on the nose and a nice slow sip after.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Whiskey Sour",
@@ -731,7 +733,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Bourbon, fresh lemon and a little sugar, shaken hard and poured over ice. Bright, easy and always a good call.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Gold Rush",
@@ -740,7 +744,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Bourbon, fresh lemon and honey syrup, shaken cold. Think of a whiskey sour with honey instead of sugar. Rounder, a little softer and very easy to like.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Revolver",
@@ -749,7 +755,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Bourbon with a little coffee liqueur and orange bitters, stirred and finished with a flamed orange peel. Like a Manhattan that stayed up late.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Nick & Nora glass",
+          "glassImg": "nick-nora"
         },
         {
           "name": "Whiskey Smash",
@@ -758,7 +766,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Bourbon muddled with fresh mint and lemon, poured over crushed ice. Bright, minty and cold.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Julep cup",
+          "glassImg": "julep"
         },
         {
           "name": "Paper Plane",
@@ -767,7 +777,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Equal parts bourbon, Aperol, amaro and lemon. Bittersweet, a little citrusy and way too easy to drink.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Nick & Nora glass",
+          "glassImg": "nick-nora"
         },
         {
           "name": "Whiskey & Dr Pepper",
@@ -776,7 +788,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Bourbon and Dr Pepper with an Amarena cherry on top. Sounds odd, tastes like a cherry cola with a kick.",
-          "base": "Bourbon"
+          "base": "Bourbon",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Fall Apple Cinnamon Old Fashioned",
@@ -785,7 +799,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Our fall twist. Apple cinnamon simple syrup stands in for the sugar, and a cap of cherry foam goes on top. Warm, a little sweet, and about as fall as it gets.",
-          "base": "Rye"
+          "base": "Rye",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Manhattan",
@@ -794,7 +810,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Rye, sweet vermouth and bitters, stirred cold and served up with a cherry. Short, strong and about as classic as it gets.",
-          "base": "Rye"
+          "base": "Rye",
+          "glass": "Nick & Nora glass",
+          "glassImg": "nick-nora"
         },
         {
           "name": "New York Sour",
@@ -803,7 +821,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "A whiskey sour that got dressed up. Rye, lemon and sugar with a float of red wine on top that gives it a deep ruby color and a little dry bite.",
-          "base": "Rye"
+          "base": "Rye",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Whiskey Ginger",
@@ -812,7 +832,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Whiskey and ginger ale over ice with a squeeze of lime. Simple, cold and it always works.",
-          "base": "Other American Whiskey"
+          "base": "Other American Whiskey",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Traditional Margarita",
@@ -821,7 +843,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Tequila, orange liqueur and fresh lime with a salted rim. The one everybody knows, and for good reason.",
-          "base": "Tequila"
+          "base": "Tequila",
+          "glass": "Margarita glass",
+          "glassImg": "margarita"
         },
         {
           "name": "Spicy Margarita",
@@ -830,7 +854,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Our margarita with a jalapeño kick. Fresh lime, tequila, orange liqueur and a little heat, with a salted rim.",
-          "base": "Tequila"
+          "base": "Tequila",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Paloma",
@@ -839,7 +865,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Tequila and fresh lime topped with grapefruit soda over ice. Light, a little bitter and easy to drink.",
-          "base": "Tequila"
+          "base": "Tequila",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Ranch Water",
@@ -848,7 +876,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Tequila, fresh lime and Topo Chico over ice. Light, fizzy and good any time you want something cold.",
-          "base": "Tequila"
+          "base": "Tequila",
+          "glass": "Collins glass",
+          "glassImg": "collins"
         },
         {
           "name": "Olive Martini",
@@ -857,7 +887,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Cold gin, a splash of dry vermouth and a few olives on a pick. No fuss, just crisp and salty.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Martini glass",
+          "glassImg": "martini"
         },
         {
           "name": "Gimlet",
@@ -866,7 +898,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Gin, fresh lime and a little sugar, shaken cold and strained into a chilled glass. Tart, crisp and about as simple as a drink gets.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Nick & Nora glass",
+          "glassImg": "nick-nora"
         },
         {
           "name": "Gin & Tonic",
@@ -875,7 +909,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Gin and tonic over plenty of ice with a wedge of lime. The easy one, and still one of the best.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Prickly Pear Gin & Tonic",
@@ -884,7 +920,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Our G&T with a splash of prickly pear syrup. Empress starts out indigo and shifts toward pink once it hits the tonic, so it puts on a little show too.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Bramble",
@@ -893,7 +931,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Gin, lemon and a little sugar over crushed ice, with a drizzle of berry liqueur that bleeds down through the glass. Tart, fruity and pretty to look at.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Rocks glass",
+          "glassImg": "rocks"
         },
         {
           "name": "Gin-Gin Mule",
@@ -902,7 +942,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Gin, muddled mint, lime and ginger beer over ice. Like a Moscow Mule, but with gin and a lot more mint.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Collins glass",
+          "glassImg": "collins"
         },
         {
           "name": "St. Germain Cocktail",
@@ -911,7 +953,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Gin and St. Germain elderflower liqueur with lemon and a splash of soda over ice. Light, floral and made for sipping slow.",
-          "base": "Gin"
+          "base": "Gin",
+          "glass": "Collins glass",
+          "glassImg": "collins"
         },
         {
           "name": "Espresso Martini",
@@ -920,7 +964,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Vodka, coffee liqueur and fresh espresso, shaken until it gets that foamy top. Three coffee beans on top if we're feeling fancy.",
-          "base": "Vodka"
+          "base": "Vodka",
+          "glass": "Martini glass",
+          "glassImg": "martini"
         },
         {
           "name": "Cosmopolitan",
@@ -929,7 +975,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Vodka, Cointreau, fresh lime and cranberry, shaken until ice cold. Tart, a little pink and a lot more grown up than its reputation.",
-          "base": "Vodka"
+          "base": "Vodka",
+          "glass": "Martini glass",
+          "glassImg": "martini"
         },
         {
           "name": "French Martini",
@@ -938,7 +986,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Vodka, pineapple juice and Chambord, shaken until it gets a little foam on top. Fruity, smooth and dangerously easy.",
-          "base": "Vodka"
+          "base": "Vodka",
+          "glass": "Martini glass",
+          "glassImg": "martini"
         },
         {
           "name": "Moscow Mule",
@@ -947,7 +997,9 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Vodka, lime and ginger beer, served in a copper mug. Spicy, cold and simple.",
-          "base": "Vodka"
+          "base": "Vodka",
+          "glass": "Copper mug",
+          "glassImg": "copper-mug"
         }
       ],
       "id": "house-drinks"
