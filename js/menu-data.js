@@ -816,7 +816,7 @@ const MENU = {
         },
         {
           "name": "Traditional Margarita",
-          "maker": "Built on Cointreau",
+          "maker": "Built on Cointreau Orange Liqueur",
           "proof": "",
           "age": "",
           "details": "",
@@ -825,7 +825,7 @@ const MENU = {
         },
         {
           "name": "Spicy Margarita",
-          "maker": "",
+          "maker": "Built on Tequila",
           "proof": "",
           "age": "",
           "details": "",
@@ -834,7 +834,7 @@ const MENU = {
         },
         {
           "name": "Paloma",
-          "maker": "",
+          "maker": "Built on Tequila",
           "proof": "",
           "age": "",
           "details": "",
@@ -843,7 +843,7 @@ const MENU = {
         },
         {
           "name": "Ranch Water",
-          "maker": "",
+          "maker": "Built on Tequila",
           "proof": "",
           "age": "",
           "details": "",
@@ -852,7 +852,7 @@ const MENU = {
         },
         {
           "name": "Cantarito",
-          "maker": "",
+          "maker": "Built on Tequila",
           "proof": "",
           "age": "",
           "details": "",
@@ -897,7 +897,7 @@ const MENU = {
         },
         {
           "name": "Bramble",
-          "maker": "Built on Seagram's Extra Dry Gin, with Chambord",
+          "maker": "Built on Seagram's Extra Dry Gin",
           "proof": "",
           "age": "",
           "details": "",
@@ -924,7 +924,7 @@ const MENU = {
         },
         {
           "name": "Espresso Martini",
-          "maker": "",
+          "maker": "Built on Vodka",
           "proof": "",
           "age": "",
           "details": "",
@@ -933,7 +933,7 @@ const MENU = {
         },
         {
           "name": "Cosmopolitan",
-          "maker": "Built on Cointreau",
+          "maker": "Built on Cointreau Orange Liqueur",
           "proof": "",
           "age": "",
           "details": "",
@@ -951,7 +951,7 @@ const MENU = {
         },
         {
           "name": "Moscow Mule",
-          "maker": "",
+          "maker": "Built on Vodka",
           "proof": "",
           "age": "",
           "details": "",

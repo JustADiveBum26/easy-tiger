@@ -60,7 +60,7 @@ He authorized Claude to set up the GitHub repo, Pages, and the Firebase project.
 Outside the repo, in `Downloads\Easy Tiger Project\` (Bradley's, read-only for Claude, newest files only, see the hard rules):
 
 - `Easy Tiger Logo\` (use `Version 8`, the newest; `Archived Version` is off limits). The page uses `02_Easy_Tiger_HERO_Black_Background_5000px.png`.
-- `Easy Tiger Menus\` (newest Word menu, as of Oct 29, 2026: `Menu Versions\Easy Tiger Spirits Menu 2026-10-29 v1.docx` with a matching `.pdf`; `Archived Menus` is off limits). The menu is now built from `Menu Setup & Instructions\inventory.json` by `build_menu.js`; that folder has its own CLAUDE.md, read it before touching the menu. Every build saves a new dated version in `Menu Versions` and old ones are never overwritten. The site's drink list and PDF were regenerated from the Oct 29 build on Oct 29, 2026. After any menu change, follow "Standing instruction: update the site when the menu changes" below.
+- `Easy Tiger Menus\` (newest Word menu, as of Oct 29, 2026: `Menu Versions\Easy Tiger Spirits Menu 2026-10-29 v2.docx` with a matching `.pdf`; `Archived Menus` is off limits). The menu is now built from `Menu Setup & Instructions\inventory.json` by `build_menu.js`; that folder has its own CLAUDE.md, read it before touching the menu. Every build saves a new dated version in `Menu Versions` and old ones are never overwritten. The site's drink list and PDF were regenerated from the Oct 29 build on Oct 29, 2026. After any menu change, follow "Standing instruction: update the site when the menu changes" below.
 - `Easy Tiger Construction\` (his build photos; `DO NOT USE` inside it is off limits).
 - `Easy Tiger Misc\` holds `peephole-options.png` (the side-by-side of the opening options), **`Christmas Preview\`** (the holiday edition in progress, see below) and its zip backup.
 - `Easy Tiger Logo\Easy Tiger Christmas\Easy_Tiger_Christmas_Logo\` is the Christmas logo set (use `Detailed_Color`). The `Bad Version` folder next to it is rejected: treat it like a DO NOT USE folder.
@@ -86,7 +86,7 @@ tools/                  make-menu-data.py, make-knock-hash.py, door-pictures/ (p
 CLAUDE.md               this file (see "Open decisions": it is publicly served)
 ```
 
-Always bump the `?v=NN` cache number on the CSS/JS links in `index.html` and `admin.html` when changing those files, so phones don't keep old copies (currently `?v=33` in `index.html`; `admin.html` has its own, `?v=10`).
+Always bump the `?v=NN` cache number on the CSS/JS links in `index.html` and `admin.html` when changing those files, so phones don't keep old copies (currently `?v=34` in `index.html`; `admin.html` has its own, `?v=10`).
 
 ---
 
@@ -151,7 +151,7 @@ Signature touches: gold double-line frames; photos in a thin gold frame with a d
 ## How the features work
 
 ### The menu and search
-- Source of truth is the **Word menu** in `Easy Tiger Menus` (built from `inventory.json`, see Folders). The 111 drinks in `js/menu-data.js` come from the Oct 29, 2026 build: Bourbon 52, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27 (Oct 29 added Old Forester 2026 Birthday Bourbon). A spirit can also carry an extra note after the mash bill on the Word detail line ("Age: ... | Mash Bill: ... | Warehouse B, 212 barrels"); the script keeps it in its own `provenance` field and the page shows it last, with no label. Any of the three parts can be missing (a blank mash bill leaves just the age). (A `.js` file on purpose: browsers block `fetch()` of `.json` when a page is opened from a folder.)
+- Source of truth is the **Word menu** in `Easy Tiger Menus` (built from `inventory.json`, see Folders). The 111 drinks in `js/menu-data.js` come from the Oct 29, 2026 build (v2): Bourbon 52, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27 (Oct 29 added Old Forester 2026 Birthday Bourbon). A spirit can also carry an extra note after the mash bill on the Word detail line ("Age: ... | Mash Bill: ... | Warehouse B, 212 barrels"); the script keeps it in its own `provenance` field and the page shows it last, with no label. Any of the three parts can be missing (a blank mash bill leaves just the age). (A `.js` file on purpose: browsers block `fetch()` of `.json` when a page is opened from a folder.)
 - The card first shows **only the list of types**. Tapping one opens that type's drinks in a fresh view with an "All types" back button; each drink opens to show notes, age, and mash bill (or "made with"). House Drinks are grouped under base-spirit headings (Bourbon, Rye, Other American Whiskey, Tequila, Gin, Vodka).
 - **Search** (box above the card) searches all drinks by name, maker and base first, then tasting notes; ignores caps, accents and apostrophes. Typing opens a Search results view; clearing it goes back to the types.
 - **Bradley rejected** tabs plus an always-open list. Don't bring them back.
@@ -216,7 +216,7 @@ Bradley asked (Oct 29, 2026) that the site follow the menu automatically. So whe
 7. **Publish:** `git add` only `js/menu-data.js`, `assets/menu/easy-tiger-menu.pdf`, `index.html`, and `CLAUDE.md` (plus `js/main.js` or `tools/make-menu-data.py` if they changed). Check `git status`, commit, push, wait for the Pages build to match the commit, and re-test the **live** address.
 8. **Update this file:** the drink counts in "The menu and search", the `?v=` number, and the Open items (for example when a blank gets filled in). Then tell Bradley what changed on the site, in plain words.
 
-**Stop and ask first if:** the script prints an error or a `CHECK:` line; a count changes in a way the menu change doesn't explain; the PDF has a name, or note-to-self text; a test fails; the repo has other changes that look half-finished; or the menu build itself stopped (for example because of unmerged edits on the shared Drive copy, see the builder's CLAUDE.md). Fix the cause, don't work around it.
+**Stop and ask first if:** the script prints an error or a `CHECK:` line; a count changes in a way the menu change doesn't explain; the PDF has a name, or note-to-self text; a test fails; the repo has other changes that look half-finished; or the menu build itself stopped or the drink import reported a problem (see the builder's CLAUDE.md; the drink list now comes from a Google Sheet, the bottles from the builder's data file). Fix the cause, don't work around it.
 
 This only runs when Claude does the menu update (it is an instruction, not a background job). If Bradley edits the Word file by hand without Claude, the site won't change until the next Claude session, and Claude should notice at the start of a session when the newest file in `Menu Versions` is newer than the menu on the site.
 
