@@ -11,7 +11,7 @@ How it reads the Word file (so keep the menu in this shape):
   - Bold, 12 pt ................ a drink name
   - Italic, 9.5 pt ............. the maker line, "Maker, Place · 90 Proof"
                                  (for House Drinks: "Built on ...")
-  - Italic, 9 pt ............... "Age: ... | Mash Bill: ..." (spirits only)
+  - Italic, 9 pt ............... "Age: ... | Mash Bill: ... | extra note" (spirits only; any part can be missing)
   - Regular, 10 pt ............. the tasting notes or description
 """
 import io
@@ -63,12 +63,18 @@ for p in doc.paragraphs:
     elif r.italic and size == 9.5:
         cur['maker'] = text
     elif r.italic and size == 9:
-        m = re.match(r'Age:\s*(.*?)\s*\|\s*Mash Bill:\s*(.*)$', text)
-        if m:
-            cur['age'], cur['details'] = m.group(1), m.group(2)
-        else:
-            m = re.match(r'Mash Bill:\s*(.*)$', text)
-            cur['details'] = m.group(1) if m else text
+        # "Age: 11 Years   |   Mash Bill: ...   |   Warehouse B, 212 barrels". Any part can be missing,
+        # and a part with no label (like the warehouse) is kept as the bottle's extra note.
+        known = False
+        for part in [x.strip() for x in text.split('|') if x.strip()]:
+            if part.startswith('Age:'):
+                cur['age'], known = part[4:].strip(), True
+            elif part.startswith('Mash Bill:'):
+                cur['details'], known = part[10:].strip(), True
+            elif known:
+                cur['provenance'] = (cur.get('provenance', '') + ' · ' + part).strip(' ·')
+        if not known:
+            cur['details'] = text
     elif size == 10:
         cur['notes'] = (cur['notes'] + ' ' + text).strip()
 

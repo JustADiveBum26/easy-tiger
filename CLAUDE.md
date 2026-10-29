@@ -60,7 +60,7 @@ He authorized Claude to set up the GitHub repo, Pages, and the Firebase project.
 Outside the repo, in `Downloads\Easy Tiger Project\` (Bradley's, read-only for Claude, newest files only, see the hard rules):
 
 - `Easy Tiger Logo\` (use `Version 8`, the newest; `Archived Version` is off limits). The page uses `02_Easy_Tiger_HERO_Black_Background_5000px.png`.
-- `Easy Tiger Menus\` (newest Word menu: `Easy Tiger Spirits Menu10082026v2.docx`; `Archived Menus` is off limits).
+- `Easy Tiger Menus\` (newest Word menu, as of Oct 29, 2026: `Menu Versions\Easy Tiger Spirits Menu 2026-10-29 v1.docx` with a matching `.pdf`; `Archived Menus` is off limits). The menu is now built from `Menu Setup & Instructions\inventory.json` by `build_menu.js`; that folder has its own CLAUDE.md, read it before touching the menu. Every build saves a new dated version in `Menu Versions` and old ones are never overwritten. The site's drink list and PDF were regenerated from the Oct 29 build on Oct 29, 2026. After any menu change, follow "Standing instruction: update the site when the menu changes" below.
 - `Easy Tiger Construction\` (his build photos; `DO NOT USE` inside it is off limits).
 - `Easy Tiger Misc\` holds `peephole-options.png` (the side-by-side of the opening options), **`Christmas Preview\`** (the holiday edition in progress, see below) and its zip backup.
 - `Easy Tiger Logo\Easy Tiger Christmas\Easy_Tiger_Christmas_Logo\` is the Christmas logo set (use `Detailed_Color`). The `Bad Version` folder next to it is rejected: treat it like a DO NOT USE folder.
@@ -86,7 +86,7 @@ tools/                  make-menu-data.py, make-knock-hash.py, door-pictures/ (p
 CLAUDE.md               this file (see "Open decisions": it is publicly served)
 ```
 
-Always bump the `?v=NN` cache number on the CSS/JS links in `index.html` and `admin.html` when changing those files, so phones don't keep old copies (currently `?v=32`).
+Always bump the `?v=NN` cache number on the CSS/JS links in `index.html` and `admin.html` when changing those files, so phones don't keep old copies (currently `?v=33` in `index.html`; `admin.html` has its own, `?v=10`).
 
 ---
 
@@ -151,7 +151,7 @@ Signature touches: gold double-line frames; photos in a thin gold frame with a d
 ## How the features work
 
 ### The menu and search
-- Source of truth is the **Word menu** in `Easy Tiger Menus`. The 110 drinks are in `js/menu-data.js`: Bourbon 51, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27. (A `.js` file on purpose: browsers block `fetch()` of `.json` when a page is opened from a folder.)
+- Source of truth is the **Word menu** in `Easy Tiger Menus` (built from `inventory.json`, see Folders). The 111 drinks in `js/menu-data.js` come from the Oct 29, 2026 build: Bourbon 52, Rye 13, Other American Whiskey 8, Tequila 1, Gin 3, Liqueur 7, House Drinks 27 (Oct 29 added Old Forester 2026 Birthday Bourbon). A spirit can also carry an extra note after the mash bill on the Word detail line ("Age: ... | Mash Bill: ... | Warehouse B, 212 barrels"); the script keeps it in its own `provenance` field and the page shows it last, with no label. Any of the three parts can be missing (a blank mash bill leaves just the age). (A `.js` file on purpose: browsers block `fetch()` of `.json` when a page is opened from a folder.)
 - The card first shows **only the list of types**. Tapping one opens that type's drinks in a fresh view with an "All types" back button; each drink opens to show notes, age, and mash bill (or "made with"). House Drinks are grouped under base-spirit headings (Bourbon, Rye, Other American Whiskey, Tequila, Gin, Vodka).
 - **Search** (box above the card) searches all drinks by name, maker and base first, then tasting notes; ignores caps, accents and apostrophes. Typing opens a Search results view; clearing it goes back to the types.
 - **Bradley rejected** tabs plus an always-open list. Don't bring them back.
@@ -197,11 +197,28 @@ Bradley wants a Christmas refresh of the **visuals only** (never the words, the 
 
 ## How to do common jobs
 
-- **Update the menu:** Bradley edits the Word file. Run `python tools/make-menu-data.py "<path to the newest docx>"` (needs python-docx; it reads formatting: Heading 1 = type, bold 12pt = drink, italic 9.5 = maker/proof or "Built on", italic 9 = age/mash bill, regular 10 = notes). It stops with a message if it can't tell a House Drink's base spirit (add a word to `BASE_WORDS`). Then save the docx as PDF (Word, or Word COM from PowerShell) over `assets/menu/easy-tiger-menu.pdf`, bump the `?v=`, test, publish.
+- **Update the menu:** Bradley adds bottles through the menu builder (`Easy Tiger Menus\Menu Setup & Instructions`, its CLAUDE.md has the rules), which saves a new Word file and PDF in `Menu Versions`. Use the newest one from there. Run `python tools/make-menu-data.py "<path to the newest docx>"` (needs python-docx; it reads formatting: Heading 1 = type, bold 12pt = drink, italic 9.5 = maker/proof or "Built on", italic 9 = age/mash bill, regular 10 = notes). It stops with a message if it can't tell a House Drink's base spirit (add a word to `BASE_WORDS`). Then copy that build's own `.pdf` (the builder already exports it through Word) over `assets/menu/easy-tiger-menu.pdf`, bump the `?v=`, test, publish. The full numbered steps are in "Standing instruction: update the site when the menu changes" just below; follow those, and they happen automatically after every menu build.
 - **Add or change Build photos:** work from copies in his Construction folder (skip anything in a DO NOT USE folder), resize to about 1600px (or keep small ones as they are), re-save as JPEG to drop camera data, put them in `assets/build/`, edit the gallery in `index.html`.
 - **Change the gate words:** see above.
 - **Swap the tiger behind the peephole:** change the `src` in the `.hatch-tiger` block and the glow/blink percentages (`.tiger-glow-*`, `.tiger-lid-*`) in `css/style.css`; the numbers for each picture are in `assets/door/README.md`.
 - **Restore Story text, add Pours We Remember entries, change the tagline or footer:** only when he asks.
+
+### Standing instruction: update the site when the menu changes
+
+Bradley asked (Oct 29, 2026) that the site follow the menu automatically. So whenever the menu is rebuilt (`node build_menu.js` in `Easy Tiger Menus\Menu Setup & Instructions`, which saves a new file in `Menu Versions`), **do all of this in the same session, without waiting to be asked**, then tell him what went live. This is a standing OK to publish menu updates only. It does not cover anything in HARD RULE 6.
+
+1. **Use the build that was just made.** Take the newest `.docx` and the `.pdf` with the same name from `Menu Versions` (never the working copy, never `Archived Menus`).
+2. **Check the repo first.** Run `git status`. If anything unrelated is uncommitted, leave it alone and add only the files below by name.
+3. **Regenerate the list:** `python tools/make-menu-data.py "<that docx>"`. Compare the type counts with the numbers in "The menu and search", and read `git diff js/menu-data.js`. Every changed line should be explained by what Bradley changed.
+4. **Replace the PDF:** copy the matching `.pdf` over `assets/menu/easy-tiger-menu.pdf`. Before it goes in the public repo, check its metadata has no author or personal name (Word sometimes adds one) and its text has no "Confirm on bottle", "double-check" or other note-to-self wording.
+5. **Bump `?v=`** on the links in `index.html` (all of them, together).
+6. **Test** with "Testing before publishing" below, plus these menu checks at 360x640, 390x844, 1366x768, 1920x1080 and 2560x1080: no sideways scroll, the type counts match the menu, searching for each bottle that changed finds it and its open row reads right (age, mash bill, extra note), blank fields leave no empty label or stray "|", no console errors, no failed requests, and the PDF link serves the new file. The password screen covers the page, so hide the gate in the browser for this test; never use or write the real words.
+7. **Publish:** `git add` only `js/menu-data.js`, `assets/menu/easy-tiger-menu.pdf`, `index.html`, and `CLAUDE.md` (plus `js/main.js` or `tools/make-menu-data.py` if they changed). Check `git status`, commit, push, wait for the Pages build to match the commit, and re-test the **live** address.
+8. **Update this file:** the drink counts in "The menu and search", the `?v=` number, and the Open items (for example when a blank gets filled in). Then tell Bradley what changed on the site, in plain words.
+
+**Stop and ask first if:** the script prints an error or a `CHECK:` line; a count changes in a way the menu change doesn't explain; the PDF has a name, or note-to-self text; a test fails; the repo has other changes that look half-finished; or the menu build itself stopped (for example because of unmerged edits on the shared Drive copy, see the builder's CLAUDE.md). Fix the cause, don't work around it.
+
+This only runs when Claude does the menu update (it is an instruction, not a background job). If Bradley edits the Word file by hand without Claude, the site won't change until the next Claude session, and Claude should notice at the start of a session when the newest file in `Menu Versions` is newer than the menu on the site.
 
 ### Testing before publishing (always)
 Start a local server (`python -m http.server <port>` in the repo folder, stop it afterward) and drive it with Playwright using the local Chrome. Check at **360x640, 390x844 (touch), 1366x768, 1920x1080, 2560x1080**: no sideways scroll, the gate and opening play to the end (about 11 s) and land at the top, tap to skip (about 0.45 s), Enter doesn't skip, reduced motion (about 0.4 s), a wrong password teases and doesn't start the door, a refresh asks again, no console errors, no failed requests, div tags balanced. After pushing, wait for the Pages build to match the commit (`gh api repos/JustADiveBum26/easy-tiger/pages/builds/latest`) and re-test the **live** address.
@@ -228,7 +245,7 @@ Waiting on Bradley (don't start unless he brings them up; remind him at natural 
 2. **Story text:** how the idea started and who helped build it. Then restore the real room details.
 3. **Footer tagline** (placeholder now) and what to do with the gold band line.
 4. **Pours We Remember:** empty; needs entries and a simple way to add them.
-5. **Menu cleanup:** fix the two to-do notes in the Word file, then regenerate the list and the PDF. PDF cover still says "Spirits Menu".
+5. **Menu cleanup:** the two to-do notes from before are gone from the newer menu. Still blank (will show nothing until filled in): Redwood Empire Lost Monarch proof, High West Bourbon proof, Russell's Reserve 6 Year mash bill, and Steeple Ridge Single Barrel age, mash bill and proof. When he fills them in, the standing instruction below updates the site. PDF cover still says "Spirits Menu".
 6. **Real house password:** he sets it in `config/house` in Firebase. Change it if he used a throwaway for testing.
 7. Optional ideas (ask first): a random Prohibition-era quote, "who's coming tonight", a record of the week, a different tiger each visit.
 

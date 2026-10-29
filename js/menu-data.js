@@ -201,7 +201,7 @@ const MENU = {
         {
           "name": "High West Bourbon",
           "maker": "High West Distillery — Park City, UT (sourced blend)",
-          "proof": "Confirm on bottle",
+          "proof": "",
           "age": "NAS",
           "details": "Blend, corn-forward",
           "notes": "Sourced, blended bourbon. Nose of caramel and dried fruit. Palate is balanced with vanilla, oak and light rye spice. Medium finish."
@@ -263,6 +263,15 @@ const MENU = {
           "notes": "Wheated bourbon. Nose of vanilla and honey. Palate brings caramel, baking spice and soft oak. Smooth, balanced finish."
         },
         {
+          "name": "Old Forester 2026 Birthday Bourbon",
+          "maker": "Old Forester — Louisville, KY",
+          "proof": "97 Proof",
+          "age": "11 Years",
+          "details": "72% corn, 18% rye, 10% malted barley",
+          "notes": "The annual Birthday Bourbon, a limited release marking George Garvin Brown's birthday. Nose of brown sugar, aged oak, raisin and a touch of dried cherry. Palate is syrupy raisin and brown sugar with gentle rye spice, leather and baking spice. Finish is rye spice, dried tobacco, candied ginger and dark caramel.",
+          "provenance": "Warehouse B, 212 barrels"
+        },
+        {
           "name": "Penelope Architect Bourbon, Build 4",
           "maker": "Penelope Bourbon — MGP-sourced (IN), four-grain blend",
           "proof": "104 Proof",
@@ -305,10 +314,10 @@ const MENU = {
         {
           "name": "Redwood Empire Lost Monarch",
           "maker": "Redwood Empire Whiskey — Windsor, CA (CA/IN/KY blend)",
-          "proof": "Confirm on bottle",
+          "proof": "",
           "age": "Blend, NAS",
           "details": "Blend of bourbon, rye & Tennessee whiskey",
-          "notes": "A blend of bourbon, rye, and Tennessee whiskey. Sweet caramel and oak on the nose, with vanilla, dried fruit and gentle spice on the palate. Confirm proof/batch/price details on the bottle."
+          "notes": "A blend of bourbon, rye, and Tennessee whiskey. Sweet caramel and oak on the nose, with vanilla, dried fruit and gentle spice on the palate."
         },
         {
           "name": "Redwood Empire Pipe Dream Bourbon",
@@ -329,10 +338,10 @@ const MENU = {
         {
           "name": "Steeple Ridge Bourbon, Single Barrel",
           "maker": "Kentucky Straight Bourbon (single-barrel pick)",
-          "proof": "Confirm on bottle",
-          "age": "Confirm on bottle",
-          "details": "Confirm on bottle",
-          "notes": "Nose of caramel and dark fruit. Palate brings vanilla, oak and baking spice. Confirm proof/batch/price details on the bottle."
+          "proof": "",
+          "age": "",
+          "details": "",
+          "notes": "Nose of caramel and dark fruit. Palate brings vanilla, oak and baking spice."
         },
         {
           "name": "Stellum Single Barrel Bourbon",
@@ -513,8 +522,8 @@ const MENU = {
           "maker": "Wild Turkey Distillery — Lawrenceburg, KY",
           "proof": "90 Proof",
           "age": "6 Years",
-          "details": "Confirm on bottle (rye vs. bourbon)",
-          "notes": "Nose of caramel and vanilla. Palate brings brown sugar, oak and light spice. Smooth, medium finish. (Bottle photo lists this as rye — Russell's Reserve 6 Year is normally a bourbon release, so double-check the label to confirm expression.)"
+          "details": "",
+          "notes": "Nose of caramel and vanilla. Palate brings brown sugar, oak and light spice. Smooth, medium finish."
         },
         {
           "name": "Sazerac Rye",

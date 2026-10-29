@@ -47,15 +47,15 @@
     var body = el('div', 'drink-body');
     if (d.notes) body.appendChild(el('p', '', d.notes));
     var facts = el('p', 'drink-facts');
-    var age = clean(d.age), details = clean(d.details);
-    if (age) {
-      facts.appendChild(el('b', '', 'Age '));
-      facts.appendChild(document.createTextNode(age + (details ? '  \u00b7  ' : '')));
+    function addFact(label, text) {
+      if (!text) return;
+      if (facts.firstChild) facts.appendChild(document.createTextNode('  \u00b7  '));
+      if (label) facts.appendChild(el('b', '', label));
+      facts.appendChild(document.createTextNode(text));
     }
-    if (details) {
-      facts.appendChild(el('b', '', MASH_BILL[cat.id] ? 'Mash bill ' : 'Made with '));
-      facts.appendChild(document.createTextNode(details));
-    }
+    addFact('Age ', clean(d.age));
+    addFact(MASH_BILL[cat.id] ? 'Mash bill ' : 'Made with ', clean(d.details));
+    addFact('', clean(d.provenance));
     if (facts.firstChild) body.appendChild(facts);
     row.appendChild(body);
     return row;
