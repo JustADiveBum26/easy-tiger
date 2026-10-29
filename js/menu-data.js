@@ -201,8 +201,8 @@ const MENU = {
         {
           "name": "High West Bourbon",
           "maker": "High West Distillery — Park City, UT (sourced blend)",
-          "proof": "",
-          "age": "NAS",
+          "proof": "92 Proof",
+          "age": "Blend, 2–13 yrs",
           "details": "Blend, corn-forward",
           "notes": "Sourced, blended bourbon. Nose of caramel and dried fruit. Palate is balanced with vanilla, oak and light rye spice. Medium finish."
         },
@@ -314,7 +314,7 @@ const MENU = {
         {
           "name": "Redwood Empire Lost Monarch",
           "maker": "Redwood Empire Whiskey — Windsor, CA (CA/IN/KY blend)",
-          "proof": "",
+          "proof": "90 Proof",
           "age": "Blend, NAS",
           "details": "Blend of bourbon, rye & Tennessee whiskey",
           "notes": "A blend of bourbon, rye, and Tennessee whiskey. Sweet caramel and oak on the nose, with vanilla, dried fruit and gentle spice on the palate."
@@ -522,7 +522,7 @@ const MENU = {
           "maker": "Wild Turkey Distillery — Lawrenceburg, KY",
           "proof": "90 Proof",
           "age": "6 Years",
-          "details": "",
+          "details": "51% rye, 37% corn, 12% malted barley (reported)",
           "notes": "Nose of caramel and vanilla. Palate brings brown sugar, oak and light spice. Smooth, medium finish."
         },
         {
