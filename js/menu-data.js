@@ -725,15 +725,6 @@ const MENU = {
           "base": "Bourbon"
         },
         {
-          "name": "Fall Apple Cinnamon Old Fashioned",
-          "maker": "Built on Penelope Rio",
-          "proof": "",
-          "age": "",
-          "details": "",
-          "notes": "Our fall twist. Apple cinnamon simple syrup stands in for the sugar, and a cap of cherry foam goes on top. Warm, a little sweet, and about as fall as it gets.",
-          "base": "Bourbon"
-        },
-        {
           "name": "Whiskey Sour",
           "maker": "Built on Maker's Mark",
           "proof": "",
@@ -786,6 +777,15 @@ const MENU = {
           "details": "",
           "notes": "Bourbon and Dr Pepper with an Amarena cherry on top. Sounds odd, tastes like a cherry cola with a kick.",
           "base": "Bourbon"
+        },
+        {
+          "name": "Fall Apple Cinnamon Old Fashioned",
+          "maker": "Built on Castle & Key Restoration Rye",
+          "proof": "",
+          "age": "",
+          "details": "",
+          "notes": "Our fall twist. Apple cinnamon simple syrup stands in for the sugar, and a cap of cherry foam goes on top. Warm, a little sweet, and about as fall as it gets.",
+          "base": "Rye"
         },
         {
           "name": "Manhattan",
@@ -848,15 +848,6 @@ const MENU = {
           "age": "",
           "details": "",
           "notes": "Tequila, fresh lime and Topo Chico over ice. Light, fizzy and good any time you want something cold.",
-          "base": "Tequila"
-        },
-        {
-          "name": "Cantarito",
-          "maker": "Built on Tequila",
-          "proof": "",
-          "age": "",
-          "details": "",
-          "notes": "A Jalisco classic. Tequila with fresh orange, lime and grapefruit juice, topped with grapefruit soda and a salted rim. Traditionally served in a clay cup.",
           "base": "Tequila"
         },
         {
