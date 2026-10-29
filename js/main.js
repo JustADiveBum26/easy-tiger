@@ -40,6 +40,15 @@
     if (showType) maker.appendChild(el('span', 'drink-cat', cat.name));
     main.appendChild(maker);
     sum.appendChild(main);
+    if (d.glassImg) {                       // house drinks: a small picture of the glass it is served in
+      var pic = document.createElement('img');
+      pic.className = 'drink-glass';
+      pic.src = 'assets/menu/glass/' + d.glassImg + '.png';
+      pic.alt = d.glass || '';
+      pic.width = 37; pic.height = 46;
+      pic.loading = 'lazy'; pic.decoding = 'async';
+      sum.appendChild(pic);
+    }
     var proof = clean(d.proof);
     if (proof) sum.appendChild(el('span', 'drink-proof', proof));
     row.appendChild(sum);
@@ -56,6 +65,7 @@
     addFact('Age ', clean(d.age));
     addFact(MASH_BILL[cat.id] ? 'Mash bill ' : 'Made with ', clean(d.details));
     addFact('', clean(d.provenance));
+    addFact('Glass ', clean(d.glass));
     if (facts.firstChild) body.appendChild(facts);
     row.appendChild(body);
     return row;

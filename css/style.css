@@ -573,6 +573,9 @@ p { margin: 0 0 1rem; }
   line-height: 1.4;
 }
 
+/* small picture of the glass a house drink is served in */
+.drink-glass { flex-shrink: 0; align-self: center; height: 46px; width: auto; opacity: 0.95; }
+
 /* little gold diamond that turns when a drink is open */
 .drink summary::after {
   content: "";
@@ -603,6 +606,7 @@ p { margin: 0 0 1rem; }
 
 @media (max-width: 480px) {
   .drink summary { gap: 10px; }
+  .drink-glass { height: 40px; }
 }
 
 /* ---------- Guest book ---------- */

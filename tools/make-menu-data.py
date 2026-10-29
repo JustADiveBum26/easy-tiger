@@ -2,7 +2,10 @@
 Turns the menu Word file into js/menu-data.js, which is what the site's clickable menu reads.
 
 Run it from the Easy Tiger Webpage folder:
-    python tools/make-menu-data.py "path/to/the-menu.docx"
+    python tools/make-menu-data.py "path/to/the-menu.docx" [--inventory "path/to/inventory.json"]
+
+  With --inventory, each house drink also gets its glass (a "glass" name and a "glassImg" picture name) so the site can show a
+  small picture of the glass. The weekly update passes it automatically.
 
 It needs the python-docx package (pip install python-docx).
 
@@ -21,11 +24,19 @@ import re
 import sys
 
 import docx
+from docx.table import Table
+from docx.text.paragraph import Paragraph
 
-if len(sys.argv) != 2:
+args = sys.argv[1:]
+inventory_path = None
+if '--inventory' in args:                      # optional: the menu data file, used to add each house drink's glass
+    i = args.index('--inventory')
+    inventory_path = args[i + 1] if i + 1 < len(args) else None
+    del args[i:i + 2]
+if len(args) != 1 or (('--inventory' in sys.argv) and not inventory_path):
     sys.exit(__doc__)
 
-src = sys.argv[1]
+src = args[0]
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 out_path = os.path.join(root, 'js', 'menu-data.js')
 
@@ -41,7 +52,23 @@ def size_of(p):
     return r.font.size.pt if r is not None and r.font.size else None
 
 
-for p in doc.paragraphs:
+def all_paragraphs(document):
+    """Paragraphs in page order, including the ones inside tables (a house drink with a glass picture sits in a table row)."""
+    for child in document.element.body.iterchildren():
+        if child.tag.endswith('}p'):
+            yield Paragraph(child, document)
+        elif child.tag.endswith('}tbl'):
+            done = set()
+            for row in Table(child, document).rows:
+                for cell in row.cells:
+                    if id(cell._tc) in done:
+                        continue
+                    done.add(id(cell._tc))
+                    for p in cell.paragraphs:
+                        yield p
+
+
+for p in all_paragraphs(doc):
     text = re.sub(r'\s+', ' ', p.text).strip()
     if not text or not p.runs:
         continue
@@ -125,6 +152,21 @@ for c in categories:
         sys.exit('Could not tell the base spirit for: ' + ', '.join(unknown))
     # stable sort: grouped by base, still in the Word file's order inside each group
     c['drinks'].sort(key=lambda d: BASE_ORDER.index(d['base']))
+
+# Glass for each house drink (the picture file name comes from glass_art/glass_types.json next to the inventory file).
+# The drinks sheet owns this; the Word menu only carries the pictures, so it is read from the inventory by drink name.
+if inventory_path:
+    inv = json.load(io.open(inventory_path, encoding='utf-8'))
+    glass_by_drink = {d['name'].strip().lower(): d.get('glass', '') for d in inv.get('drinks', [])}
+    types_path = os.path.join(os.path.dirname(os.path.abspath(inventory_path)), 'glass_art', 'glass_types.json')
+    img_of = {t['name']: t['file'] for t in json.load(io.open(types_path, encoding='utf-8'))} if os.path.exists(types_path) else {}
+    for c in categories:
+        if c['id'] != 'house-drinks':
+            continue
+        for d in c['drinks']:
+            g = glass_by_drink.get(d['name'].strip().lower(), '')
+            if g and g in img_of:
+                d['glass'], d['glassImg'] = g, img_of[g]
 
 with io.open(out_path, 'w', encoding='utf-8', newline='\n') as f:
     f.write('// Made from the menu Word file by tools/make-menu-data.py. Re-run it after the menu changes.\n')
