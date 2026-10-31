@@ -116,7 +116,7 @@ for c in categories:
 # The base comes from the "Built on ..." bottle when that bottle is on the menu
 # (so Gentleman Jack makes a Whiskey Ginger a Tennessee whiskey drink), and from the
 # first spirit named in the description otherwise (Cointreau, Chambord, no bottle at all).
-BASE_ORDER = ['Bourbon', 'Rye', 'Other American Whiskey', 'Tequila', 'Gin', 'Vodka']
+BASE_ORDER = ['Bourbon', 'Rye', 'Other American Whiskey', 'Tequila', 'Gin', 'Vodka', 'Rum', 'Mocktails']
 BASE_WORDS = [('bourbon', 'Bourbon'), ('rye', 'Rye'), ('tequila', 'Tequila'), ('gin', 'Gin'), ('vodka', 'Vodka'),
               ('whiskey', 'Other American Whiskey')]
 BOTTLE_TYPES = {'bourbon': 'Bourbon', 'rye': 'Rye', 'other-american-whiskey': 'Other American Whiskey',
@@ -142,11 +142,19 @@ def base_of(drink):
     return None
 
 
+# The drinks sheet owns each drink's Category (the main spirit, or Mocktails). When the menu data is given (--inventory) that
+# category is the group; only a drink with no category falls back to working it out from the bottle or the description.
+category_by_drink = {}
+if inventory_path:
+    for dd in json.load(io.open(inventory_path, encoding='utf-8')).get('drinks', []):
+        if dd.get('category'):
+            category_by_drink[dd['name'].strip().lower()] = dd['category']
+
 for c in categories:
     if c['id'] != 'house-drinks':
         continue
     for d in c['drinks']:
-        d['base'] = base_of(d)
+        d['base'] = category_by_drink.get(d['name'].strip().lower()) or base_of(d)
     unknown = [d['name'] for d in c['drinks'] if d['base'] not in BASE_ORDER]
     if unknown:
         sys.exit('Could not tell the base spirit for: ' + ', '.join(unknown))
