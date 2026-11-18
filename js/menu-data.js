@@ -1548,7 +1548,7 @@ const MENU = {
         },
         {
           "name": "Bramble",
-          "maker": "Built on Castle & Key Harvest Seasonal Gin",
+          "maker": "Built on Citadelle Gin",
           "proof": "",
           "age": "",
           "details": "",
