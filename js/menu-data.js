@@ -1394,7 +1394,7 @@ const MENU = {
         },
         {
           "name": "Whiskey Ginger",
-          "maker": "Built on Old Grand Dad 80 Proof",
+          "maker": "Built on 1832 Distilling Missouri Straight Bourbon Whiskey",
           "proof": "",
           "age": "",
           "details": "",
