@@ -217,7 +217,7 @@ const MENU = {
           "proof": "114.3 Proof",
           "age": "",
           "details": "",
-          "notes": "A sourced bourbon blended and often finished in other casks by Crowded Barrel in Austin, Texas. Flavors of vanilla, oak, plum and dark cherry, with maple syrup on the palate and some heat at this proof. Finishes vary by batch, from port and wine barrels to rum casks."
+          "notes": "A sourced bourbon blended and finished in other casks by Crowded Barrel Whiskey Co. in Austin, Texas. Eleanor is released in numbered batches, and the finish and strength change from batch to batch."
         },
         {
           "name": "David Nicholson Reserve",
@@ -265,7 +265,7 @@ const MENU = {
           "proof": "107 Proof",
           "age": "NAS",
           "details": "",
-          "notes": "A single barrel pick from the Ezra Brooks Distiller's Collection barrel program, bottled at 107 proof. Nose of vanilla, toffee and fresh cut lumber. Palate is oily with baked apple, warm spice and black pepper. Finish is long, with cinnamon, caramel and a little cocoa.",
+          "notes": "A single barrel pick from the Ezra Brooks Distiller's Collection barrel program, bottled at 107 proof by Lux Row Distillers in Bardstown, Kentucky.",
           "provenance": "Single barrel pick through the Ezra Brooks barrel program"
         },
         {
@@ -428,7 +428,7 @@ const MENU = {
           "maker": "Jim Beam Distillery (Beam Suntory) — Clermont, KY",
           "proof": "100 Proof",
           "age": "4 Years (bonded, minimum)",
-          "details": "",
+          "details": "75% corn, 13% rye, 12% malted barley",
           "notes": "Beam's revived old family brand, a bottled in bond bourbon sold as unfiltered. Nose of dusky barrel char, clove and a hint of smoke with some cereal. Palate is oak and char up front, then dark chocolate, vanilla and nutmeg. Finish is toasted coconut with a growing cinnamon note."
         },
         {
@@ -558,7 +558,7 @@ const MENU = {
           "proof": "90 Proof",
           "age": "",
           "details": "",
-          "notes": "Bourbon from the Slick Whistle line made by Six-Mile Ordinary in Columbia, Missouri. Nose of vanilla, caramel and toasted oak. Palate is smooth and velvety with dark fruit, spice and a little nuttiness. Finish is warm and lingering with sweetness and some smoke."
+          "notes": "Bourbon from the Slick Whistle line made by Six-Mile Ordinary in Columbia, Missouri, described as mild, smooth and sweet. Nose of vanilla, caramel and toasted oak. Palate is velvety with dark fruit, spice and a hint of nuttiness. Finish is warm and lingering, with sweetness and some smoke."
         },
         {
           "name": "Stagg Batch #22A",
@@ -1145,11 +1145,11 @@ const MENU = {
         },
         {
           "name": "Hiram Walker Cocktail Mixers Triple Sec",
-          "maker": "Hiram Walker & Sons",
+          "maker": "Hiram Walker & Sons (Pernod Ricard)",
           "proof": "30 Proof",
           "age": "",
           "details": "",
-          "notes": "Budget triple sec made for mixing."
+          "notes": "A budget orange liqueur made for mixing, with imported orange peel steeped in a triple distilled spirit. Palate is a clean, crisp orange, sweet with a slight citrus bitterness. Smooth, light in body and low in alcohol, it suits margaritas and similar cocktails."
         },
         {
           "name": "Jeppson's Malört",
