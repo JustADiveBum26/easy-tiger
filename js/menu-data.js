@@ -1398,7 +1398,7 @@ const MENU = {
           "proof": "",
           "age": "",
           "details": "",
-          "notes": "Tennessee whiskey and ginger ale over ice with a squeeze of lime and a piece of candied ginger. Simple, cold and it always works.",
+          "notes": "Bourbon and ginger ale over ice with a squeeze of lime and a piece of candied ginger. Simple, cold and it always works.",
           "base": "Bourbon",
           "glass": "Highball glass",
           "glassImg": "highball"
