@@ -1383,7 +1383,7 @@ const MENU = {
         },
         {
           "name": "Paper Plane",
-          "maker": "Built on Bib & Tucker Small Batch Bourbon 6 Year Old",
+          "maker": "Built on Buffalo Trace Kentucky Straight Bourbon Whiskey",
           "proof": "",
           "age": "",
           "details": "",
@@ -1515,7 +1515,7 @@ const MENU = {
         },
         {
           "name": "Gimlet",
-          "maker": "Built on Castle & Key 'Harvest' Seasonal Gin",
+          "maker": "Built on Highclere Castle London Dry Gin",
           "proof": "",
           "age": "",
           "details": "",
