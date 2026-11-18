@@ -399,6 +399,15 @@ const MENU = {
           "notes": "Willett's budget bourbon built for cocktails, with an unusually high share of malted barley. Nose of cinnamon, pineapple upside-down cake and a little flint, with some light grassy oak. Palate is butterscotch, apple skin, allspice and vanilla with a silky feel. Finish is dry with baking spice and a touch of tropical fruit, ending in butterscotch."
         },
         {
+          "name": "Old Forester 2026 Birthday Bourbon",
+          "maker": "Old Forester — Louisville, KY",
+          "proof": "97 Proof",
+          "age": "11 Years",
+          "details": "72% corn, 18% rye, 10% malted barley",
+          "notes": "The annual Birthday Bourbon, a limited release marking George Garvin Brown's birthday. Nose of brown sugar, aged oak, raisin and a touch of dried cherry. Palate is syrupy raisin and brown sugar with gentle rye spice, leather and baking spice. Finish is rye spice, dried tobacco, candied ginger and dark caramel.",
+          "provenance": "Warehouse B, 212 barrels"
+        },
+        {
           "name": "Old Grand Dad 80 Proof",
           "maker": "Jim Beam Distillery (Beam Suntory) — Clermont, KY",
           "proof": "80 Proof",
@@ -1374,7 +1383,7 @@ const MENU = {
         },
         {
           "name": "Paper Plane",
-          "maker": "Built on Bib & Tucker Small Batch Bourbon (6 Year)",
+          "maker": "Built on Bib & Tucker Small Batch Bourbon 6 Year Old",
           "proof": "",
           "age": "",
           "details": "",
@@ -1382,6 +1391,17 @@ const MENU = {
           "base": "Bourbon",
           "glass": "Nick & Nora glass",
           "glassImg": "nick-nora"
+        },
+        {
+          "name": "Whiskey Ginger",
+          "maker": "Built on Old Grand Dad 80 Proof",
+          "proof": "",
+          "age": "",
+          "details": "",
+          "notes": "Tennessee whiskey and ginger ale over ice with a squeeze of lime and a piece of candied ginger. Simple, cold and it always works.",
+          "base": "Bourbon",
+          "glass": "Highball glass",
+          "glassImg": "highball"
         },
         {
           "name": "Whiskey & Dr Pepper",
@@ -1407,7 +1427,7 @@ const MENU = {
         },
         {
           "name": "Fall Apple Cinnamon Old Fashioned",
-          "maker": "Built on Castle & Key Restoration Rye",
+          "maker": "Built on Castle & Key Restoration Rye Whiskey",
           "proof": "",
           "age": "",
           "details": "",
@@ -1418,7 +1438,7 @@ const MENU = {
         },
         {
           "name": "Manhattan",
-          "maker": "Built on Penelope Rye",
+          "maker": "Built on Penelope Straight Rye Whiskey",
           "proof": "",
           "age": "",
           "details": "",
@@ -1439,19 +1459,8 @@ const MENU = {
           "glassImg": "rocks"
         },
         {
-          "name": "Whiskey Ginger",
-          "maker": "Built on Jack Daniel's Gentleman Jack",
-          "proof": "",
-          "age": "",
-          "details": "",
-          "notes": "Tennessee whiskey and ginger ale over ice with a squeeze of lime and a piece of candied ginger. Simple, cold and it always works.",
-          "base": "Other American Whiskey",
-          "glass": "Highball glass",
-          "glassImg": "highball"
-        },
-        {
           "name": "Traditional Margarita",
-          "maker": "Built on LALO Blanco",
+          "maker": "Built on Lalo Blanco Tequila 2023",
           "proof": "",
           "age": "",
           "details": "",
@@ -1495,7 +1504,7 @@ const MENU = {
         },
         {
           "name": "Olive Martini",
-          "maker": "Built on Anchorage Distilling Gin",
+          "maker": "Built on Anchorage Adventure Series Aurora Gin",
           "proof": "",
           "age": "",
           "details": "",
@@ -1506,7 +1515,7 @@ const MENU = {
         },
         {
           "name": "Gimlet",
-          "maker": "Built on Castle & Key Harvest Seasonal Gin",
+          "maker": "Built on Castle & Key 'Harvest' Seasonal Gin",
           "proof": "",
           "age": "",
           "details": "",
@@ -1517,7 +1526,7 @@ const MENU = {
         },
         {
           "name": "Gin & Tonic",
-          "maker": "Built on Castle & Key Harvest Seasonal Gin",
+          "maker": "Built on Castle & Key 'Harvest' Seasonal Gin",
           "proof": "",
           "age": "",
           "details": "",
