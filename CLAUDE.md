@@ -183,15 +183,15 @@ Plain and tiger-emblem QR codes and a 6x8 inch print-ready sign (`easy-tiger-sig
 
 ---
 
-## Holiday popup: Christmas edition (in progress, NOT live)
+## Holiday popup: Christmas edition (LIVE from Nov 18, 2026 to Jan 10, 2027)
 
-Bradley wants a Christmas refresh of the **visuals only** (never the words, the order of the sections or how things work). The plan is to go live about **Nov 25, 2026** (45 days from Oct 12), so there is time to refine.
+Bradley asked (Nov 18, 2026) to go Christmas now everywhere (skipping a separate Thanksgiving look). The look is **visual only**: no words, section order or behavior changed. The printed menu's cover name is **"Put It on Santa's Tab"** (he picked it); the website text does not show a pop-up name.
 
-- **Where it lives:** `Easy Tiger Misc\Christmas Preview\` is a separate copy of the site plus `css/christmas.css`, `js/christmas.js`, `assets/xmas/` and the Christmas logo files. It has its own local-only version history (git, no remote, tag `xmas-v1`), a zip backup (`Christmas Preview backup 2026-10-12.zip`), a README with the plan and a to-do list, and `tools/make_xmas_art.py` (recipes for the logo cutout, the red bow lifted from the logo, the garland and the baubles; tested, they reproduce the pictures exactly).
-- **View it:** double-click `START PREVIEW.bat` there, or run `python -m http.server 8160 --bind 127.0.0.1` in that folder and open http://localhost:8160/ (add `?skipgate` to skip the password screen). It is disconnected from the real database on purpose.
-- **What it does:** wreath logo everywhere (cut out of its black square for the end of the door opening), evergreen and cranberry sections, richer red velvet, a pine garland with hanging baubles and the satin bow over the rod, the rules poster, the footer and the door, twinkling lights under the nav, gold twinkles, soft bokeh lights, gentle snow (off for reduced motion).
-- **Status:** Bradley said "much better" after two rounds. Not published, nothing in the real repo or on the live site. Keep working there, commit each round, and only move it into the real site when he says so.
-- **Going live (plan):** switch it on by date (about Nov 25 to Jan 2) with a `?theme=` override for testing, add only specific files (never a whole folder), test at phone width first, verify the live site, then update this section.
+- **How it switches:** a small inline script in `index.html` (right after the `style.css` link) checks the visitor's own date. From **2026-11-18 through 2027-01-10** it adds the `xmas` class, loads `css/christmas.css`, and (at the end of the page) `js/christmas.js`; outside that window nothing loads and the normal look is untouched, so it returns by itself on Jan 11. **Test override:** add `?theme=christmas` or `?theme=classic` to the address. The same dates live in `editions.json` in the menu builder (`Easy Tiger Menus\Menu Setup & Instructions`); change both if the window moves.
+- **Files (all added, none replaced):** `css/christmas.css`, `js/christmas.js` (snow, bows, twinkles, bokeh, and the logo swap), `assets/xmas/` (garland, baubles, bow, and the Christmas logos `logo.png`, `logo-medium.png`, `logo-small.png`, `logo-cutout.png`). The normal logo files in `assets/logo/` are never changed: christmas.js points the same images at the `assets/xmas/` versions. The favicon, home-screen icons and link-preview card stay normal.
+- **The working copy** of the design (with its own local git history and START PREVIEW.bat) is still in `Easy Tiger Misc\Christmas Preview\`; change the look there, then copy `css/christmas.css`, `js/christmas.js` and `assets/xmas/` across (the preview's logo files are named `assets/logo/easy-tiger-logo*.png` there but live under `assets/xmas/` here). Do not copy the preview's `index.html`: the real one has newer wording and photos.
+- **Menu PDF and drink list:** the PDF on the site is the Christmas-themed menu (same content, Christmas pages) while the window is on; the weekly job rebuilds it with the right look by date (see the menu builder's CLAUDE.md, "Seasonal looks").
+- **Going back:** on Jan 11 the site returns by itself; the next menu build returns the menu to the regular look. To end it early, change the end date in `index.html` and `editions.json`.
 
 ---
 
