@@ -1449,7 +1449,7 @@ const MENU = {
         },
         {
           "name": "New York Sour",
-          "maker": "Built on Bulleit 95 Rye",
+          "maker": "Built on Russell's Reserve 6 Year Old Kentucky Straight Rye Whiskey",
           "proof": "",
           "age": "",
           "details": "",
